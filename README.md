@@ -1,3 +1,26 @@
+# 본인 소개
+
+|이름 |윤소영|![gdKO](/gdko.jpg)|
+|연락처 | soyo1228@naver.com||
+|| [깃블로그](https://yoon-ddo.github.io/) ||
+|skill set| Frontend - HTML, CSS, Javascript||
+|| Backend - Java, Spring, Oracle||
+|| Data Analysis - Python||
+|자격증| **2021.06** | 정보처리기사 ( 한국산업인력공단 ) |
+|| **2020.06** | SQLD ( 한국데이터산업진흥원 ) |
+|| **2020.07** | ADsP ( 한국데이터산업진흥원 ) |
+|수상| **2020.08 ~ 2020.09** | BIG CONTEST Innovation 분야<br>코로나 시대의 언택트 소통 클래스<br>Kids Social Connector | 상위 3%<br>본선진출 |
+|| **2020.07 ~ 2020.08** | 비정형데이터를 이용한<br>스타트업 투자예측 | 최우수상 |
+|| **2020.07 ~ 2020.10** | Kakao Arena 공모전<br>Melon Playlist Continuation | 47등<br>(785팀) |
+|| **2020.06 ~ 2020.06** | 보험사 데이터를 이용한 보험사기자 찾기 프로젝트 | - |
+|| **2020.02 ~ 2020.02** | 소셜데이터를 활용한<br>음식 트랜드 분석 | 금상 |
+|교육이력| **2021.03 ~ 2021.12** | 하나금융티아이 채용전환형 교육 1200시간( 한국폴리텍대학교 광명융합기술교육원 - 데이터분석과 ) |
+|| **2020.04 ~ 2020.08** | 실시간 빅데이터 분석 및 시각 인지 시스템 개발자 양성과정 840시간( 한국소프트웨어산업협회 ) |
+|| **2019.12 ~ 2020.02** | 청년취업아카데미 핀테크_빅데이터 금융 사이언티스트 양성과정 500시간( 아시아경제 ) |
+|이력|  **2020.09 ~ 2020.12** | [서초구청 도심 혼잡 버드아이뷰 이미지 데이터 구축 사업](https://aihub.or.kr/aidata/30750) 계약직 | 나무플래닛소속 |
+
+<br><br><br>
+
 # 프로젝트 제목
 
 [프로젝트 홈페이지 - https://koposoftware.github.io/template/](https://koposoftware.github.io/template/)
@@ -24,17 +47,6 @@
 
    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/6LxbdIjWP04" frameborder="0"></iframe>
 
-# 4. 본인 소개
-
-본인 소개를 추가하세요
-
-|이름 |고길동|![gdKO](/gdko.jpg)|
-|연락처 | soyo1228(@)naver.com||
-|skill set| Frontend - HTML, CSS, Javascript||
-| | Backend - Java, Spring, Oracle||
-|자격증|  ||
-|수상| ||
-|특기사항|  TOEIC 990 ||
 
 # 5. 기타
 그외 프로젝트를 더욱 설명할수 있는 것들을 추가하세요
