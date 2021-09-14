@@ -21,7 +21,7 @@
 
 <br><br><br>
 
-# 프로젝트 제목
+# HomeOneHana
 
 [프로젝트 홈페이지 - https://koposoftware.github.io/template/](https://koposoftware.github.io/template/)
 
