@@ -1,0 +1,58 @@
+package trash;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+import kr.co.hana.search.vo.BrtcSignguVO;
+import kr.co.hana.search.vo.SearchHomeVO;
+
+public class SearchDAOImpl3 {
+	
+
+	private SqlSessionTemplate sqlSessionTemplate;
+
+
+
+	/**
+	 * 일치하는지역, 시군구 코드 받기
+	 */
+	public BrtcSignguVO getBrtcSigCode(BrtcSignguVO brtcsig){
+		BrtcSignguVO result = sqlSessionTemplate.selectOne("search.dao.SearchDAO.brtcSigCode", brtcsig);
+		return result;
+	}
+	
+	/**
+	 * 시군구코드 전체가져오기
+	 */
+	public List<String> getBrtcList() {
+		List<String> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.BrtcList");
+		return result;
+	}
+	
+	/**
+	 * 지역이 같은 주택 가져오기(근처주택)
+	 */
+	public List<SearchHomeVO> getHomeList(BrtcSignguVO brtcsig) {
+		List<SearchHomeVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getHomelist", brtcsig);
+		return result;
+	}
+	
+	/**
+	 * 주소가 같은 주택정보 가져오기(주택상세정보)
+	 */
+	public List<SearchHomeVO> getHomeDetail(String rnadres) {
+		List<SearchHomeVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getHomeDetail", rnadres);
+		return result;
+	}
+	
+	
+	/**
+	 * 해당되는 주소의 위도경도 가져오기
+	 */
+	public List<SearchHomeVO> getLatLng(List<String> addrlst) {
+		List<SearchHomeVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getLatLng", addrlst);
+		return result;
+	}
+	
+}

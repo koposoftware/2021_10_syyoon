@@ -1,0 +1,20 @@
+package kr.co.hana.login.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.co.hana.login.vo.LoginVO;
+
+@Repository
+public class LoginDAOImpl implements LoginDAO{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	public LoginVO login(LoginVO login) {
+		LoginVO loginVO = sqlSessionTemplate.selectOne("login.dao.LoginDAO.login", login);
+		return loginVO;
+	}
+
+}
