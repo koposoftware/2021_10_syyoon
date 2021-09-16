@@ -1,0 +1,108 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>회원가입</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/join/signup.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/join/signup.js"></script>
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>
+			
+	</header>
+	<section>
+		<div class="section-header text-center">
+			<p>WELCOME</p>
+                 <h2>회원정보동의</h2>
+        </div>
+
+		<div id="formarea">
+			<div action="" id="joinForm">
+				<ul class="join_box">
+					<li class="checkBox check01">
+						<ul class="clearfix">
+							<li>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두
+								동의합니다.</li>
+							<li class="checkAllBtn">
+								<p>
+									<input id="chkAll" type="checkbox" name=""> <label for="chkAll"></label>
+								</p>
+
+							</li>
+						</ul>
+					</li>
+					<li class="checkBox check02">
+						<ul class="clearfix">
+							<li>이용약관 동의(필수)</li>
+							<li class="checkBtn">
+								<p>
+									<input class="chkEtc" id="chkMust1" type="checkbox"> <label for="chkMust1"></label>
+								</p>
+							</li>
+						</ul> <textarea name="" id="">여러분을 환영합니다.
+HomeOneHana 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 HomeOneHana 서비스의 이용과 관련하여 HomeOneHana 서비스를 제공하는 HomeOneHana 주식회사(이하 ‘HomeOneHana’)와 이를 이용하는 HomeOneHana 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 HomeOneHana 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+	       </textarea>
+					</li>
+					<li class="checkBox check03">
+						<ul class="clearfix">
+							<li>개인정보 수집 및 이용에 대한 안내(필수)</li>
+							<li class="checkBtn">
+								<p>
+									<input class="chkEtc" id="chkMust2" type="checkbox"> <label for="chkMust2"></label>
+								</p>
+							</li>
+						</ul> <textarea name="" id="">여러분을 환영합니다.
+HomeOneHana 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 HomeOneHana 서비스의 이용과 관련하여 HomeOneHana 서비스를 제공하는 HomeOneHana 주식회사(이하 ‘HomeOneHana’)와 이를 이용하는 HomeOneHana 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 HomeOneHana 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+	       </textarea>
+					</li>
+					<li class="checkBox check03">
+						<ul class="clearfix">
+							<li>위치정보 이용약관 동의(선택)</li>
+							<li class="checkBtn">
+								<p>
+									<input class="chkEtc" id="chkSele1" type="checkbox"> <label for="chkSele1"></label>
+								</p>
+							</li>
+						</ul> <textarea name="" id="">여러분을 환영합니다.
+HomeOneHana 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 HomeOneHana 서비스의 이용과 관련하여 HomeOneHana 서비스를 제공하는 HomeOneHana 주식회사(이하 ‘HomeOneHana’)와 이를 이용하는 HomeOneHana 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 HomeOneHana 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+	       </textarea>
+					</li>
+					<li class="checkBox check04">
+						<ul class="clearfix">
+							<li>이벤트 등 프로모션 알림 메일 수신(선택)</li>
+							<li class="checkBtn">
+								<p>
+									<input class="chkEtc" id="chkSele2" type="checkbox"><label for="chkSele2"></label>
+								</p>
+							</li>
+						</ul>
+
+					</li>
+				</ul>
+				<ul class="footBtwrap clearfix">
+					<li><button class="fpmgBt1">비동의</button></li>
+					<li><button class="fpmgBt2">동의</button></li>
+				</ul>
+			</div>
+
+		</div>
+
+
+	</section>
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>
