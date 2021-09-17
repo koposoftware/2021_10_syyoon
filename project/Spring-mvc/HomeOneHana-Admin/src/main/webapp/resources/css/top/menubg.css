@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+
+header{
+	height:101px;
+	background-color:#008485;
+}
+@media(max-width:992px){
+	header{
+		height:70px;
+	}
+}

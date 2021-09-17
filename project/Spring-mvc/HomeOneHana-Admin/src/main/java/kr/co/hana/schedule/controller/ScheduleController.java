@@ -1,0 +1,14 @@
+package kr.co.hana.schedule.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class ScheduleController {
+	
+	@GetMapping("/schedule")
+	public String scheduleMain() {
+		System.out.println("스케쥴");
+		return "schedule/schedule";
+	}
+}
