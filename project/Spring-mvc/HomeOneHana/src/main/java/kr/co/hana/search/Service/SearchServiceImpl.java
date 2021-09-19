@@ -1,0 +1,309 @@
+package kr.co.hana.search.Service;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
+
+import kr.co.hana.search.dao.SearchDAO;
+import kr.co.hana.search.vo.BrtcSignguVO;
+import kr.co.hana.search.vo.FavoriteVO;
+import kr.co.hana.search.vo.SearchHomeVO;
+
+@Service
+public class SearchServiceImpl implements SearchService{
+	
+	@Autowired
+	private SearchDAO searchdao;
+	
+
+	/**
+	 * 검색한 주소에서 가까운 주택 찾기
+	 */
+	public List<SearchHomeVO> getNearHomeAll(SearchHomeVO searchInfo, List<BrtcSignguVO> list){
+		// 검색한 주택정보
+		String rnadres = searchInfo.getRnadres();
+		String seLat = searchInfo.getLati();
+		String seLng = searchInfo.getLongs();
+		
+		List<SearchHomeVO> nearHome = new ArrayList<SearchHomeVO>();
+	
+		// 지역코드리스트와 일치하는 주택 모두 가져오기
+		for(int i = 0; i<list.size(); i++) {
+			List<SearchHomeVO> Home = searchdao.getHomeList(list.get(i));
+			//System.out.println(Home);
+			for(int h = 0; h<Home.size(); h++) {
+				SearchHomeVO homeData = Home.get(h);				
+				
+				if(homeData != null) {
+					String homeLat = homeData.getLati();
+					String homeLng = homeData.getLongs();
+					double dist = distance(seLat, seLng, homeLat, homeLng, "meter");
+					
+					if(dist<800) {//800미터 안쪽에있는 주택들 리스트에 넣기
+						if(!rnadres.equals(homeData.getRnadres())) {
+							nearHome.add(homeData);
+						}
+					}
+				}
+			}
+		}
+		return nearHome;
+	}
+	
+	
+	/**
+	 * 주소넘기면 선택한 주택 상세정보 받음.
+	 */
+	public List<SearchHomeVO> getHomeDetail(SearchHomeVO searchInfo){
+		String searchAddress = searchInfo.getRnadres();
+		List<SearchHomeVO> homeDetail = searchdao.getHomeDetail(searchAddress);
+
+		return homeDetail;
+	}	
+	
+	
+	/**
+	 * 주소를 받아서 지역과 시,군구 코드 리스트 만들기
+	 */
+	public List<BrtcSignguVO> getCodeList(String rnadres){
+		
+		String[] splitArray = rnadres.split(" ");
+		List<BrtcSignguVO> codeList = new ArrayList<BrtcSignguVO>();
+		if(splitArray.length > 2) {
+			codeList = getBrtcSigCode(splitArray);
+		}else {
+			codeList = null;
+		}
+		
+		return codeList;
+	}
+	
+	
+	/**
+	 * 일치하는 지역 코드 가져오기
+	 */
+	public List<BrtcSignguVO> getBrtcSigCode(String[] spAddress) {
+		
+		List<String> brtcList = searchdao.getBrtcList();
+		List<BrtcSignguVO> codeList = new ArrayList<BrtcSignguVO>();
+		
+		if(brtcList.contains(spAddress[0])) {
+			// 지역으로 시작하는 주소일때
+			BrtcSignguVO searchBrtc = new BrtcSignguVO();
+			searchBrtc.setBrtcnm(spAddress[0]);
+			searchBrtc.setSigngunm(spAddress[1]);
+			BrtcSignguVO selectOne = searchdao.getBrtcSigCode(searchBrtc);
+			codeList.add(selectOne);
+			if(selectOne != null) { //값이 나오면
+				searchBrtc.setSigngunm(spAddress[1]+" "+spAddress[2]); // 뒤에주소도 붙여서 비교해보기
+				BrtcSignguVO selectOne2 = searchdao.getBrtcSigCode(searchBrtc);
+				if(selectOne2 !=null) {
+					codeList.add(selectOne2);
+				}
+			}
+			return codeList;
+		}
+		return null;
+	}
+	
+
+	/**
+	 거리구하기
+	 * @param lat1
+	 * @param lon1
+	 * @param lat2
+	 * @param lon2
+	 * @param unit
+	 * @return
+	 */
+	public double distance(String latt1, String lont1, String latt2, String lont2, String unit) {
+		
+		double lat1 = Double.parseDouble(latt1);
+		double lon1 = Double.parseDouble(lont1);
+		double lat2 = Double.parseDouble(latt2);
+		double lon2 = Double.parseDouble(lont2);
+        
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+         
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+         
+        if (unit == "kilometer") {
+            dist = dist * 1.609344;
+        } else if(unit == "meter"){
+            dist = dist * 1609.344;
+        } 
+ 
+        return (dist);
+    }
+	
+	private static double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+	     
+    // This function converts radians to decimal degrees
+    private static double rad2deg(double rad) {
+        return (rad * 180 / Math.PI);
+    }
+    
+    
+    
+    
+	/** API
+	 * 주소로 위,경도 가져오기
+	 */
+	public SearchHomeVO  getLatiLongs(String rnadres)
+			 throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
+		
+		SearchHomeVO latlngvo = new SearchHomeVO();
+		
+		StringBuilder urlBuilder = new StringBuilder("https://api.vworld.kr/req/address");
+		urlBuilder.append("?" + URLEncoder.encode("service", "UTF-8") + "=" + URLEncoder.encode("address", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("request", "UTF-8") + "=" + URLEncoder.encode("getcoord", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("version", "UTF-8") + "=" + URLEncoder.encode("2.0", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("crs", "UTF-8") + "=" + URLEncoder.encode("epsg:4326", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode( rnadres, "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("refine", "UTF-8") + "=" + URLEncoder.encode("true", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("simple", "UTF-8") + "=" + URLEncoder.encode("false", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("road", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("key", "UTF-8") + "="
+				+ URLEncoder.encode("0B982473-0F10-3E6C-803F-2AE6590D33D1", "UTF-8"));
+
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		//System.out.println("Response code: " + conn.getResponseCode());
+		BufferedReader rd;
+		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} else {
+			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+		//System.out.println(sb.toString());
+		String result = sb.toString();
+		JSONObject jObject = new JSONObject(result);
+		//System.out.println("위도경도 : "+result);
+		String status = jObject.getJSONObject("response").getString("status");
+		if(status.equals("OK")) {
+			JSONObject resp = jObject.getJSONObject("response").getJSONObject("result").getJSONObject("point");
+			String lati = resp.getString("y");
+			String longs = resp.getString("x");
+			
+			
+			latlngvo.setLati(lati);
+			latlngvo.setLongs(longs);
+			//System.out.println(lati + ", " + longs);
+			
+			return latlngvo;
+			
+		}
+		
+		return null;
+
+	}
+	
+
+	
+	
+	/** API
+	 	위도 경도로 주소가져오기
+	 */
+	public String getAddress(SearchHomeVO latilongInfo) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException  {
+		
+		String latilng= latilongInfo.getLongs()+","+latilongInfo.getLati();
+		
+		StringBuilder urlBuilder = new StringBuilder("https://api.vworld.kr/req/address");
+		urlBuilder.append("?" + URLEncoder.encode("service", "UTF-8") + "=" + URLEncoder.encode("address", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("request", "UTF-8") + "=" + URLEncoder.encode("getAddress", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("version", "UTF-8") + "=" + URLEncoder.encode("2.0", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("crs", "UTF-8") + "=" + URLEncoder.encode("epsg:4326", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("point", "UTF-8") + "=" + URLEncoder.encode(latilng, "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("format", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("both", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("zipcode", "UTF-8") + "=" + URLEncoder.encode("true", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("simple", "UTF-8") + "=" + URLEncoder.encode("false", "UTF-8"));
+		urlBuilder.append("&" + URLEncoder.encode("key", "UTF-8") + "="
+				+ URLEncoder.encode("0B982473-0F10-3E6C-803F-2AE6590D33D1", "UTF-8"));
+
+		URL url = new URL(urlBuilder.toString());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Content-type", "application/json");
+		//System.out.println("Response code: " + conn.getResponseCode());
+		BufferedReader rd;
+		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} else {
+			rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		}
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = rd.readLine()) != null) {
+			sb.append(line);
+		}
+		rd.close();
+		conn.disconnect();
+		//System.out.println(sb.toString());
+		String result = sb.toString();
+		JSONObject jObject = new JSONObject(result);
+		String address = ((JSONObject) jObject.getJSONObject("response").getJSONArray("result").get(0)).getString("text");
+		
+		return address;
+	}
+
+	
+	/**
+	 * 주택즐겨찾기 추가
+	 */
+	public int addFavoriteHome(FavoriteVO favorite) {
+		int result = searchdao.addFavoriteHome(favorite);
+		return result;
+	}
+	
+	/**
+	 * 주택즐겨찾기 삭제
+	 */
+	public int delFavoriteHome(FavoriteVO favorite) {
+		int result = searchdao.delFavoriteHome(favorite);
+		return result;
+	}
+	
+	/**
+	 * 즐겨찾은 주택가져오기
+	 * @param id
+	 * @return
+	 */
+	public List<FavoriteVO> getFavoriteHome(String id){
+		List<FavoriteVO> result = searchdao.getFavoriteHome(id);
+		return result;
+		
+	}
+	
+	
+	
+
+}
