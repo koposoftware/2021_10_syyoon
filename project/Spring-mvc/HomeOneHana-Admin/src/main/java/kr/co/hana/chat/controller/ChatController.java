@@ -1,15 +1,43 @@
 package kr.co.hana.chat.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+
+import kr.co.hana.chat.service.ChatService;
+import kr.co.hana.chat.vo.LoanInfoVO;
+import kr.co.hana.login.vo.LoginVO;
 
 @Controller
 public class ChatController {
+	
+	@Autowired
+	private ChatService chatservice;
+	
 
-	@GetMapping("/chat")
-	public String chatMain() {
+	@GetMapping("/consult/chat")
+	public String chatMain(HttpSession session, Model model) {
 		System.out.println("채팅해봐");
+		
+		Gson gson = new Gson();
+		LoginVO login = (LoginVO) session.getAttribute("loginVO");
+		String loginjson = gson.toJson(login);
+		model.addAttribute("loginVO",loginjson);
+		model.addAttribute("loginvo",login);
 		return "chat/chat";
+	}
+	
+	@GetMapping("/consult/loan")
+	@ResponseBody
+	public LoanInfoVO getLoanInfo(String loanname) {
+		LoanInfoVO result = chatservice.getLoanInfo(loanname);
+		return result;
 	}
 	
 }
