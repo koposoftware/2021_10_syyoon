@@ -1,0 +1,30 @@
+package kr.co.hana.consult.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ChatChannelVO {
+	
+	private Map<Integer, ChatRoomVO> storage = new HashMap<Integer, ChatRoomVO>();
+	/*
+	 * //방 접속 : 방 번호 + 사용자 정보 public void enter(int roomNumber, WebSocketSession
+	 * session) { if(!storage.containsKey(roomNumber)) { //방번호가 없다면
+	 * storage.put(roomNumber, new ChatRoomVO()); } //사용자를 방에 추가
+	 * storage.get(roomNumber).enter(session); }
+	 * 
+	 * //방 나가기 : 방 번호 + 사용자 정보 public void leave(int roomNumber, WebSocketSession
+	 * session) { storage.get(roomNumber).leave(session);
+	 * 
+	 * //if(storage.get(m.getRoom()).size() == 0) {
+	 * if(storage.get(roomNumber).isEmpty()) { storage.remove(roomNumber); } }
+	 * 
+	 * //방 메세지 전송 : 방 번호 + 메세지(String) public void sendRoom(int roomNumber, String
+	 * json) throws IOException { ChatRoomVO room = storage.get(roomNumber);//방 정보를
+	 * 꺼낸다 if(room != null) { room.broadcast(json); } }
+	 * 
+	 * //전체 메세지 전송 : 메세지(Stirng) // - sendRoom을 전체 방 개수만큼 반복 public void
+	 * sendAll(String json) throws IOException { for(int roomNumber :
+	 * storage.keySet()) { sendRoom(roomNumber, json); } }
+	 */
+
+}

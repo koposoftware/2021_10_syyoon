@@ -1,0 +1,73 @@
+package kr.co.hana.consult.vo;
+
+public class ChatVO {
+	
+	private int chatid;
+	private String msg;
+	private String userid;
+	private String chatdt;
+	private String chatchk;
+	private int roomid;
+	private String filesavenm;
+	private String usernm;
+	
+	
+	public int getChatid() {
+		return chatid;
+	}
+	public void setChatid(int chatid) {
+		this.chatid = chatid;
+	}
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getChatdt() {
+		return chatdt;
+	}
+	public void setChatdt(String chatdt) {
+		this.chatdt = chatdt;
+	}
+	public String getChatchk() {
+		return chatchk;
+	}
+	public void setChatchk(String chatchk) {
+		this.chatchk = chatchk;
+	}
+	public int getRoomid() {
+		return roomid;
+	}
+	public void setRoomid(int roomid) {
+		this.roomid = roomid;
+	}
+	public String getFilesavenm() {
+		return filesavenm;
+	}
+	public void setFilesavenm(String filesavenm) {
+		this.filesavenm = filesavenm;
+	}
+	public String getUsernm() {
+		return usernm;
+	}
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+	@Override
+	public String toString() {
+		return "ChatVO [chatid=" + chatid + ", msg=" + msg + ", userid=" + userid + ", chatdt=" + chatdt + ", chatchk="
+				+ chatchk + ", roomid=" + roomid + ", filesavenm=" + filesavenm + ", usernm=" + usernm + "]";
+	}
+	
+	
+	
+	
+
+}
