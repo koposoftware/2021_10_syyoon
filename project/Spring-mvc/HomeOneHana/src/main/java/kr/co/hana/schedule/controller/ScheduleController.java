@@ -90,7 +90,6 @@ public class ScheduleController {
 			String goLH = "https://apply.lh.or.kr/LH/index.html?gv_url="+scvo.getDtl_url()+"&gv_menuId="+scvo.getMenu_id()
 							+"&gv_param=CCR_CNNT_SYS_DS_CD:"+scvo.getCcr_cnnt_sys_ds_cd()+",PAN_ID:"+scvo.getPan_id()+",LCC:Y";
 			
-			
 			FavoriteScheduleVO fsvo = new FavoriteScheduleVO();
 			
 			//로그인 했으면 chkFavorite반환
@@ -140,7 +139,7 @@ public class ScheduleController {
 		FavoriteScheduleVO fsvo = new FavoriteScheduleVO();
 		//fsvo.setId("onehana");
 		fsvo.setId(loginVO.getId());
-		
+	
 		String noticecode = scvo.getSpl_inf_tp_cd() + "-"+ scvo.getCcr_cnnt_sys_ds_cd()+"-"+ scvo.getPan_id()
 							+"-"+scvo.getUpp_ais_tp_cd()+"-"+scvo.getDtl_url()+"-"+scvo.getMenu_id();
 		fsvo.setNoticecode(noticecode);

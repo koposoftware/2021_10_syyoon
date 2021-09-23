@@ -37,6 +37,15 @@
 
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    
+	    	<!-- 최대 업로드 파일사이즈 : 10MB -->
+	    	<property name="maxUploadSize" value="10485760"/>
+	    	<property name="defaultEncoding" value="utf-8" /> 
+	    </bean>
+	    <mvc:view-controller path="/loan/file/result" view-name="loan/fileresult"/>
+		
 	<mvc:default-servlet-handler />
 
 	<!-- DataSource설정 -->

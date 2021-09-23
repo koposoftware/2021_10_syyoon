@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.search.vo.BrtcSignguVO;
 import kr.co.hana.search.vo.SearchHomeVO;
 
@@ -20,7 +21,7 @@ public class DAOTest2 {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	
+	@Ignore
 	@Test
 	public void getHomeDetail() {
 		
@@ -57,5 +58,18 @@ public class DAOTest2 {
 		System.out.println(result.get(0));
 
 	}
+	
+	@Test
+	public void contractLogProcedure() {
+		EnrollLoanVO enroll=new EnrollLoanVO();
+		enroll.setUserid("ryu94");
+		enroll.setManagerid("admin2");
+		enroll.setLoanname("신혼부부전세론");
+		int result = sqlSessionTemplate.insert("loan.dao.LoanDAO.contractLogProcedure",enroll);		
+		System.out.println(result);
+		// -1
+	
+	}
+	
 
 }

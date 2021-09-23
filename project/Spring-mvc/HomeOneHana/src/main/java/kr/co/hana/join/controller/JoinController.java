@@ -60,7 +60,7 @@ public class JoinController {
         System.out.println("입력전화번호: " + phoneNumber);
         System.out.println("랜덤숫자 : " + numStr);
         //joinService.certifiedPhoneNumber(phoneNumber,numStr);
-        return numStr;
+        return "0000";
     }
 	
 	

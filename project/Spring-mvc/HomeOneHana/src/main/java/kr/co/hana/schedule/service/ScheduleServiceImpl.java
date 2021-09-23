@@ -221,11 +221,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦툒�젙蹂닿뎄遺꾩퐫�뱶*/
-        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨좉컼�꽱�꽣�뿰怨꾩떆�뒪�뀥援щ텇肄붾뱶*/
-        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦퀬�븘�씠�뵒*/
-        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� �긽�쐞留ㅻЪ�쑀�삎肄붾뱶*/
-        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 留ㅻЪ�쑀�삎肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8")); 
+        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); 
+        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); 
         
         List<ScheduleDetailVO> resultList = new ArrayList<ScheduleDetailVO>();
         
@@ -257,11 +257,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦툒�젙蹂닿뎄遺꾩퐫�뱶*/
-        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨좉컼�꽱�꽣�뿰怨꾩떆�뒪�뀥援щ텇肄붾뱶*/
-        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦퀬�븘�씠�뵒*/
-        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� �긽�쐞留ㅻЪ�쑀�삎肄붾뱶*/
-        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 留ㅻЪ�쑀�삎肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8")); 
+        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); 
+        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); 
         
         List<ScheduleDetailVO> resultList = new ArrayList<ScheduleDetailVO>();
         

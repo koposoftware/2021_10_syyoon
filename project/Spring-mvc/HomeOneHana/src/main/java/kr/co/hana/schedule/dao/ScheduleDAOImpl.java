@@ -37,8 +37,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		
 		FavoriteScheduleVO result = sqlSessionTemplate.selectOne("search.dao.ScheduleDAO.getFavoriteNoticeOne", fsvo);
 		return result;
-		
-		
 	}
+	
 
 }

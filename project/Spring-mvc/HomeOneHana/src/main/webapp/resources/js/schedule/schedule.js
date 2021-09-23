@@ -153,59 +153,7 @@ const goToday = () => {
 		return result
 	}
 	
-	// 페이징
-	
-    function paging(){
-	//https://codepen.io/jaehee/pen/mRmNEX
-		var pageRow = 10;
-		$('#nav').remove()
-		var $home = $('#notList')
-		$home.after('<div id="nav">');
-		
-		var $tr = $($home).find('tbody tr')
-		var rowTotals = $tr.length;
-		var pageTotal = Math.ceil(rowTotals/pageRow);
-		for(var i = 0; i<pageTotal; i++){
-			$('<a href="#"></a>').attr('rel',i)
-								.html(i+1)
-								.appendTo("#nav");
-		}
-		
-		$tr.addClass('off-screen')
-			.slice(0, pageRow)
-			.removeClass('off-screen');
 
-		var $pagingLink = $('#nav a');
-		$pagingLink.on('click', function (evt) {
-			evt.preventDefault();
-			var $this = $(this);
-			if ($this.hasClass('active')) {
-				return;
-			}
-			$pagingLink.removeClass('active');
-			$this.addClass('active');
-	
-			// 0 => 0(0*4), 4(0*4+4)
-			// 1 => 4(1*4), 8(1*4+4)
-			// 2 => 8(2*4), 12(2*4+4)
-			// 시작 행 = 페이지 번호 * 페이지당 행수
-			// 끝 행 = 시작 행 + 페이지당 행수
-	
-			var currPage = $this.attr('rel');
-			var startItem = currPage * pageRow;
-			var endItem = startItem + pageRow;
-	
-			$tr.css('opacity', '0.0')
-					.addClass('off-screen')
-					.slice(startItem, endItem)
-					.removeClass('off-screen')
-					.animate({opacity: 1}, 300);
-	
-		});
-	
-		$pagingLink.filter(':first').addClass('active');	
-	
-	}
 	
 	//지역버튼 클릭
 	function noticeButtonClick(notice){
@@ -219,7 +167,7 @@ const goToday = () => {
 			
 			
 			
-			$('.modal-body').append('<div><select id="homeType"><option value="전체" selected>전체</option><option value="행복주택">행복주택</option><option value="국민임대">국민임대</option><option value="영구임대">영구임대</option><option value="장기전세">장기전세</option></select></div>')
+			//$('.modal-body').append('<div><select id="homeType"><option value="전체" selected>전체</option><option value="행복주택">행복주택</option><option value="국민임대">국민임대</option><option value="영구임대">영구임대</option><option value="장기전세">장기전세</option></select></div>')
 			$('.modal-body').append('<div><table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
 
 			for(let i=0; i<notice.length; i++){
@@ -245,7 +193,7 @@ const goToday = () => {
 			$('.modal-body').append('</tbody></table></div>')
 
 			
-			paging();
+		
 			
 			
 			

@@ -24,15 +24,17 @@
 	                                <h1>Home One Hana</h1>                            	
                             	</c:if>
                             	<c:if test="${ not empty sessionScope.loginVO }">
-                            		<p>Home One Hana</p>
+                            		<p>전국 모든 임대주택을 한 눈에!</p>
 	                                <h1><c:out value="${ sessionScope.loginVO.name }님 환영합니다!"/></h1> 
                             	</c:if>
                                 <h2></h2>
                                 <div class="typed-text">행복주택, 공공임대, 매입임대, 전세임대, 국민임대</div>
                             </div>
                             <div class="hero-btn">
+                            	<c:if test="${ empty sessionScope.loginVO }">
                                 <a class="btn" href="${ pageContext.request.contextPath }/login">Log In</a>
                                 <a class="btn" href="${ pageContext.request.contextPath }/signup">Join</a>
+                                </c:if>
                             </div>
                         </div>
                     </div>

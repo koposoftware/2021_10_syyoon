@@ -9,5 +9,11 @@
   		<typeAlias type="kr.co.hana.search.vo.SearchVO" alias="searchVO"/>
   		<typeAlias type="kr.co.hana.search.vo.SearchHomeVO" alias="searchHomeVO"/>
   		<typeAlias type="kr.co.hana.search.vo.BrtcSignguVO" alias="brtcSignguVO"/>
+  		<typeAlias type="kr.co.hana.search.vo.FavoriteVO" alias="favoriteVO"/>
+  		<typeAlias type="kr.co.hana.schedule.vo.FavoriteScheduleVO" alias="favoriteScheduleVO"/>
+  		<typeAlias type="kr.co.hana.loan.vo.ReviewFileVO" alias="reviewFileVO"/>
+  		<typeAlias type="kr.co.hana.loan.vo.EnrollLoanVO" alias="enrollLoanVO"/>
+  		<typeAlias type="kr.co.hana.mypage.vo.LoanContractVO" alias="loanContractVO"/>
+  		<typeAlias type="kr.co.hana.mypage.vo.AccountVO" alias="accountVO"/>
   	</typeAliases>
   </configuration>

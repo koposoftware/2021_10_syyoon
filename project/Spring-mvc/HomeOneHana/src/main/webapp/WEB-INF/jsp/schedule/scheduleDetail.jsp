@@ -23,9 +23,11 @@
 			, ais_tp_cd : '<c:out value="${favoriteParam.ais_tp_cd}"/>'
 			, dtl_url : '<c:out value="${favoriteParam.dtl_url}"/>'
 			, ccr_cnnt_sys_ds_cd : '<c:out value="${favoriteParam.ccr_cnnt_sys_ds_cd}"/>'
+			, upp_ais_tp_cd : '<c:out value="${favoriteParam.upp_ais_tp_cd}"/>'
 			, menu_id : '<c:out value="${favoriteParam.menu_id}"/>'
 			, pan_dt:'<c:out value="${ detailinfo[0].sbsc_acp_clsg_dt }"/>'
 	}
+	console.log(favoriteParam)
 
 	var chkFavorite = '<c:out value="${chkFavorite}"/>'
 	console.log(chkFavorite)

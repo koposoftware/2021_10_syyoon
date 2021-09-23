@@ -34,5 +34,22 @@
 		from brtcsigngu
 	</select>
 	
+	<insert id="addFavoriteHome" parameterType="favoriteVO">
+		insert into favorite(id, hsmpsn, favseq)
+			values(#{id},#{hsmpsn},SEQ_FAVSEQ.nextval)
+	</insert>
+	
+	<delete id="delFavoriteHome" parameterType="favoriteVO">
+		delete from favorite 
+			where id=#{id} and hsmpsn=#{hsmpsn}
+	</delete>
+	
+	<select id="getFavorites" parameterType="String" resultType="favoriteVO">
+		select f.id, f.hsmpsn, to_char(f.enrolldt,'YYYY-MM-DD') as enrolldt, 
+				h.rnadres, h.suplytynm, h.housetynm, h.insttnm
+		from favorite f, homelist h
+		where f.hsmpsn = h.hsmpsn and f.id=#{id}
+	</select>
+	
 
 </mapper>

@@ -7,9 +7,7 @@ public class FavoriteScheduleVO {
 	private int favnotiseq;
 	private String noticeend;
 	private String noticetitle;
-	
-	
-	
+	private String enrolldt;
 	public String getId() {
 		return id;
 	}
@@ -40,11 +38,18 @@ public class FavoriteScheduleVO {
 	public void setNoticetitle(String noticetitle) {
 		this.noticetitle = noticetitle;
 	}
+	public String getEnrolldt() {
+		return enrolldt;
+	}
+	public void setEnrolldt(String enrolldt) {
+		this.enrolldt = enrolldt;
+	}
 	@Override
 	public String toString() {
 		return "FavoriteScheduleVO [id=" + id + ", noticecode=" + noticecode + ", favnotiseq=" + favnotiseq
-				+ ", noticeend=" + noticeend + ", noticetitle=" + noticetitle + "]";
+				+ ", noticeend=" + noticeend + ", noticetitle=" + noticetitle + ", enrolldt=" + enrolldt + "]";
 	}
+	
 	
 	
 	

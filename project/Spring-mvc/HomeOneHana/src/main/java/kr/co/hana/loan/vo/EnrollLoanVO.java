@@ -1,0 +1,34 @@
+package kr.co.hana.loan.vo;
+
+public class EnrollLoanVO {
+	
+	private String loanname;
+	private String userid;
+	private String managerid;
+	
+	public String getLoanname() {
+		return loanname;
+	}
+	public void setLoanname(String loanname) {
+		this.loanname = loanname;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getManagerid() {
+		return managerid;
+	}
+	public void setManagerid(String managerid) {
+		this.managerid = managerid;
+	}
+	@Override
+	public String toString() {
+		return "EnrollLoanVO [loanname=" + loanname + ", userid=" + userid + ", managerid=" + managerid + "]";
+	}
+	
+	
+
+}

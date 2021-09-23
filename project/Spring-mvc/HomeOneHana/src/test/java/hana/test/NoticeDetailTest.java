@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.co.hana.schedule.vo.DetailFileVO;
 import kr.co.hana.schedule.vo.ScheduleDetailVO;
 import kr.co.hana.schedule.vo.ScheduleVO;
 
@@ -25,7 +25,7 @@ import kr.co.hana.schedule.vo.ScheduleVO;
 @ContextConfiguration(locations = { "classpath:config/spring/spring-mvc.xml" })
 public class NoticeDetailTest {
 	
-	
+	@Ignore
 	@Test
 	public void whyErr() throws IOException {
 		List<ScheduleVO> resultList = new ArrayList<ScheduleVO>();
@@ -112,7 +112,7 @@ public class NoticeDetailTest {
 	
 	
 	
-	@Ignore
+
 	@Test
 	public void getDetail() throws IOException {
 		
@@ -124,12 +124,25 @@ public class NoticeDetailTest {
 		scvo.setUpp_ais_tp_cd("06");
 		scvo.setAis_tp_cd("10");
 		*/
+	
 		scvo.setSpl_inf_tp_cd("062");
 		scvo.setCcr_cnnt_sys_ds_cd("03");
 		scvo.setPan_id("2015122300009566");
 		scvo.setUpp_ais_tp_cd("06");
 		scvo.setAis_tp_cd("07");
+		/*
+		scvo.setSpl_inf_tp_cd("010");
+		scvo.setCcr_cnnt_sys_ds_cd("01");
+		scvo.setPan_id("2016122300001530");
+		scvo.setUpp_ais_tp_cd("06");
+		scvo.setAis_tp_cd("01");
+		*/
 		
+		//UPP_AIS_TP_CD: "01",
+		//AIS_TP_CD: "01",
+		//SPL_INF_TP_CD: "010",
+		//PAN_ID: "2016122300001530",
+		//CCR_CNNT_SYS_DS_CD: "01"
 		
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
@@ -145,45 +158,55 @@ public class NoticeDetailTest {
 
         JSONArray jArray = new JSONArray(result);
         JSONObject jObject = (JSONObject) jArray.get(1);
+        Set haveKey = jObject.keySet();
+
         System.out.println(jObject.keySet());
-        JSONArray count = jObject.getJSONArray("dsSplScdl");
-        System.out.println(count.length());
         
-        
-        for(int c=0; c<count.length(); c++) {
+        if(haveKey.contains("dsSplScdl") && haveKey.contains("dsSbd")) {
+        	JSONArray count = jObject.getJSONArray("dsSplScdl");
+        	System.out.println(count.length());
         	
-        	 ScheduleDetailVO schedule = new ScheduleDetailVO();
-             JSONObject ds = (JSONObject) jObject.getJSONArray("dsSplScdl").get(c);
-             //System.out.println(ds);
-             schedule.setSbsc_acp_clsg_dt(ds.getString("SBSC_ACP_CLSG_DT"));
-             schedule.setPpr_sbm_ope_anc_dt(ds.getString("PPR_SBM_OPE_ANC_DT"));
-             schedule.setPpr_acp_clsg_dt(ds.getString("PPR_ACP_CLSG_DT"));
-             schedule.setPzwr_anc_dt(ds.getString("PZWR_ANC_DT"));
-             schedule.setCtrt_ed_dt(ds.getString("CTRT_ED_DT"));
-             schedule.setSbsc_acp_st_dt(ds.getString("SBSC_ACP_ST_DT"));
-             schedule.setCtrt_st_dt(ds.getString("CTRT_ST_DT"));
-             schedule.setPpr_acp_st_dt(ds.getString("PPR_ACP_ST_DT"));
-             
-             JSONObject sbd = (JSONObject) jObject.getJSONArray("dsSbd").get(c);
-             //System.out.println(sbd);
-             schedule.setLgdn_adr(sbd.getString("LGDN_ADR"));
-             schedule.setLgdn_dtl_adr(sbd.getString("LGDN_DTL_ADR"));
-             schedule.setHsh_cnt(sbd.getString("HSH_CNT"));
-             schedule.setHtn_fmla_desc(sbd.getString("HTN_FMLA_DESC"));
-             schedule.setLcc_nt_nm(sbd.getString("LCC_NT_NM"));
-             schedule.setDdo_ar(sbd.getString("DDO_AR"));
-             schedule.setMvin_xpc_ym(sbd.getString("MVIN_XPC_YM"));
-             
-             JSONObject ctr = (JSONObject) jObject.getJSONArray("dsCtrtPlc").get(0);
-             schedule.setSil_ofc_gud_fcts(ctr.getString("SIL_OFC_GUD_FCTS"));
-             
-             JSONObject etc = (JSONObject) jObject.getJSONArray("dsEtcInfo").get(0);
-             schedule.setEtc_cts(etc.getString("ETC_CTS"));
-             resultList.add(schedule);
+        	
+        	for(int c=0; c<count.length(); c++) {
+        		
+        		ScheduleDetailVO schedule = new ScheduleDetailVO();
+        		JSONObject ds = (JSONObject) jObject.getJSONArray("dsSplScdl").get(c);
+        		//System.out.println(ds);
+        		schedule.setSbsc_acp_clsg_dt(ds.getString("SBSC_ACP_CLSG_DT"));
+        		schedule.setPpr_sbm_ope_anc_dt(ds.getString("PPR_SBM_OPE_ANC_DT"));
+        		schedule.setPpr_acp_clsg_dt(ds.getString("PPR_ACP_CLSG_DT"));
+        		schedule.setPzwr_anc_dt(ds.getString("PZWR_ANC_DT"));
+        		schedule.setCtrt_ed_dt(ds.getString("CTRT_ED_DT"));
+        		schedule.setSbsc_acp_st_dt(ds.getString("SBSC_ACP_ST_DT"));
+        		schedule.setCtrt_st_dt(ds.getString("CTRT_ST_DT"));
+        		schedule.setPpr_acp_st_dt(ds.getString("PPR_ACP_ST_DT"));
+        		
+        		JSONObject sbd = (JSONObject) jObject.getJSONArray("dsSbd").get(c);
+        		//System.out.println(sbd);
+        		schedule.setLgdn_adr(sbd.getString("LGDN_ADR"));
+        		schedule.setLgdn_dtl_adr(sbd.getString("LGDN_DTL_ADR"));
+        		schedule.setHsh_cnt(sbd.getString("HSH_CNT"));
+        		schedule.setHtn_fmla_desc(sbd.getString("HTN_FMLA_DESC"));
+        		schedule.setLcc_nt_nm(sbd.getString("LCC_NT_NM"));
+        		schedule.setDdo_ar(sbd.getString("DDO_AR"));
+        		schedule.setMvin_xpc_ym(sbd.getString("MVIN_XPC_YM"));
+        		
+        		JSONObject ctr = (JSONObject) jObject.getJSONArray("dsCtrtPlc").get(0);
+        		schedule.setSil_ofc_gud_fcts(ctr.getString("SIL_OFC_GUD_FCTS"));
+        		
+        		JSONObject etc = (JSONObject) jObject.getJSONArray("dsEtcInfo").get(0);
+        		schedule.setEtc_cts(etc.getString("ETC_CTS"));
+        		resultList.add(schedule);
+        	}
+
+        }else {
+        	System.out.println("ㅂㅇ");
         }
-        System.out.println(resultList.get(0));
-        System.out.println(resultList.get(1));
+        
+        //System.out.println(resultList.get(0));
+        //System.out.println(resultList.get(1));
        
+        /*
         //이미지
         JSONArray imgs = jObject.getJSONArray("dsSbdAhfl");
         List<DetailFileVO> imgList = new ArrayList<DetailFileVO>();
@@ -208,8 +231,9 @@ public class NoticeDetailTest {
         	filevo.setFileurl(file.getString("AHFL_URL"));
         	fileList.add(filevo);
         }
+        
         System.out.println(fileList.size());
-
+		*/
     }
 	
 

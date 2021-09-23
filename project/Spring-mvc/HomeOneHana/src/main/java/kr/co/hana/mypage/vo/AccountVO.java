@@ -1,0 +1,70 @@
+package kr.co.hana.mypage.vo;
+
+public class AccountVO {
+
+	private String id;
+	private String account;
+	private int balance;
+	private String code;
+	private String name;
+	private String alias;
+	private String enrolldt;
+	private String relationacc;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+	public String getEnrolldt() {
+		return enrolldt;
+	}
+	public void setEnrolldt(String enrolldt) {
+		this.enrolldt = enrolldt;
+	}
+	public String getRelationacc() {
+		return relationacc;
+	}
+	public void setRelationacc(String relationacc) {
+		this.relationacc = relationacc;
+	}
+	@Override
+	public String toString() {
+		return "AccountVO [id=" + id + ", account=" + account + ", balance=" + balance + ", code=" + code + ", name="
+				+ name + ", alias=" + alias + ", enrolldt=" + enrolldt + ", relationacc=" + relationacc + "]";
+	}
+	
+	
+	
+	
+}

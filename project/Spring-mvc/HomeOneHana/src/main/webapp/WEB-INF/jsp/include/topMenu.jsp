@@ -40,13 +40,14 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto">
-                <!-- <a href="Front/index2.jsp" class="nav-item nav-link active">Home</a> -->
                 <a href="${ pageContext.request.contextPath }/schedule" class="nav-item nav-link">공고일정</a>
                 <a href="${ pageContext.request.contextPath }/search" class="nav-item nav-link">주택찾기</a>
-                <a href="${ pageContext.request.contextPath }/loan" class="nav-item nav-link">하나대출</a>
-                <a href="${ pageContext.request.contextPath }/consult/reservation" class="nav-item nav-link">온라인상담</a>
-                <a href="#" class="nav-item nav-link">고객센터</a>
-
+                <a href="${ pageContext.request.contextPath }/loan" class="nav-item nav-link">하나대출</a>                
+            	<c:if test="${ empty sessionScope.loginVO  }">
+                <!-- <a href="Front/index2.jsp" class="nav-item nav-link active">Home</a> -->
+                <%-- <a href="${ pageContext.request.contextPath }/loan/review" class="nav-item nav-link">대출상담</a> --%>
+                <a href="${ pageContext.request.contextPath }/login" class="nav-item nav-link">로그인</a>
+				</c:if>
                 
                 <%--로그인사용자만 접근가능 --%>
                 <c:if test="${ not empty sessionScope.loginVO  }">
