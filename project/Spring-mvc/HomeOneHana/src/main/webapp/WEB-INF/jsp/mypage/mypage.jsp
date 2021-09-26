@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +33,11 @@
 					<div class="card">
 						<div class="card-body">
 							
-							<h5 class="my-3">My Drive</h5>
+							<h5 class="my-3">My Page</h5>
 							<div class="fm-menu">
 								<div class="list-group list-group-flush">
-									<a id="Menu1" href="javascript:;" class="list-group-item py-1"><i class="bx bx-folder me-2"></i><span>관심주택공고</span></a>
-									<a id="Menu2" href="javascript:;" class="list-group-item py-1"><i class="bx bx-devices me-2"></i><span>대출계좌관리</span></a>
+									<a id="Menu1" href="javascript:;" class="list-group-item py-1"><i class="bx bx-devices me-2"></i><span>대출계좌관리</span></a>
+									<a id="Menu2" href="javascript:;" class="list-group-item py-1"><i class="bx bx-folder me-2"></i><span>관심주택공고</span></a>
 									<a href="javascript:;" class="list-group-item py-1"><i class="bx bx-plug me-2"></i><span>내정보수정</span></a>
 
 								</div>
@@ -55,13 +57,25 @@
 										
 										
 											<c:if test="${contract.status eq '심사중' }">class="fm-file-box bg-light-primary text-primary loan-reviewBox"</c:if>
+											<c:if test="${contract.status eq '대출완료' }">class="fm-file-box bg-light-primary text-primary loan-finishBox"</c:if>
 											<c:if test="${contract.status eq '대출승인' }"> class="fm-file-box bg-light-primary text-primary loan-acceptBox"</c:if>
 											<c:if test="${contract.status eq '대출거절' }"> class="fm-file-box bg-light-primary text-primary loan-rejectBox"</c:if>
 											>
 											<p class="loanstatus">${ contract.status}</p>
 										</div>
 										<div class="flex-grow-1 ms-2">
-											<h6 class="mb-0 loanname"><a a href="${ pageContext.request.contextPath }/loan/contract">${ contract.loanname}</a></h6>
+											<h6 class="mb-0 loanname"><a 
+												<c:if test="${contract.status eq '대출승인' }">
+													href="${ pageContext.request.contextPath }/loan/contract?contractcode=${contract.contractcode}"
+												</c:if>
+												<c:if test="${contract.status ne '대출승인' }">
+													href="#"								
+												</c:if>
+												
+												
+												>
+												
+												${ contract.loanname}</a></h6>
 											<p class="mb-0 text-secondary loandate">${contract.stratdt }</p>
 										</div>
 										
@@ -85,7 +99,93 @@
 				<div class="col-12 col-lg-9">
 					<div class="card" >
 					
-						<div class="card-body" id="menu1">
+					
+					<div class="card-body" id="menu1">
+							<div class="d-flex align-items-center">
+								<div>
+									<h5 class="mb-0">대출계좌내역</h5>
+								</div>
+								
+							</div>
+							<div class="table-responsive mt-3" style="margin-bottom:50px;">
+								<table class="table table-striped table-hover table-sm mb-0">
+									<thead>
+										<tr>
+											<th>상품명</th>
+											<th>계좌번호</th>
+											<th>대출금액</th>
+											<th>이자</th>
+											<th>기산일</th>
+											<th>만기일</th>
+											<th>총상환금액</th>
+											<th>연결계좌</th>
+										</tr>
+									</thead>
+									<tbody>
+									<c:if test="${not empty loanaccountList }">
+										<c:forEach items="${loanaccountList }" var="loanacc" varStatus="loop">
+										<tr>
+											<td>${loanacc.loanname }</td>	
+											<td>${ fn:substring(loanacc.loanaccount,0,3) }-${ fn:substring(loanacc.loanaccount,3,9) }-${ fn:substring(loanacc.loanaccount,9,13) }</td>
+											<td><fmt:formatNumber value="${loanacc.principal }" type="currency"/></td>
+											<td>${loanacc.finalrate }%</td>
+											<td>${loanacc.accountdt }</td>
+											<td>${loanacc.duedate }</td>
+											<td>${loanacc.repayamount }</td>
+											<td>${ fn:substring(loanacc.account,0,3) }-${ fn:substring(loanacc.account,3,9) }-${ fn:substring(loanacc.account,9,13) }</td>
+										</tr>
+										</c:forEach>
+									
+									</c:if>
+									<c:if test="${empty loanaccountList }">
+										<tr>
+											<td style="text-align:center;" colspan="8">대출계좌가 없습니다.</td>
+										</tr>
+									</c:if>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="d-flex align-items-center">
+								<div>
+									<h5 class="mb-0">보유계좌</h5>
+								</div>
+								
+							</div>
+							<div class="row mt-3" style="margin-bottom:50px;">
+								<c:if test="${ not empty accountList }">
+									<c:forEach items="${ accountList }" var="acc" varStatus="loop">
+											<div class="col-12 col-lg-4">
+												<div class="card shadow-none border radius-15">
+												<div class="card-body">
+													<div class="d-flex align-items-center">
+														<div ><span class="subti" >${acc.name}</span>
+														</div>
+														<div class="ms-auto"><i class="fas fa-money-check-alt"></i>
+														</div>
+													</div>
+													<h5 class="mt-3 mb-0"><fmt:formatNumber value="${acc.balance }" type="currency"/></h5>
+													<p class="mb-1 mt-4" style="font-size:12px;">
+														<span class="float-end">${fn:substring(acc.account,0,3)}-${fn:substring(acc.account,3,9)}-${fn:substring(acc.account,9,13)}</span>
+														<span>(${acc.alias})</span>
+													</p>
+													</div>
+												</div>
+											</div>
+									</c:forEach>
+								</c:if>
+								<c:if test="${ empty accountList }">
+									<div >
+										보유한 계좌가 없습니다.
+									</div>
+								</c:if>
+							</div>
+							
+							
+						</div>
+						
+					
+						<div class="card-body" id="menu2">
 							
 							<h5>관심주택</h5>
 							<div class="row mt-3" style="margin-bottom:50px;">
@@ -117,6 +217,13 @@
 										</div>
 									
 									</c:forEach>
+								</c:if>
+								
+								
+								<c:if test="${ empty favoriteHome }">
+									<div>
+										즐겨찾기한 주택이 없습니다.
+									</div>
 								</c:if>
 							</div>
 							
@@ -159,35 +266,17 @@
 										</c:forEach>
 									
 									</c:if>
+									<c:if test="${empty favoriteNotice }">
+										<tr>
+											<td colspan="4">관심공고가 없습니다.</td>
+										</tr>
+									</c:if>
 									</tbody>
 								</table>
 							</div>
 						</div>
-						
-						<div class="card-body" id="menu2">
-							<h5>나의 계좌</h5>
-							<div class="row mt-3" style="margin-bottom:50px;">
-								<c:if test="${ not empty accountList }">
-									<c:forEach items="${ accountList }" var="acc" varStatus="loop">
-											<div class="col-12 col-lg-4">
-												<div class="card shadow-none border radius-15">
-												<div class="card-body">
-													<div class="d-flex align-items-center">
-														<div ><span class="subti" >${acc.name}</span>
-														</div>
-														<div class="ms-auto"><i class="fas fa-money-check-alt"></i>
-														</div>
-													</div>
-													<h5 class="mt-3 mb-0">${acc.balance }원</h5>
-													<p class="mb-1 mt-4" style="font-size:12px;"><span>${acc.alias}</span>-<span class="float-end">${acc.account}</span>
-													</p>
-													</div>
-												</div>
-											</div>
-									</c:forEach>
-								</c:if>
-							</div>
 						</div>
+						
 					</div>
 				</div>
 			

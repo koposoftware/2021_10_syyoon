@@ -44,6 +44,18 @@
 	height:800px;
 }
 
+
+
+#hana_loans{
+	width:200px;
+	border: 1px solid rgba(0,140,140,.2); 
+	outline:none;
+}
+
+#hana_loans:focus{
+	outline:none;
+}
+
 /*========================================================================
 
 
@@ -262,8 +274,8 @@
 	outline:0;
 }
 
-#searchlimit,#sendLimit{
-	width:20%;
+#linkSend,#sendLimit{
+
 	padding:10px;
 	border: 1px solid #008485;
 	background:#008485;
@@ -272,14 +284,14 @@
 	color:#fff;
 	font-weight:700;
 }
-#searchlimit:hover,#sendLimit:hover{
+#linkSend:hover,#sendLimit:hover{
 	border: 1px solid #008485;
 	background:#fff;
 	color:#008485;
 
 }
 
-#searchlimit:focus,#sendLimit:focus{
+#linkSend:focus,#sendLimit:focus{
 	outline:0;
 }
 
@@ -321,5 +333,30 @@
 
 label{
 	margin-right:10px;
+}
+
+
+
+
+.wantLoan{
+	margin-bottom:5px;
+}
+
+
+.goLoan{
+	padding:4px;
+	border-radius:7px;
+	text-decoration-line: none;
+	background-color:#008485;
+	border:1px solid #008485;
+	text-align:center;
+	color:#fff;
+	font-size:14px;
+}
+
+
+.goLoan:hover{
+	background-color:#fff;
+	color:#008485;
 }
 

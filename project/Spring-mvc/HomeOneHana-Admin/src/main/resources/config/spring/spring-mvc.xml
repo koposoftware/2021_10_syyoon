@@ -81,9 +81,8 @@
 
 
 	<!-- Web Socket -->
-<!-- 	<websocket:handlers>
-		<websocket:mapping handler="consultHandler"
-			path="/consult/chat" />
+ 	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/consult/chat" />
 		<websocket:handshake-interceptors>
 			<bean
 				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
@@ -91,9 +90,8 @@
 		<websocket:sockjs websocket-enabled="true" />
 
 	</websocket:handlers>
-	<bean id="consultHandler"
-		class="kr.co.hana.consult.handler.ConsultHandler" /> -->
-
+	<bean id="chatHandler"
+		class="kr.co.hana.chat.handler.ChatHandler" /> 
 
 
 

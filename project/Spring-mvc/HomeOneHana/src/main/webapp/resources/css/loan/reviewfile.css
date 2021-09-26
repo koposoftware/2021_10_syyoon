@@ -373,7 +373,6 @@ a {
 ul.join_box {
 	padding-bottom: 40px;
     padding-top: 40px;
-	border: 1px solid #ddd;
 	background-color: #fff;
 }
 
@@ -513,4 +512,100 @@ input[type="checkbox"]:checked+label:after {
 	width:500px;
 	padding:10px;
 	margin:auto;
+}
+
+
+
+
+/*
+		한도조회
+*/
+.boxTempl{
+	margin-bottom:40px;
+}
+
+.inputinfotext{
+	text-align:right;
+	border:0;
+	margin:10px;
+	width:80%;
+	height:100%;
+}
+
+.inputinfotext:focus{
+	outline:0;
+}
+
+#searchlimit{
+
+	padding:10px;
+	border: 1px solid #008485;
+	background:#008485;
+	text-align:center;
+	font-size:15px;
+	color:#fff;
+	font-weight:700;
+}
+#searchlimit:hover{
+	border: 1px solid #008485;
+	background:#fff;
+	color:#008485;
+
+}
+
+#searchlimit:focus{
+	outline:0;
+}
+
+.tbl{
+	font-size:12px;
+	margin:auto;
+	text-align:center;
+	width:100%;
+	border-top:2px solid #b5b5b5;
+	border-bottom:2px solid #b5b5b5;
+}
+
+.tbl tr{
+	border-bottom:1px solid #b5b5b5;
+}
+.homew{
+	margin-top:5px;
+}
+.tbl th{
+	font-weight:700;
+	border-right:1px solid #b5b5b5;
+	border-bottom:1px solid #b5b5b5;
+	vertical-align:middle;
+	font-size:16px;
+	height:30px;
+	background-color:rgba(167,182,191,.2);
+	color:#000;
+}
+
+.tbl td{
+	font-size:14px;
+	vertical-align:middle;
+	height:40px;
+}
+
+
+#selectlocation{
+	font-size:14px;
+	height:100%;
+    padding:5px;
+    border:0;
+
+}
+
+#selectlocation:focus{
+	outline:0;
+}
+
+label{
+	margin-right:10px;
+}
+
+input[name=homeYN]{
+	margin-top:10px;
 }

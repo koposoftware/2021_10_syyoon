@@ -98,8 +98,8 @@ $(document).ready(function(){
 	});
 	
 	$('#phoneckOkBtn').click(function(){
-		window.open('/HomeOneHana/consult/chat?loanname=하나 청년전세론','',
-		 'width=596, height=653')
+		window.open('/HomeOneHana/consult/chat?loanname=우량주택전세론','',
+		 'width=596, height=750')
 	})
 	
 })

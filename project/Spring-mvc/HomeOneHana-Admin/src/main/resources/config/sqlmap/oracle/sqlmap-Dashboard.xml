@@ -14,4 +14,18 @@
 		) a
 		where rowidx=1
 	</select>
+	
+	<select id="getFiles" parameterType="Integer" resultType="downloadFileVO">
+		select to_char(enrolldt, 'YYYY-MM-DD') as enrolldt, file_ori_name, file_save_name, filesize
+		from loanfile
+		where contractcode=#{contractcode}
+		
+	</select>
+	
+	
+	<insert id="statusUpdate" parameterType="userDashBoardVO">
+		INSERT INTO LOANRECORD(LOANSEQ,STATUS,CONTRACTCODE)
+   		 VALUES(loanseq.nextval,#{status},#{contractcode})
+	
+	</insert>
 </mapper>

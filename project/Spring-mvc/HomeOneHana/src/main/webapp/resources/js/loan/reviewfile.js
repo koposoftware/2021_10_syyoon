@@ -4,7 +4,38 @@
 
 
 $(document).ready(function(){
-
+	$('#modalb').hide()
+	$('#modalb').trigger('click')
+	
+	$('#searchlimit').click(function(){
+		
+		var homeYN = $('input[name=homeYN]:checked').val()
+		var loc = $('#selectlocation').val()
+		var homeprice = $('input[name=homeprice]').val()+"0000"
+		var income = $('input[name=income]').val()+"0000"
+		
+		var ltv = 0
+		var homeltv = 0
+		var dti = 0
+		var res = homeprice*0.6
+		if(loc == "11"){
+			ltv = 40
+			dti = 40
+		}
+		if(homeYN == "N"){
+			homeltv = 10
+		}
+		console.log(homeYN)
+		console.log(ltv)
+		console.log(res*((ltv+homeltv)/100))
+		
+		$('#ltv').empty()
+		$('#ltv').append(ltv+'% (+'+homeltv+'%)')
+		var prin = res*((ltv+homeltv)/100)
+		$('input[name=principal]').attr('value', prin)
+		
+	});
+	
 	
   //* Form js
   function verificationForm() {

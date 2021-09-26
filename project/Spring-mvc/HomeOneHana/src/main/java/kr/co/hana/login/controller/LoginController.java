@@ -17,6 +17,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+
+	
+	
 	
 	@GetMapping("/login")
 	public String loginForm() {
@@ -64,6 +67,9 @@ public class LoginController {
 		
 		return "redirect:/";
 	}
+	
+	
+	
 	
 	
 }

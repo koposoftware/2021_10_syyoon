@@ -5,5 +5,8 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="kr.co.hana.login.vo.LoginVO" alias="loginVO"/>
+  		<typeAlias type="kr.co.hana.dashboard.vo.UserDashBoardVO" alias="userDashBoardVO"/>
+  		<typeAlias type="kr.co.hana.dashboard.vo.DownloadFileVO" alias="downloadFileVO"/>
+  		<typeAlias type="kr.co.hana.chat.vo.LoanInfoVO" alias="loanInfoVO"/>
   	</typeAliases>
   </configuration>

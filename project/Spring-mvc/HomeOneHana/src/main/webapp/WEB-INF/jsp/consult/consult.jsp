@@ -8,29 +8,23 @@
 <head>
 <title>HomeOneHana::온라인상담</title>
 <!-- webSocket -->
+<link
+	href="${ pageContext.request.contextPath }/resources/css/consult/consult.css"
+	rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
 
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 
 <link rel="canonical"
@@ -38,6 +32,10 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300'
 	rel='stylesheet' type='text/css'>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
 <script>
@@ -61,13 +59,8 @@ console.log(user)
 
 
 
-<link rel='stylesheet prefetch'
-	href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
-<link rel='stylesheet prefetch'
-	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-<link
-	href="${ pageContext.request.contextPath }/resources/css/consult/consult.css"
-	rel="stylesheet">
+
+
 
 <!-- 
 
@@ -83,47 +76,65 @@ Website: http://emilcarlsson.se/
 
 -->
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-
 
 
 </head>
-<body style="font-family: 'Noto Sans KR';">
+<body>
 
-
-	<div id="frame">
-		
-		<div class="content">
-			<div class="contact-profile">
-				<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-				<p style="color:#fff;">상담</p>
-
-			</div>
-			<div class="messages">
-				<ul>
-					<%--
-					<li class="sent"><img
-						src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-						<p>여기가 상담 맛집인가여?</p></li>
-					<li class="replies"><img
-						src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<p>아주 잘 찾아오셨습니다 호갱님</p></li>
-					--%>
-				</ul>
-			</div>
-			<div class="message-input">
-				<div class="wrap">
-					<input type="text" placeholder="Write your message..." id="ans" />
-					<button class="submit">
-						<i class="fa fa-paper-plane" aria-hidden="true"></i>
-					</button>
+<section>
+	<div id="chatArea">
+		<div id="chattitle">
+			<h2 id="customs">대출상담</h2>
+		</div>
+		<div id="chatContents">
+			
+			<%-- 
+			<div class="chatbotBlock">
+				<div class="chatbotImg">
+					<div></div>
+				</div>
+				<div class="chatbot">
+					<div class="chatbottext">안녕하쇼~</div>
 				</div>
 			</div>
+			<div class="userchatBlock">
+				<div class="userChat">
+					<div class="userchattext">환영합니다 호갱님~</div>
+				</div>
+				<div class="userImg">
+					<i class="far fa-user-circle fa-2x"></i>
+				</div>
+			</div>
+			
+			<div class="chatbotBlock">
+				<div class="chatbotImg">
+					<div></div>
+				</div>
+				<div class="chatbot">
+					<div class="chatbottext">
+						<div class="wantLoan">대출을 원하시면 아래링크로 이동해주세요!</div>
+						<a class="goLoan" href="#">지금 대출하러가기</a>
+					</div>
+				</div>
+			</div>
+			--%>
+
 		</div>
+
+		<div id="sendArea">
+			<div id="textBox">
+				<input type="text" id="msgs">
+			</div>
+			<div id="sendBtn">
+				<button>
+					<i class="fas fa-paper-plane fa-lg"></i>
+				</button>
+			</div>
+		</div>
+
+
 	</div>
+</section>
 	<!-- 
 	<script
 		src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>

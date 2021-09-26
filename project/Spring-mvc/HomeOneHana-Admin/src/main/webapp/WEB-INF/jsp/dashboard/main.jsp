@@ -204,7 +204,7 @@
 	                            ></div>
 	                          </div>
 	                          <div>
-	                            <p class="font-semibold"><a href="${ pageContext.request.contextPath }/main/review?contractcode=${user.contractcode}&userid=${user.userid}">${user.name }</a></p>
+	                            <p class="font-semibold"><a href="${ pageContext.request.contextPath }/main/review?contractcode=${user.contractcode}&userid=${user.userid}&loanname=${user.loanname}&name=${user.name }">${user.name }</a></p>
 	                            <p class="text-xs text-gray-600 dark:text-gray-400">
 	                              ${user.userid}
 	                            </p>

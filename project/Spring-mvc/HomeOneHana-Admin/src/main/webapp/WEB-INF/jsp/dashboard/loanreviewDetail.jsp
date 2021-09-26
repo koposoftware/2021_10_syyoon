@@ -20,7 +20,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
 	<script>
-	
+		var credit='${requestScope.credit}'
+		console.log(credit)
 		var concode = '${requestScope.contractcode}'
 		//console.log(concode)
 		$(document).ready(function(){
@@ -61,7 +62,7 @@
               >
               <h4
               class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-              윤소영 님의 정보 
+              ${requestScope.username } 님의 정보 
               </h4>
 
               <!-- 상품명 -->
@@ -72,7 +73,7 @@
                   <p
                     class="text-sm font-semibold text-gray-700 dark:text-gray-200 rmmargin"
                   >
-                    상품명 : 000 대출
+                    상품명 : ${ requestScope.loanname }
                   </p>
                 </div>
               </div>
@@ -92,7 +93,12 @@
                   <p
                     class="text-sm font-semibold text-red-700 dark:text-gray-200 rmmargin"
                   >
-                    양호
+                  	<c:if test="${empty credit }">
+                  		-
+                  	</c:if>
+                  	<c:if test="${not empty credit }">
+                    	${credit.tax_status }
+                    </c:if>
                   </p>
                 </div>
               </div>
@@ -124,22 +130,57 @@
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3">
                         <div class="flex items-center text-xs">
-                            <p class="font-semibold"> 제출 완료 </p>
+                            <p class="font-semibold"> 
+                            
+                            <c:if test="${empty credit }">
+		                  		-
+		                  	</c:if>
+		                  	<c:if test="${not empty credit }">
+                            	<c:if test="${ credit.people_insurance eq 1 }">Y</c:if>
+                            	<c:if test="${ credit.people_insurance ne 1 }">N</c:if> 
+                            </c:if>
+                             </p>
                         </div>
                       </td>
                       <td class="px-4 py-3 text-sm">
                         <div class="flex items-center text-xs">
-                          <p class="font-semibold"> 제출 완료 </p>
+                          <p class="font-semibold"> 
+                          <c:if test="${empty credit }">
+		                  		-
+		                  	</c:if>
+		                  	<c:if test="${not empty credit }">
+		                        <c:if test="${ credit.health_insurance eq 1 }">Y</c:if>
+	        					<c:if test="${ credit.health_insurance ne 1 }">N</c:if> 
+	        				</c:if>
+        				</p>
                       </div>
                       </td>
                       <td class="px-4 py-3 text-xs">
                         <div class="flex items-center text-xs">
-                          <p class="font-semibold"> 제출 완료 </p>
+                          <p class="font-semibold"> 
+                          <c:if test="${empty credit }">
+	                  		-
+	                  	</c:if>
+	                  	<c:if test="${not empty credit }">
+	                          <c:if test="${ credit.hired_insurance eq 1 }">Y</c:if>
+	                          <c:if test="${ credit.hired_insurance ne 1 }">N</c:if>
+                          </c:if>
+                          </p>
                       </div>
                       </td>
                       <td class="px-4 py-3 text-sm">
                         <div class="flex items-center text-xs">
-                          <p class="font-semibold"> 제출 완료 </p>
+                          <p class="font-semibold"> 
+                          <c:if test="${empty credit }">
+		                  		-
+	                  	</c:if>
+	                  	<c:if test="${not empty credit }">
+	                          
+	                          <c:if test="${ credit.industrial_insurance eq 1 }">Y</c:if>
+	                          <c:if test="${ credit.industrial_insurance ne 1 }">N</c:if>  
+                            						
+                        </c:if> 						
+                           </p>
                       </div>
                       </td>
                     </tr>
@@ -152,7 +193,8 @@
               <!-- 직업 : 직장인 -->
               <span
               class="text-sm font-semibold text-gray-600 dark:text-gray-300">
-              직업 : 직장인
+              직업 : <c:if test="${empty credit }">-</c:if>
+                  	<c:if test="${not empty credit }">${credit.job }</c:if>
               </span>
 
               <div class="w-full overflow-x-auto">
@@ -174,17 +216,23 @@
                     <tr class="text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3">
                         <div class="flex items-center text-xs">
-                            <p class="font-semibold"> 1 </p>
+                            <p class="font-semibold"> <c:if test="${empty credit }">-</c:if>
+                  									<c:if test="${not empty credit }">${credit.workyear } 년</c:if></p>
                         </div>
                       </td>
                       <td class="px-4 py-3 text-sm">
                         <div class="flex items-center text-xs">
-                          <p class="font-semibold"> 하나금융 IT </p>
+                          <p class="font-semibold"> <c:if test="${empty credit }">-</c:if>
+                  								<c:if test="${not empty credit }">${credit.companynm }</c:if> </p>
                       </div>
                       </td>
                       <td class="px-4 py-3 text-xs">
                         <div class="flex items-center text-xs">
-                          <p class="font-semibold"> N </p>
+                          <p class="font-semibold"> <c:if test="${empty credit }">-</c:if>
+                  	<c:if test="${not empty credit }">
+                  				<c:if test="${credit.stockyn eq 1}">상장</</c:if>
+                  				<c:if test="${credit.stockyn eq 0}">비상장</</c:if>
+                  		</c:if></p>
                       </div>
                       </td>
                       

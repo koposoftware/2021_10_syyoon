@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.loan.vo.ReviewFileVO;
+import kr.co.hana.mypage.vo.LoanContractVO;
 
 @Repository
 public class LoanDAOImpl implements LoanDAO {
@@ -13,12 +14,20 @@ public class LoanDAOImpl implements LoanDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
+	
+	
 	public void uploadFile(ReviewFileVO rfvo) {
 		sqlSessionTemplate.insert("loan.dao.LoanDAO.uploadFile",rfvo);
 	}
 
-	public void contractLogProcedure(EnrollLoanVO enroll) {
-		sqlSessionTemplate.insert("loan.dao.LoanDAO.contractLogProcedure",enroll);		
+	public int contractLogProcedure(EnrollLoanVO enroll) {
+		int result = sqlSessionTemplate.selectOne("loan.dao.LoanDAO.contractLogProcedure",enroll);
+		return result;
+		
+	}
+
+	public void finishContractStatus(LoanContractVO loanvo) {
+		sqlSessionTemplate.insert("loan.dao.LoanDAO.finishContractStatus",loanvo);
 		
 	}
 

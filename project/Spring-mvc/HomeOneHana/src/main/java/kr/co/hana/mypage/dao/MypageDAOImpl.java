@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.mypage.vo.AccountVO;
 import kr.co.hana.mypage.vo.LoanContractVO;
 import kr.co.hana.schedule.vo.FavoriteScheduleVO;
@@ -39,6 +40,17 @@ public class MypageDAOImpl implements MypageDAO {
 	 */
 	public List<AccountVO> getAccount(String id) {
 		List<AccountVO> result = sqlSessionTemplate.selectList("mypage.dao.MypageDAO.getAccount", id);
+		return result;
+	}
+	
+	public EnrollLoanVO getContractInfo(int contractcode) {
+		EnrollLoanVO result = sqlSessionTemplate.selectOne("mypage.dao.MypageDAO.getContractInfo", contractcode);
+		return result;
+	}
+
+
+	public List<AccountVO> getLoanAccount(String id) {
+		List<AccountVO> result = sqlSessionTemplate.selectList("mypage.dao.MypageDAO.getLoanAccount", id);
 		return result;
 	}
 	

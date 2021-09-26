@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import kr.co.hana.loan.Service.LoanService;
 import kr.co.hana.login.vo.LoginVO;
 import kr.co.hana.mypage.service.MypageService;
 import kr.co.hana.mypage.vo.AccountVO;
@@ -27,9 +29,52 @@ public class MypageController {
 	@Autowired
 	private SearchService searchservice;
 	
+	@Autowired
+	private LoanService loanservice;
+	
 	
 	@GetMapping("/mypage")
 	public String myPageMain(HttpSession session, Model model) {
+		LoginVO log = (LoginVO) session.getAttribute("loginVO");
+		
+		// 즐겨찾은 공고
+		List<FavoriteScheduleVO> favNotice = mypageservice.getAllFavoriteNoti(log.getId());
+		model.addAttribute("favoriteNotice", favNotice);
+		
+		//즐겨찾은 집
+		List<FavoriteVO> favHome = searchservice.getFavoriteHome(log.getId());
+		model.addAttribute("favoriteHome", favHome);
+		
+		//계약상황
+		List<LoanContractVO> contracts = mypageservice.getContract(log.getId());
+		model.addAttribute("contractList", contracts);
+		System.out.println(contracts.toString());
+		
+		//계좌정보
+		List<AccountVO> accounts = mypageservice.getAccount(log.getId());
+		model.addAttribute("accountList", accounts);
+		
+		// 대출계좌정보
+		List<AccountVO> loanaccounts = mypageservice.getLoanAccount(log.getId());
+		model.addAttribute("loanaccountList", loanaccounts);
+		
+		return "mypage/mypage";
+	}
+	
+	@PostMapping("/mypage")
+	public String myPageMainP(int contractcode, String account, String accountdt, HttpSession session, Model model) {
+		System.out.println(contractcode);
+		System.out.println(account);
+		//상태변경
+		LoanContractVO loanvo = new LoanContractVO();
+		loanvo.setAccountdt(accountdt);
+		loanvo.setAccount(account);
+		loanvo.setContractcode(contractcode);
+		loanvo.setLoanaccount(loanservice.makeAccountNum());
+		loanservice.finishContractStatus(loanvo);
+		
+		
+		
 		LoginVO log = (LoginVO) session.getAttribute("loginVO");
 		
 		// 즐겨찾은 공고
@@ -48,14 +93,13 @@ public class MypageController {
 		List<AccountVO> accounts = mypageservice.getAccount(log.getId());
 		model.addAttribute("accountList", accounts);
 		
-		
+		//대출계좌정보
+		List<AccountVO> loanaccounts = mypageservice.getLoanAccount(log.getId());
+		model.addAttribute("loanaccountList", loanaccounts);
+
 		return "mypage/mypage";
 	}
 	
-	@GetMapping("/loan/contract")
-	public String loanContract() {
-		System.out.println("계약서작성해볼래");
-		return "mypage/loancontract";
-	}
 	
+
 }

@@ -5,9 +5,10 @@ public class LoanContractVO {
 	private String loanname;
 	private String status;
 	private String stratdt;
+	private String accountdt;
+	private String account;
+	private String loanaccount;
 	private String contractdt;
-	
-	
 	public int getContractcode() {
 		return contractcode;
 	}
@@ -32,6 +33,24 @@ public class LoanContractVO {
 	public void setStratdt(String stratdt) {
 		this.stratdt = stratdt;
 	}
+	public String getAccountdt() {
+		return accountdt;
+	}
+	public void setAccountdt(String accountdt) {
+		this.accountdt = accountdt;
+	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
+	public String getLoanaccount() {
+		return loanaccount;
+	}
+	public void setLoanaccount(String loanaccount) {
+		this.loanaccount = loanaccount;
+	}
 	public String getContractdt() {
 		return contractdt;
 	}
@@ -41,8 +60,10 @@ public class LoanContractVO {
 	@Override
 	public String toString() {
 		return "LoanContractVO [contractcode=" + contractcode + ", loanname=" + loanname + ", status=" + status
-				+ ", stratdt=" + stratdt + ", contractdt=" + contractdt + "]";
+				+ ", stratdt=" + stratdt + ", accountdt=" + accountdt + ", account=" + account + ", loanaccount="
+				+ loanaccount + ", contractdt=" + contractdt + "]";
 	}
+	
 	
 	
 

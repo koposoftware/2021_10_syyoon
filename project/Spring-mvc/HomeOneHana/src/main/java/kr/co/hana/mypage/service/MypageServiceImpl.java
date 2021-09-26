@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.mypage.dao.MypageDAO;
 import kr.co.hana.mypage.vo.AccountVO;
 import kr.co.hana.mypage.vo.LoanContractVO;
@@ -52,6 +53,16 @@ public class MypageServiceImpl implements MypageService {
 	 */
 	public List<AccountVO> getAccount(String id) {
 		List<AccountVO> result = mypagedao.getAccount(id);
+		return result;
+	}
+	
+	public EnrollLoanVO getContractInfo(int contractcode) {
+		EnrollLoanVO result = mypagedao.getContractInfo(contractcode);
+		return result;
+	}
+
+	public List<AccountVO> getLoanAccount(String id) {
+		List<AccountVO> result = mypagedao.getLoanAccount(id);
 		return result;
 	}
 	

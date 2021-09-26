@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.hana.dashboard.vo.DownloadFileVO;
 import kr.co.hana.dashboard.vo.UserDashBoardVO;
 
 
@@ -22,6 +23,22 @@ public class DashboardDAOImpl implements DashboardDAO {
 	public List<UserDashBoardVO> getUsers(String managerid){
 		List<UserDashBoardVO> result = sqlSessionTemplate.selectList("dashboard.dao.dashboardDAO.getUsers",managerid);
 		
+		return result;
+	}
+	
+	/**
+	 * 사용자가 업로드한 파일 목록가져오기
+	 */
+	public List<DownloadFileVO> getFiles(int contractcode) {
+		List<DownloadFileVO> result = sqlSessionTemplate.selectList("dashboard.dao.dashboardDAO.getFiles", contractcode);
+		return result;
+	}
+	
+	/**
+	 * 상태 업데이트
+	 */
+	public int statusUpdate(UserDashBoardVO dashinfo) {
+		int result = sqlSessionTemplate.insert("dashboard.dao.dashboardDAO.statusUpdate", dashinfo);
 		return result;
 	}
 

@@ -1,13 +1,21 @@
 package kr.co.hana.dashboard.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.parser.ParseException;
+
+import kr.co.hana.dashboard.vo.DownloadFileVO;
+import kr.co.hana.dashboard.vo.UserCreditVO;
 import kr.co.hana.dashboard.vo.UserDashBoardVO;
 
 public interface DashboardService {
 	
 	List<UserDashBoardVO> getUsers(String managerid);
 	Map<String, Integer> getUserCnt(String managerid);
+	List<DownloadFileVO> getFiles(int contractcode);
+	int statusUpdate(UserDashBoardVO dashinfo);
+	UserCreditVO getUserCredit(String id)throws IOException, ParseException;
 
 }

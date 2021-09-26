@@ -111,6 +111,9 @@ background-color: #f7f7ff;
 	margin-top:5px;
 	margin-bottom:5px;
 }
+.loan-finishBox{
+	background-color:#000;
+}
 .loan-acceptBox{
 	background-color:#008485;
 }
@@ -137,4 +140,11 @@ background-color: #f7f7ff;
 	color:#fff; 
 	font-size:10px; 
 	margin-bottom:0px;
+}
+
+th{
+	text-align:center;
+}
+td{
+	font-size:14px;
 }

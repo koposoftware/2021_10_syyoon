@@ -6,6 +6,7 @@ public class LoanInfoVO {
 	private String baserate;
 	private String addrate;
 	private String finalrate;
+	private String link;
 	public String getName() {
 		return name;
 	}
@@ -36,11 +37,19 @@ public class LoanInfoVO {
 	public void setFinalrate(String finalrate) {
 		this.finalrate = finalrate;
 	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
 	@Override
 	public String toString() {
 		return "LoanInfoVO [name=" + name + ", changedt=" + changedt + ", baserate=" + baserate + ", addrate=" + addrate
-				+ ", finalrate=" + finalrate + "]";
+				+ ", finalrate=" + finalrate + ", link=" + link + "]";
 	}
+	
+	
 	
 	
 	

@@ -20,7 +20,14 @@
 	<!-- fullcalendar 언어 CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
 	
-
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			var content = '<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>'
+			$(content).prependTo('#calaenderMenu')    	  
+			
+		})
+	</script>
     
   </head>
   <body>

@@ -15,7 +15,7 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public String home(){
-		System.out.println("메인이지");
+		System.out.println("메인은 로그인화면이지");
 		return "index";
 	}
 	

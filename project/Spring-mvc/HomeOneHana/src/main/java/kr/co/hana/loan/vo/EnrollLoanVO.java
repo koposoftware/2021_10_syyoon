@@ -2,10 +2,14 @@ package kr.co.hana.loan.vo;
 
 public class EnrollLoanVO {
 	
+	
 	private String loanname;
 	private String userid;
 	private String managerid;
+	private int principal;
 	
+	private String finalrate;
+	private int duedate;
 	public String getLoanname() {
 		return loanname;
 	}
@@ -24,10 +28,35 @@ public class EnrollLoanVO {
 	public void setManagerid(String managerid) {
 		this.managerid = managerid;
 	}
+	public int getPrincipal() {
+		return principal;
+	}
+	public void setPrincipal(int principal) {
+		this.principal = principal;
+	}
+	public String getFinalrate() {
+		return finalrate;
+	}
+	public void setFinalrate(String finalrate) {
+		this.finalrate = finalrate;
+	}
+	public int getDuedate() {
+		return duedate;
+	}
+	public void setDuedate(int duedate) {
+		this.duedate = duedate;
+	}
 	@Override
 	public String toString() {
-		return "EnrollLoanVO [loanname=" + loanname + ", userid=" + userid + ", managerid=" + managerid + "]";
+		return "EnrollLoanVO [loanname=" + loanname + ", userid=" + userid + ", managerid=" + managerid + ", principal="
+				+ principal + ", finalrate=" + finalrate + ", duedate=" + duedate + "]";
 	}
+
+	
+	
+	
+	
+	
 	
 	
 

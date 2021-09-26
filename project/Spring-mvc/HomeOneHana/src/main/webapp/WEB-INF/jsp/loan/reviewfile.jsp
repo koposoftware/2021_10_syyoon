@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HomeOneHana::</title>
+<title>HomeOneHana::대출상품가입하기</title>
 <link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/css/loan/reviewfile.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css" rel="stylesheet">
@@ -18,6 +18,11 @@
 <script src="${ pageContext.request.contextPath }/resources/js/loan/reviewfile.js"></script>
 <%--https://codepen.io/emrankhan016/pen/vdNzXm --%>
 
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header>
@@ -42,73 +47,89 @@
 		    </div>
 		    <!-- progressbar -->
 		    <ul id="progressbar">
-		      <li class="active">금융정보 제공 동의</li>  
+		      <li class="active">한도조회</li>  
 		      <li>심사서류 제출</li> 
 		      <li>제출하기</li>
 		    </ul>
 		    <!-- fieldsets -->
 		    <fieldset>
-		      <h3>금융정보 제공 동의를 통해 빠른 대출을 경험해보세요!</h3>
-	
-		      <div class="form-row"> 
-		        <div class="form-group col-md-12">  
-		        	<div id="formarea">
-						<div id="joinForm">
-							<ul class="join_box">
-								<li class="checkBox check01">
-									<ul class="clearfix">
-										<li>아래의 모든 사항을 확인했으며, 모두 동의합니다.</li>
-										<li class="checkAllBtn">
-											<p>
-												<input id="chkAll" type="checkbox" name="chkAll"> <label for="chkAll"></label>
-											</p>
-										</li>
-									</ul>
-								</li>
-								
-								<li class="checkBox check02">
-									<textarea> HomeOneHana(홈원하나)는 개인정보보호를 매우 중요시하며 ‘공공기관의 개인정보보호에 관한 법률’을 준수하고 있습니다. 귀하가 수집 및 이용ㆍ제3자 제공에 동의한 개인정보는 다양한 프로그램에 대한 정보제공과 프로그램 참여대상 관리 및 통계분석을 통한 자료로써 활용되며, 사용자의 분포도ㆍ이용행태 등을 분석하는데 이용될 수 있습니다. 
-				      			 </textarea>
-								</li>
-								
-								
-								<li class="checkBox check02">
-									<ul class="clearfix">
-										<li>1. 개인정보 수집 및 이용 동의</li>
-										<li class="checkBtn">
-											<p>
-												<input class="chkEtc" id="chkMust1" type="checkbox" name="chkEtc1"> <label for="chkMust1"></label>
-											</p>
-										</li>
-									</ul> 
-								</li><li class="checkBox check02">
-									<textarea>1) 수집ㆍ이용 목적 - 가족에 대한 서비스 정보 제공 및 건강가정지원센터의 각종 서비스 안내  - 서비스 이용자의 개인 식별, 서비스 이용에 따른 이력관리 및 통계분석 자료  2) 수집 항목 : 성명, 생년월일, 주소, 이메일, 전화번호, 직업  3) 보유ㆍ이용 기간  - 문서 관리 : 해당 서비스 지원 기간동안 보관하고, 서비스 종료 후 개인정보처리 방침에 명시된 문서보관기관 경과 후 파기  - 통합정보시스템 관리 : 준영구  4) 동의 거부 권리 : 위 개인정보 수집 및 이용 동의를 거부하실 수 있음. 다만 이 경우 센터에서 진행되는 프로그램이나 서비스의 가입 및 이용이 거부될 수 있음.  
-				      			 </textarea>
-				      			</li>
+		      <h3>고객님의 한도를 알아보세요!</h3>
+				<div class="form-row"> 
+		        <div class="form-group col-md-12">
+						<div class="boxTempl">
 
-								<li class="checkBox check03">
-									<ul class="clearfix">
-										<li>위치정보 이용약관 동의(선택)</li>
-										<li class="checkBtn">
-											<p>
-												<input class="chkEtc" id="chkSele1" type="checkbox" name="chkEtc2"> <label for="chkSele1"></label>
-											</p>
-										</li>
-									</ul> 
-								</li>
-									<li class="checkBox check02"><textarea>여러분을 환영합니다. HomeOneHana 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 HomeOneHana 서비스의 이용과 관련하여 HomeOneHana 서비스를 제공하는 HomeOneHana 주식회사(이하 ‘HomeOneHana’)와 이를 이용하는 HomeOneHana 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 HomeOneHana 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-				       				</textarea>
-								</li>
-				
-							</ul>
-				        </div>
-					</div>			
-				</div>
-		      </div>  
+							<table class="tbl">
+								<tr>
+									<th>주택보유여부</th>
+									<td>
+									<span class="homew"><input  type="radio" name="homeYN" id="homeY"
+										value="Y"><label for="homeY"> 주택보유</label></span> 
+									<span class="homew"><input
+										type="radio" name="homeYN" id="homeN" value="N"><label
+										for="homeN" > 무주택</label></span></td>
+								</tr>
+								<tr>
+									<th>지역</th>
+									<td><select id="selectlocation" name="laction" >
+											<option value="11">서울특별시</option>
+											<option value="41">경기도</option>
+											<option value="28">인천광역시</option>
+											<option value="42">강원도</option>
+											<option value="36110">세종특별자치시</option>
+											<option value="31">울산광역시</option>
+											<option value="30">대전광역시</option>
+											<option value="29">광주광역시</option>
+											<option value="27">대구광역시</option>
+											<option value="26">부산광역시</option>
+											<option value="43">충청북도</option>
+											<option value="44">충청남도</option>
+											<option value="45">전라북도</option>
+											<option value="46">전라남도</option>
+											<option value="47">경상북도</option>
+											<option value="48">경상남도</option>
+											<option value="50">제주특별자치도</option>
+									</select></td>
+								</tr>
+								<tr>
+									<th>주택금액</th>
+									<td><input type="text" class="inputinfotext"
+										name="homeprice" >만원</td>
+								</tr>
+								<tr>
+									<th>소득</th>
+									<td><input type="text" class="inputinfotext"
+										name="income" >만원</td>
+								</tr>
+
+							</table>
+
+							<div class="boxTempl"
+								style="text-align: center; margin-top: 10px;">
+								<button type="button" id="searchlimit">한도조회</button>
+							</div>
+
+							<table class="tbl">
+								<tr>
+									<th width="50%">LTV</th>
+									<th width="50%">예상한도</th>
+								</tr>
+								<tr>
+									<td id="ltv">-</td>
+									<td id="limits"><input type="text" class="inputinfotext"
+										name="principal" readonly>원</td>
+								<tr>
+							</table>
+
+
+						</div>
+					</div>
+		        </div>
+		    
 		      <button type="button" class="action-button previous_button">Back</button>
 		      <button type="button" class="next action-button">Continue</button>  
 		    </fieldset>
     		<fieldset>
+    			<button type="button" id="modalb" data-toggle="modal" data-target="#exampleModalCenter"></button>
 		      <h3>심사 서류를 업로드 하세요</h3>
 		      <!-- fileupload -->
 		      <div id="fileBox">
@@ -166,7 +187,82 @@
 		  </div>
 		</div>
 	</section>
-	
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">금융정보 제공 동의</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-row"> 
+		        <div class="form-group col-md-12">  
+		        	<div id="formarea">
+						<div id="joinForm">
+							<ul class="join_box">
+								<li class="checkBox check01">
+									<ul class="clearfix">
+										<li>아래의 모든 사항을 확인했으며, 모두 동의합니다.</li>
+										<li class="checkAllBtn">
+											<p>
+												<input id="chkAll" type="checkbox" name="chkAll"> <label for="chkAll"></label>
+											</p>
+										</li>
+									</ul>
+								</li>
+								
+								<li class="checkBox check02">
+									<textarea> HomeOneHana(홈원하나)는 개인정보보호를 매우 중요시하며 ‘공공기관의 개인정보보호에 관한 법률’을 준수하고 있습니다. 귀하가 수집 및 이용ㆍ제3자 제공에 동의한 개인정보는 다양한 프로그램에 대한 정보제공과 프로그램 참여대상 관리 및 통계분석을 통한 자료로써 활용되며, 사용자의 분포도ㆍ이용행태 등을 분석하는데 이용될 수 있습니다. 
+				      			 </textarea>
+								</li>
+								
+								
+								<li class="checkBox check02">
+									<ul class="clearfix">
+										<li>1. 개인정보 수집 및 이용 동의</li>
+										<li class="checkBtn">
+											<p>
+												<input class="chkEtc" id="chkMust1" type="checkbox" name="chkEtc1"> <label for="chkMust1"></label>
+											</p>
+										</li>
+									</ul> 
+								</li><li class="checkBox check02">
+									<textarea>1) 수집ㆍ이용 목적 - 가족에 대한 서비스 정보 제공 및 건강가정지원센터의 각종 서비스 안내  - 서비스 이용자의 개인 식별, 서비스 이용에 따른 이력관리 및 통계분석 자료  2) 수집 항목 : 성명, 생년월일, 주소, 이메일, 전화번호, 직업  3) 보유ㆍ이용 기간  - 문서 관리 : 해당 서비스 지원 기간동안 보관하고, 서비스 종료 후 개인정보처리 방침에 명시된 문서보관기관 경과 후 파기  - 통합정보시스템 관리 : 준영구  4) 동의 거부 권리 : 위 개인정보 수집 및 이용 동의를 거부하실 수 있음. 다만 이 경우 센터에서 진행되는 프로그램이나 서비스의 가입 및 이용이 거부될 수 있음.  
+				      			 </textarea>
+				      			</li>
+
+								<li class="checkBox check03">
+									<ul class="clearfix">
+										<li>위치정보 이용약관 동의(선택)</li>
+										<li class="checkBtn">
+											<p>
+												<input class="chkEtc" id="chkSele1" type="checkbox" name="chkEtc2"> <label for="chkSele1"></label>
+											</p>
+										</li>
+									</ul> 
+								</li>
+									<li class="checkBox check02"><textarea>여러분을 환영합니다. HomeOneHana 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 HomeOneHana 서비스의 이용과 관련하여 HomeOneHana 서비스를 제공하는 HomeOneHana 주식회사(이하 ‘HomeOneHana’)와 이를 이용하는 HomeOneHana 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 HomeOneHana 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+				       				</textarea>
+								</li>
+				
+							</ul>
+				        </div>
+					</div>			
+				</div>
+		      </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">제출</button>
+      </div>
+    </div>
+  </div>
+</div>
 	
 	<!-- End Multi step form -->
 	<footer>

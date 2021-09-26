@@ -4,9 +4,12 @@ import java.util.List;
 
 import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.loan.vo.ReviewFileVO;
+import kr.co.hana.mypage.vo.LoanContractVO;
 
 public interface LoanService {
 	
 	void uploadFile(List<ReviewFileVO> rfvo);
-	void contractLogProcedure(EnrollLoanVO enroll);
+	void finishContractStatus(LoanContractVO loanvo);
+	int contractLogProcedure(EnrollLoanVO enroll);
+	String makeAccountNum();
 }

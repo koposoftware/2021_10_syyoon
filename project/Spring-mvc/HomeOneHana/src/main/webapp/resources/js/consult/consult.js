@@ -3,43 +3,49 @@
  */
 
 
-$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+function newMessage() {
+	message = $("#textBox input").val();
+	if ($.trim(message) == '') {
+		return false;
+	}
+	
+	
+	/*if -> 나일때 왼쪽에 뜨게
+	else -> 상대방일때 오른쪽에 뜨게*/
+	$('#chatContents').append('<div class="userchatBlock">'
+			+ '<div class="userChat">'
+			+ '<div class="userchattext">'+message+'</div>'
+			+ '</div>'
+			+ '<div class="userImg"><i class="far fa-user-circle fa-2x"></i></div>'
+			+ '</div></div>'
+			)
+	$('#textBox input').val(null);
 
-/*$("#profile-img").click(function() {
-	$("#status-options").toggleClass("active");
-});*/
-
-$(".expand-button").click(function() {
-	$("#profile").toggleClass("expanded");
-	$("#contacts").toggleClass("expanded");
-});
-
-/*$("#status-options ul li").click(function() {
-	$("#profile-img").removeClass();
-	$("#status-online").removeClass("active");
-	$("#status-away").removeClass("active");
-	$("#status-busy").removeClass("active");
-	$("#status-offline").removeClass("active");
-	$(this).addClass("active");
-
-	if ($("#status-online").hasClass("active")) {
-		$("#profile-img").addClass("online");
-	} else if ($("#status-away").hasClass("active")) {
-		$("#profile-img").addClass("away");
-	} else if ($("#status-busy").hasClass("active")) {
-		$("#profile-img").addClass("busy");
-	} else if ($("#status-offline").hasClass("active")) {
-		$("#profile-img").addClass("offline");
-	} else {
-		$("#profile-img").removeClass();
-	};
-
-	$("#status-options").removeClass("active");
-});*/
+	sock.send(message);
+	$("#chatContents").animate({ scrollTop: $(document).height() }, "fast");
+};
 
 
 
-$('.submit').click(function() {
+function register(){
+	var msg = {
+		username : userNm,
+		userid : userId
+		,loanname: loanNm
+	}
+	sock.send(JSON.stringify(msg))
+};
+
+function sendMsg(){
+	var msg = {
+		username : userNm,
+		userid : userId	
+		,loanname: loanNm
+	}
+	
+}
+
+$('#sendBtn button').click(function() {
 	newMessage();
 });
 
@@ -75,50 +81,29 @@ sock.onmessage = function(e) {
 	
 	if(socketId != arr[0]){
 
-		$('<li class="replies"><img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" /><p>' + arr[1] + '</p></li>').appendTo($('.messages ul'));
+		$('#chatContents').append('<div class="chatbotBlock">'
+			+ '<div class="chatbotImg" ><div></div></div>'
+			+ '<div class="chatbot">'
+			+ '<div class="chatbottext">'+arr[1]+'</div>'
+			+ '</div></div>'
+			)
 	}
 
 
-	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+	$("#chatContents").animate({ scrollTop: $(document).height() }, "fast");
 
 }
 
 sock.onclose = function() {
-	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>연결종료</p></li>').appendTo($('.messages ul'));
+	$('#chatContents').append('<div class="chatbotBlock">'
+			+ '<div class="chatbotImg" ><div></div></div>'
+			+ '<div class="chatbot">'
+			+ '<div class="chatbottext">대화가 종료되었습니다.</div>'
+			+ '</div></div>'
+			)
 }
 
 
-function newMessage() {
-	message = $(".message-input input").val();
-	if ($.trim(message) == '') {
-		return false;
-	}
-	
 
 
-	/*if -> 나일때 왼쪽에 뜨게
-	else -> 상대방일때 오른쪽에 뜨게*/
-	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
-	$('.message-input input').val(null);
-	sock.send(message);
-	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
-};
-
-function register(){
-	var msg = {
-		username : userNm,
-		userid : userId
-		,loanname: loanNm
-	}
-	sock.send(JSON.stringify(msg))
-};
-
-function sendMsg(){
-	var msg = {
-		username : userNm,
-		userid : userId	
-		,loanname: loanNm
-	}
-	
-}
 

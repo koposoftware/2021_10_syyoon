@@ -4,6 +4,14 @@ public class AccountVO {
 
 	private String id;
 	private String account;
+	private String loanaccount;
+	private String accountdt;
+	private String loanname;
+	private String finalrate;
+	private String repayamount; // 값은돈
+	private int principal;
+	private String duedate;
+	
 	private int balance;
 	private String code;
 	private String name;
@@ -21,6 +29,48 @@ public class AccountVO {
 	}
 	public void setAccount(String account) {
 		this.account = account;
+	}
+	public String getLoanaccount() {
+		return loanaccount;
+	}
+	public void setLoanaccount(String loanaccount) {
+		this.loanaccount = loanaccount;
+	}
+	public String getAccountdt() {
+		return accountdt;
+	}
+	public void setAccountdt(String accountdt) {
+		this.accountdt = accountdt;
+	}
+	public String getLoanname() {
+		return loanname;
+	}
+	public void setLoanname(String loanname) {
+		this.loanname = loanname;
+	}
+	public String getFinalrate() {
+		return finalrate;
+	}
+	public void setFinalrate(String finalrate) {
+		this.finalrate = finalrate;
+	}
+	public String getRepayamount() {
+		return repayamount;
+	}
+	public void setRepayamount(String repayamount) {
+		this.repayamount = repayamount;
+	}
+	public int getPrincipal() {
+		return principal;
+	}
+	public void setPrincipal(int principal) {
+		this.principal = principal;
+	}
+	public String getDuedate() {
+		return duedate;
+	}
+	public void setDuedate(String duedate) {
+		this.duedate = duedate;
 	}
 	public int getBalance() {
 		return balance;
@@ -60,9 +110,13 @@ public class AccountVO {
 	}
 	@Override
 	public String toString() {
-		return "AccountVO [id=" + id + ", account=" + account + ", balance=" + balance + ", code=" + code + ", name="
-				+ name + ", alias=" + alias + ", enrolldt=" + enrolldt + ", relationacc=" + relationacc + "]";
+		return "AccountVO [id=" + id + ", account=" + account + ", loanaccount=" + loanaccount + ", accountdt="
+				+ accountdt + ", loanname=" + loanname + ", finalrate=" + finalrate + ", repayamount=" + repayamount
+				+ ", principal=" + principal + ", duedate=" + duedate + ", balance=" + balance + ", code=" + code
+				+ ", name=" + name + ", alias=" + alias + ", enrolldt=" + enrolldt + ", relationacc=" + relationacc
+				+ "]";
 	}
+	
 	
 	
 	

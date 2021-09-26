@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,21 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import kr.co.hana.loan.Service.LoanService;
 import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.loan.vo.ReviewFileVO;
+import kr.co.hana.login.vo.LoginVO;
+import kr.co.hana.mypage.service.MypageService;
+import kr.co.hana.mypage.vo.AccountVO;
 
 @Controller
 public class LoanController {
 	
 	@Autowired
 	private LoanService loanservice;
+	
+	@Autowired
+	private MypageService mypageservice;
+	
+	
+	
 	private static final String SAVE_PATH = "D:/homeOneHanaFile/";
 	
 	
@@ -55,6 +66,7 @@ public class LoanController {
 		
 		*/
 		System.out.println(enroll.toString());
+		int contractcode = loanservice.contractLogProcedure(enroll);
 		Iterator<String> iter = mhsq.getFileNames();
 		List<ReviewFileVO> rfvoList = new ArrayList<ReviewFileVO>();
 		while(iter.hasNext()) {
@@ -93,16 +105,33 @@ public class LoanController {
 				mFile.transferTo(new File(SAVE_PATH + saveFileName));
 				
 				ReviewFileVO rfvo = new ReviewFileVO();
+				rfvo.setContractcode(contractcode);
 				rfvo.setFile_ori_name(oriFileName);
 				rfvo.setFile_save_name(saveFileName);
 				rfvo.setFilesize(fileSize);
 				rfvoList.add(rfvo);
 			} 
 		} 
-		
-		//loanservice.uploadFile(rfvoList);
-		loanservice.contractLogProcedure(enroll);
+		loanservice.uploadFile(rfvoList);
 		
 		return "loan/fileresult";
+	}
+	
+	
+	@GetMapping("/loan/contract")
+	public String loanContract(int contractcode, HttpSession session, Model model) {
+		System.out.println("계약서작성해볼래");
+		
+		model.addAttribute("contractcode", contractcode);
+		LoginVO log = (LoginVO) session.getAttribute("loginVO");
+		//계좌정보
+		List<AccountVO> accounts = mypageservice.getAccount(log.getId());
+		model.addAttribute("accountList", accounts);
+		
+		// 계약상품 정보
+		EnrollLoanVO contractinfo = mypageservice.getContractInfo(contractcode);
+		model.addAttribute("contractinfo", contractinfo);
+
+		return "loan/loancontract";
 	}
 }

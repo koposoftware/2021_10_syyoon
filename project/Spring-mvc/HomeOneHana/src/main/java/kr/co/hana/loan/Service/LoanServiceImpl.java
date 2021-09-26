@@ -1,6 +1,7 @@
 package kr.co.hana.loan.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.hana.loan.dao.LoanDAO;
 import kr.co.hana.loan.vo.EnrollLoanVO;
 import kr.co.hana.loan.vo.ReviewFileVO;
+import kr.co.hana.mypage.vo.LoanContractVO;
 
 @Service
 public class LoanServiceImpl implements LoanService{
@@ -21,7 +23,6 @@ public class LoanServiceImpl implements LoanService{
 	public void uploadFile(List<ReviewFileVO> rfvo) {
 		
 		for(int i = 0; i<rfvo.size(); i++) {
-			rfvo.get(i).setContractcode(1);
 			loandao.uploadFile(rfvo.get(i));
 		}
 	}
@@ -29,10 +30,34 @@ public class LoanServiceImpl implements LoanService{
 	/**
 	 * 계약 로그 insert
 	 */
-	public void contractLogProcedure(EnrollLoanVO enroll) {
-		loandao.contractLogProcedure(enroll);
-
+	public int contractLogProcedure(EnrollLoanVO enroll) {
+		int result = loandao.contractLogProcedure(enroll);
+		return result;
+	}
+	
+	
+	/**
+	 * 계약서 작성 후 상태 업데이트
+	 */
+	public void finishContractStatus(LoanContractVO loanvo) {
+		loandao.finishContractStatus(loanvo);
 		
+	}
+	
+	
+	/**
+	 * 계좌번호 만들기
+	 */
+	public String makeAccountNum() {
+		String uid = UUID.randomUUID().toString().replace("-", "");
+		//System.out.println(uid);
+		uid = uid.replaceAll("[a-zA-Z]", "");
+		if(uid.length()<13) {
+			uid = String.format("%013d", uid);
+		}else if( uid.length()>13) {
+			uid = uid.substring(0,13);
+		}
+		return uid;
 	}
 
 }
