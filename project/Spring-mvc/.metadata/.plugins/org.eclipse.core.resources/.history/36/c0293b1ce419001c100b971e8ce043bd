@@ -1,0 +1,28 @@
+package kr.co.hana.mypage.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+
+@Repository
+public class MypageDAOImpl implements MypageDAO {
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	
+	/**
+	 * 좋아요누른 공고 리스트 가져오기
+	 */
+	public List<FavoriteScheduleVO> getAllFavorite(String id){
+		List<FavoriteScheduleVO> result = sqlSessionTemplate.selectList("mypage.dao.MypageDAO.getAllFavorite", id);
+		return result;
+	}
+	
+	
+	
+	
+}

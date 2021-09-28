@@ -1,0 +1,169 @@
+/**
+ * 
+ */
+
+function newMessage() {
+	message = $("#textBox input").val();
+	if ($.trim(message) == '') {
+		return false;
+	}
+	
+	/*if -> 나일때 왼쪽에 뜨게
+	else -> 상대방일때 오른쪽에 뜨게*/
+	$('#chatContents').append('<div class="replychatBlock">'
+			+ '<div class="reply">'
+			+ '<div class="replytext">'+message+'</div>'
+			+ '</div>'
+			+ '<div class="replyimg"><img src="/HomeOneHana-Admin/resources/img/하나은행-ci.png"></div>'
+			+ '</div></div>'
+			)
+	$('#textBox input').val(null);
+
+	sock.send(message);
+	$("#chatContents").animate({ scrollTop: $(document).height() }, "fast");
+};
+$('#sendBtn button').click(function() {
+	newMessage();
+});
+
+$(window).on('keydown', function(a) {
+	if (a.which == 13) {
+		newMessage();
+		return false;
+	}
+});
+
+///HomeOneHana/consult/chat
+///HomeOneHana-Admin/chat
+var sock = new SockJS("/HomeOneHana/consult/chat");
+sock.onopen = function(){
+	console.log('연결생성');
+	register();
+	
+};
+
+sock.onmessage = function(e) {
+	console.log('메시지왔다')
+	var mess = e.data
+	console.log(mess)
+	var arr = mess.replace("{","").replace("}","").replaceAll("\"","").split(",")
+	//일단 내꺼부터 등록해
+	if(socketId == null){
+		socketId = arr[0]
+	}
+	
+	
+	console.log(arr)
+	if(arr.length == 4){
+		var getUserId = arr[2].split(':')[1]
+		if(userId != getUserId){
+			myUserId = getUserId
+			myUserName = arr[1].split(':')[1]
+			loanNm = arr[3].split(':')[1]
+			$('#chattitle').empty()
+			$('#chattitle').append('<h2>'+myUserName+'고객님</h2>')
+			
+			//$('#customerInput').append('<h2>'+myUserName+'고객님</h2>')
+			$.ajax({url:"/HomeOneHana-Admin/consult/loan"
+				, method:"get"
+				, data:{loanname:loanNm}
+				, success:function(data){
+					console.log(data)
+					$('#loan-name').empty()
+					$('#loan-changedt').empty()
+					$('#loan-baserate').empty()
+					$('#loan-addrate').empty()
+					$('#loan-finalrate').empty()
+					
+					
+					$('#loan-name').append(data.name)
+					$('#loan-changedt').append(data.changedt)
+					$('#loan-baserate').append(data.baserate)
+					$('#loan-addrate').append(data.addrate)
+					$('#loan-finalrate').append(data.finalrate)
+					
+					
+					
+				},error:function(){
+					console.log('err')
+				}
+			});
+		}
+	}
+	
+	console.log(myUserId+", "+myUserName+", "+loanNm)
+	
+	console.log("미영이화면 : "+socketId+", "+arr[0] + arr[1])
+	
+	if(socketId!=null && socketId != arr[0]){
+		$('#chatContents').append('<div class="sendchatBlock">'
+			+ '<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>'
+			+ '<div class="send">'
+			+ '<div class="sendtext">'+arr[1]+'</div>'
+			+ '</div></div>'
+			)
+	}
+	
+
+	$("#chatContents").animate({ scrollTop: $(document).height() }, "fast");
+
+}
+
+
+
+sock.onclose = function() {
+	$('#chatContents').append('<div class="sendchatBlock">'
+			+ '<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>'
+			+ '<div class="send">'
+			+ '<div class="sendtext">대화가 종료되었습니다.</div>'
+			+ '</div></div>'
+			)
+}
+
+
+function register(){
+	var msg = {
+		username : userNm,
+		userid : userId	
+		,loanname: loanNm
+	}
+	sock.send(JSON.stringify(msg))
+};
+
+function sendMsg(){
+	var msg = {
+		username : userNm,
+		userid : userId			
+	}	
+}
+
+
+$(document).ready(function(){
+	
+	$('#searchlimit').click(function(){
+		
+		var homeYN = $('input[name=homeYN]').val()
+		var loc = $('#selectlocation').val()
+		var homeprice = $('input[name=homeprice]').val()+"0000"
+		var income = $('input[name=income]').val()+"0000"
+		
+		var ltv = 0
+		var dti = 0
+		var res = homeprice*0.6
+		if(loc == "11"){
+			ltv = 40
+			dti = 40
+		}
+		if(homeYN == "N"){
+			ltv += 10
+		}
+		
+		console.log(ltv)
+		console.log(res*(ltv/100))
+		
+		
+		
+	})
+	
+})
+

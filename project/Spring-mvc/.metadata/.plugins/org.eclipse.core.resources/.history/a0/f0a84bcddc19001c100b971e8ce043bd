@@ -1,0 +1,6 @@
+package kr.co.hana.mypage.service;
+
+@Service
+public class MypageServiceImpl implements MypageService {
+
+}

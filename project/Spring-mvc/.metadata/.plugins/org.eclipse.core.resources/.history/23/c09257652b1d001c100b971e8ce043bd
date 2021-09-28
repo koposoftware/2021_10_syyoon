@@ -1,0 +1,154 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomeOneHana::관리자모드</title>
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/chat/chat.css" />
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script src="${ pageContext.request.contextPath }/resources/js/chat/sockjs.min.js"></script>
+    <script src="https://use.typekit.net/hoy3lrg.js"></script>
+	<script>
+		var user = JSON.parse('${requestScope.loginVO}')
+		var userId = user.id
+		var userNm = user.name
+		var socketId = null
+		var myUserId = null
+		var myUserName = null
+		var loanNm = null
+
+		console.log(user)
+		
+		
+			try {
+				Typekit.load({
+					async : true
+				});
+			} catch (e) {
+			}
+	</script>
+	<script src="${ pageContext.request.contextPath }/resources/js/chat/chat.js"></script>
+	<link rel='stylesheet prefetch'
+	href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+  </head>
+  <body>
+    <div
+      class="flex h-screen bg-gray-50 dark:bg-gray-900"
+      :class="{ 'overflow-hidden': isSideMenuOpen }">
+		<jsp:include page="../include/sider.jsp" />
+		
+      <!-- Backdrop -->
+      
+      <div class="flex flex-col flex-1 w-full">
+      	<jsp:include page="../include/header.jsp" />
+      	
+      	
+        <main  class="section">
+ 			<div class="container" style="margin:auto;">
+                
+                <div id="divide" class="row">
+                    <div id="customerInfo" class="col-lg-6 m-15px-tb">
+                        <div id="customerInput" class="resume-box">
+                           
+                            <div class="boxTempl" style="text-align:right; margin-top:10px;">
+                            	<select id="hana_loans">
+                            		<option value="우량주택전세론">우량주택전세론</option>
+                            		<option value="주택신보 전세자금대출">주택신보 전세자금대출</option>
+                            		<option value="하나 청년전세론">하나 청년전세론</option>
+                            		<option value="신혼부부전세론">신혼부부전세론</option>
+                            		<option value="하나 전세금안심대출">하나 전세금안심대출</option>
+                            		<option value="다둥이전세론">다둥이전세론</option>
+                            	</select>
+                            	
+                            </div>
+                             <h1 id="LoanNameIn"></h1>
+                            <div style="margin-top:20px; margin-bottom:20px; padding:20px;">
+                            	
+                            	<div class="boxTempl">
+                            		<h4>대출정보</h4>
+	                            	<table class="tbl" id="loaninfoTbl">
+	                            		<thead>
+	                            			<tr>
+		                            			<th>금리변동주기</th>
+		                            			<th>기준금리</th>
+		                            			<th>가산금리</th>
+		                            			<th>최종금리</th>
+	                            			</tr>
+	                            		</thead>
+	                            		<tbody>
+	                            			<tr>
+		                            			<td id="loan-changedt">-</td>
+		                            			<td id="loan-baserate">-</td>
+		                            			<td id="loan-addrate">-</td>
+		                            			<td id="loan-finalrate">-</td>
+	                            			</tr>
+	                            		</tbody>
+	                            	</table>
+                            	</div>
+                            	
+                            	<div id="condition" class="boxTempl"></div>
+                            	
+                            	<div id="sendLink" class="boxTempl"style="text-align:center; margin-top:10px;">
+                           				<a id="sendLimit">대출상품정보전송</a></div>
+                            </div>
+                        	
+                        </div>
+                        
+                    </div>
+                    <div id="chatArea" class="col-lg-6 m-15px-tb">
+                        <div class="resume-box">
+                            <!-- chatstart -->
+                           	<div id="chatTing">
+                           		<div id="chattitle">
+                           			<h2 id="customs">고객상담</h2>
+                           		</div>
+                           		<div id="chatContents">
+                           		<%-- 
+                           			<div class="sendchatBlock">
+                           				<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>
+                           				<div class="send">
+                           					<div class="sendtext">나다-!</div>
+                           				</div>
+                           			</div>
+                           			<div class="replychatBlock">
+                           				<div class="reply">
+                           					<div class="replytext">환영합니다 호갱님~</div>
+                           				</div>
+                           				<div class="replyimg"><img src="${ pageContext.request.contextPath }/resources/img/하나은행-ci.png"></div>
+                           			</div>
+                           		--%>
+                           		</div>
+                           		<div id="sendArea">
+                           			<div id="textBox"><input type="text" id="msgs" ></div>
+                           			<div id="sendBtn"><button><i class="fas fa-paper-plane fa-lg"></i></button></div>
+                           		</div>
+                           	</div>    
+                                                
+
+                            <!-- chat end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+      </div>
+      
+      <script>
+		$(document).ready(function(){
+			var content = '<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>'
+			$(content).prependTo('#chatMenu')    	  
+			
+		})
+	</script>
+      
+    </div>
+  </body>
+</html>

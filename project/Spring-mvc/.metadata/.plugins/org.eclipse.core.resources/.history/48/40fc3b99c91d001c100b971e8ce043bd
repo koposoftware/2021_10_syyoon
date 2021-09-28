@@ -1,0 +1,145 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HomeOneHana::</title>
+<link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/loan/reviewfile.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/loan/loancontract.css" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.2/css/intlTelInput.css" rel="stylesheet">
+<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+
+<script src="${ pageContext.request.contextPath }/resources/js/loan/reviewfile.js"></script>
+<script src="${ pageContext.request.contextPath }/resources/js/loan/loancontract.js"></script>
+<%--https://codepen.io/emrankhan016/pen/vdNzXm --%>
+
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>
+			
+	</header>
+	
+	<section>
+	<div class="container">
+		<div class="multi_step_form" >  
+		  <form id="msform" action="${ pageContext.request.contextPath }/loan/file/result" method="post"  enctype="multipart/form-data"> 
+		    <!-- Tittle -->
+		    <div class="tittle" style="padding-bottom:25px;">
+		      <h2>대출계약</h2>
+		      <p>In order to use this service, you have to complete this verification process</p>
+		    </div>
+		    <!-- progressbar -->
+		    <ul id="progressbar">
+		      <li class="active">계약서 작성</li>  
+		      <li>이자통장 선택</li> 
+		      <li>제출하기</li>
+		    </ul>
+		    <!-- fieldsets -->
+		    <fieldset style="padding:0px;">
+		      <div class="contractPaperBox">
+		      	<div class="paperBox">
+		      		<a data-lightbox="example-set" href="${ pageContext.request.contextPath }/resources/img/loan/contract01.JPG">
+		      		<img src="${ pageContext.request.contextPath }/resources/img/loan/contract01.jpg">
+		      		</a>
+		      		</div> 
+		      	<div class="paperBox">
+		      		<a data-lightbox="example-set" href="${ pageContext.request.contextPath }/resources/img/loan/contract02.JPG">
+		      		<img src="${ pageContext.request.contextPath }/resources/img/loan/contract02.jpg">
+		      		</a>
+		      		
+		      	</div> 
+		        
+		      </div>
+		      <div class="contractPaperBox">
+		      	<div class="paperBox">
+		      		대출정보
+		      	</div>
+		      	<div class="paperBox">
+		      		싸인받자
+		      	</div>
+		      
+		      </div>
+		      
+		      <button type="button" class="action-button previous_button">Back</button>
+		      <button type="button" class="next action-button">Continue</button>  
+		    </fieldset>
+    		<fieldset>
+		      <h3>이자통장선택 및 개설</h3>
+		      <!-- fileupload -->
+		      <div id="fileBox">
+		      <div class="upload-block"> 
+		        <div class="custom-file">
+		          계좌목록보기
+			    </div>
+			  </div>
+			  <div class="upload-block"> 
+		        <div class="custom-file">
+		          <input type="file" class="custom-file-input" id="receipt" name="receipt">
+		          <label class="custom-file-label" for="receipt"><i class="ion-android-cloud-outline"></i>전세 보증금 5%이상 납입영수증</label>
+			    </div>
+			  </div>
+			  <div class="upload-block"> 
+		        <div class="custom-file">
+		          <input type="file" class="custom-file-input" id="residentcerti" name="residentcerti">
+		          <label class="custom-file-label" for="residentcerti"><i class="ion-android-cloud-outline"></i>주민등록등본</label>
+			    </div>
+			  </div>
+			  <div class="upload-block"> 
+		        <div class="custom-file">
+		          <input type="file" class="custom-file-input" id="familycerti" name="familycerti">
+		          <label class="custom-file-label" for="familycerti"><i class="ion-android-cloud-outline"></i>가족관계증명서</label>
+			    </div>
+			  </div>
+			  </div>
+			  <!-- fileupload End -->
+
+		      <ul id="fileList" class="file_added">
+		        <li>File Added:</li>
+		      </ul>
+		      <div id="passarea" class="passport">
+		        <a href="#" class="don_icon"><i class="ion-android-done"></i></a> 
+		      </div>
+		      
+		      <button type="button" class="action-button previous previous_button">Back</button>
+		      <button type="button" class="next action-button">Continue</button>  
+		    </fieldset>  
+		    <fieldset>
+		      <h3>제출하시겠습니까?</h3>
+
+		      <div class="form-group"> 
+		        	'제출하기'버튼을 누르면 제출이 완료됩니다!
+		        	<input type="hidden" value="${enrollVO.loanname }" name="loanname">
+		        	<input type="hidden" value="${enrollVO.userid }" name="userid">
+		        	<input type="hidden" value="${enrollVO.managerid }" name="managerid">
+		      </div> 
+		     
+		      <button type="button" class="action-button previous previous_button">Back</button> 
+		      <input type="submit" href="#" class="action-button" value="제출하기" data-toggle="modal" data-target="#exampleModalCenter"> 
+		    </fieldset>  
+		  </form> 
+		  </div>
+		</div>
+	</section>
+	
+	
+	<!-- End Multi step form -->
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>

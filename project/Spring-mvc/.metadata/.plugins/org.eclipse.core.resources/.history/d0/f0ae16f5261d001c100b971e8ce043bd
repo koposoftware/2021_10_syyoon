@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chat.dao.chatDAO">
+
+	<select id="getLoanInfo" parameterType="String" resultType="loanInfoVO">
+		select name, changedt, baserate, addrate, finalrate 
+		from hana_loan 
+		where name=#{name}
+	</select>
+</mapper>

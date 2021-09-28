@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+
+var lgt = $('div.forum-item').length
+console.log(lgt)

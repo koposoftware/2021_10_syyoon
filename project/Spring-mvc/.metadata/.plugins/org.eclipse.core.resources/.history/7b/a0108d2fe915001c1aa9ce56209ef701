@@ -1,0 +1,13 @@
+package kr.co.hana.mypage.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MyPageController {
+	
+	
+	@GetMapping("/mypage")
+	public String myPage() {
+		return "mypage/mypage";
+	}
+}

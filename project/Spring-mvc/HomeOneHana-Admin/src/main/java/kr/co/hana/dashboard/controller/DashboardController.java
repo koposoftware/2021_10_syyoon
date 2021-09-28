@@ -41,7 +41,7 @@ public class DashboardController {
 	@PostMapping("/main")
 	public String homeLogin(LoginVO login, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		System.out.println(login.toString());
+		//System.out.println(login.toString());
 		LoginVO loginVO = loginService.login(login);
 		
 		String msg = "";
@@ -55,7 +55,7 @@ public class DashboardController {
 			session.setAttribute("loginVO", loginVO);
 			LoginVO lg = (LoginVO) session.getAttribute("loginVO");
 			model.addAttribute("loginVO", loginVO);
-			System.out.println("세션등록완료 : "+lg.toString());
+			//System.out.println("세션등록완료 : "+lg.toString());
 			
 			List<UserDashBoardVO> userlst = dashboardservice.getUsers(lg.getId());
 			model.addAttribute("userList",userlst);
@@ -76,9 +76,9 @@ public class DashboardController {
 	
 	@GetMapping("/main/review")
 	public String dashDetail(int contractcode, String userid, String loanname, String name, Model model) throws IOException, ParseException {
-		System.out.println("심사결과");
-		System.out.println(contractcode);
-		System.out.println(userid);
+		//System.out.println("심사결과");
+		//System.out.println(contractcode);
+		//System.out.println(userid);
 		List<DownloadFileVO> fileList = dashboardservice.getFiles(contractcode);
 		model.addAttribute("fileList",fileList);
 		model.addAttribute("contractcode", contractcode);
@@ -89,7 +89,7 @@ public class DashboardController {
 		if(credit!=null) {
 
 			model.addAttribute("credit",credit);
-			System.out.println(credit);
+			//System.out.println(credit);
 		}else {
 			model.addAttribute("credit",null);
 		}
@@ -121,7 +121,7 @@ public class DashboardController {
 	@GetMapping("/main/review/statusupdate")
 	@ResponseBody
 	public int statusUpdate(@ModelAttribute UserDashBoardVO dashinfo) {
-		System.out.println(dashinfo);
+		//System.out.println(dashinfo);
 		int result = dashboardservice.statusUpdate(dashinfo);
 		return result;
 		//return 0;

@@ -1,0 +1,377 @@
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+#sideBtn {
+	width: 80%;
+	position: relative;
+	height: 850px;
+	width: 3%;
+	background-color: #fff;
+	text-align: center;
+	border-right: 1.5px solid lightgray;
+}
+
+aside {
+/* 	z-index: 1; */
+	height: 850px;
+	width: 20%;
+	background-color: #fff;
+	transition: width 1s;
+}
+
+#homelist{
+	overflow-y: scroll;
+	height:767px;
+
+}
+
+
+
+section {
+	position: absolute;
+/* 	z-index: 2; */
+	right: 0;
+	width: 97%;
+	height: 850px;
+	transition: width 1s;
+}
+
+.menuBtn {
+	margin-top: 10px;
+	width: 50px;
+	height: 60px;
+	background-color: transparent;
+	border: 0;
+	color: #008485;
+}
+
+.menuBtn:hover {
+	border: 0;
+	background-color: transparent;
+	color: rgba(0, 140, 140, 0.8)
+}
+
+.menuBtn:focus {
+	outline: none;
+}
+
+.btnText {
+	color:#000;
+	font-size: 6px;
+}
+
+.divbtn {
+	width: 80%;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+#searchArea {
+	display: flex;
+	border: 3px solid rgba(0, 140, 140, .5);
+	height: 50px;
+	width: 100%;
+	border-radius: 5px;
+}
+
+.sArea {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#searchBtn {
+	border: 0;
+	margin-left: 15px;
+	margin-right: 5px;
+	color: #008485;
+	background-color: transparent;
+}
+
+#searchBtn:hover {
+	border: 0;
+	background-color: transparent;
+	color: rgba(0, 140, 140, 0.8)
+}
+
+#searchBtn:focus {
+	outline: none;
+}
+
+#searchAddr {
+	border: 0;
+	width: 100%;
+	padding-right: 30px;
+}
+
+#searchAddr:focus {
+	outline: none;
+}
+
+#searchA {
+	width: 100%;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+}
+
+#selectlocation{
+	width:100%;
+	font-weight:700;
+	font-size:13px;
+    padding:5px;
+    border:1px solid rgba(0,140,140,.5);
+    border-radius:3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance : none;
+
+}
+
+#selectlocation:focus{
+	outline:0;
+	border:2px solid rgba(0,140,140,.5);
+}
+
+#searchAddr{
+	text-align:center;
+	color:#008485;
+	font-weight:700;
+	font-size:12px;
+	padding:5px;
+	padding-top:20px;
+	width:200px;
+	height:70px;
+}
+
+.iwcont{
+	text-align:center;
+	color:#008485;
+	font-weight:700;
+	font-size:12px;
+	padding:5px;
+	padding-top:20px;
+	width:100%;
+	height:70px;
+}
+
+.noticewindow{
+	width:150px;
+	text-align:center;
+	padding:6px;
+	padding-top:20px;
+	font-size:12px;	
+	text-align:center;
+}
+
+
+.favorite i{
+	color:#b5b5b5;
+}
+
+.favorite:hover{
+	color:#000;
+}
+
+/*
+	슬라이더 css
+*/
+
+.filterTitle{
+	font-weight:800;
+	color:#000;
+	font-size:16px;
+	margin-left:20px;
+	margin-top:25px;
+}
+
+.filterBox{
+	margin-bottom:50px;
+	
+}
+
+[slider] {
+  position: relative;
+  height: 5px;
+  border-radius: 3px;
+  text-align: left;
+  margin: 45px 0 10px 0;
+}
+
+[slider] > div {
+  position: absolute;
+  left: 13px;
+  right: 15px;
+  height: 5px;
+}
+
+[slider] > div > [inverse-left] {
+  position: absolute;
+  left: 0;
+  height: 5px;
+  border-radius: 3px;
+  background-color: rgba(167,182,191,0.3);
+  margin: 0 7px;
+}
+
+[slider] > div > [inverse-right] {
+  position: absolute;
+  right: 0;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #CCC;
+  margin: 0 7px;
+}
+
+[slider] > div > [range] {
+  position: absolute;
+  left: 0;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #008485;
+}
+
+[slider] > div > [thumb] {
+  position: absolute;
+  top: -7px;
+  z-index: 2;
+  height: 15px;
+  width: 15px;
+  text-align: left;
+  margin-left: -11px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  background-color: #FFF;
+  border-radius: 50%;
+  outline: none;
+}
+
+[slider] > input[type=range] {
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 3;
+  height: 14px;
+  top: -2px;
+  width: 100%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+
+div[slider] > input[type=range]::-ms-track {
+  -webkit-appearance: none;
+  background: transparent;
+  color: transparent;
+}
+
+div[slider] > input[type=range]::-moz-range-track {
+  -moz-appearance: none;
+  background: transparent;
+  color: transparent;
+}
+
+div[slider] > input[type=range]:focus::-webkit-slider-runnable-track {
+  background: transparent;
+  border: transparent;
+}
+
+div[slider] > input[type=range]:focus {
+  outline: none;
+}
+
+div[slider] > input[type=range]::-ms-thumb {
+  pointer-events: all;
+  width: 15px;
+  height: 15px;
+  border-radius: 0px;
+  border: 0 none;
+  background: red;
+}
+
+div[slider] > input[type=range]::-moz-range-thumb {
+  pointer-events: all;
+  width: 15px;
+  height: 15px;
+  border-radius: 0px;
+  border: 0 none;
+  background: red;
+}
+
+div[slider] > input[type=range]::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 15px;
+  height: 15px;
+  border-radius: 0px;
+  border: 0 none;
+  background: red;
+  -webkit-appearance: none;
+}
+
+div[slider] > input[type=range]::-ms-fill-lower {
+  background: transparent;
+  border: 0 none;
+}
+
+div[slider] > input[type=range]::-ms-fill-upper {
+  background: transparent;
+  border: 0 none;
+}
+
+div[slider] > input[type=range]::-ms-tooltip {
+  display: none;
+}
+
+[slider] > div > [sign] {
+  opacity: 0;
+  position: absolute;
+  margin-left: -20px;
+  top: -39px;
+  z-index:3;
+  background-color: #008485;
+  color: #fff;
+  width: 35px;
+  height: 25px;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
+[slider] > div > [sign]:after {
+  position: absolute;
+  margin-left:10px;
+  content: '';
+  left: 0;
+  border-radius: 8px;
+  top: 19px;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top-width: 10px;
+  border-top-style: solid;
+  border-top-color: #008485;
+}
+
+[slider] > div > [sign] > span {
+  font-size: 6px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+[slider]:hover > div > [sign] {
+  opacity: 1;
+}

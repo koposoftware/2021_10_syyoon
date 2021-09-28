@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+
+var lgt = $('.forum-title').length
+console.log(lgt)

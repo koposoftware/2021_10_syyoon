@@ -20,7 +20,7 @@ public class JoinController {
 	
 	@GetMapping("/signup")
 	public String signup(){
-		System.out.println("회원가입동의");
+		//System.out.println("회원가입동의");
 		return "join/signup";
 	}
 	
@@ -28,7 +28,7 @@ public class JoinController {
 	
 	@GetMapping("/join")
 	public String join() {
-		System.out.println("회원가입폼");
+		//System.out.println("회원가입폼");
 		return "join/joinForm";
 	}
 	
@@ -57,8 +57,8 @@ public class JoinController {
             numStr+=ran;
         }
 
-        System.out.println("입력전화번호: " + phoneNumber);
-        System.out.println("랜덤숫자 : " + numStr);
+        //System.out.println("입력전화번호: " + phoneNumber);
+        //System.out.println("랜덤숫자 : " + numStr);
         //joinService.certifiedPhoneNumber(phoneNumber,numStr);
         return "0000";
     }

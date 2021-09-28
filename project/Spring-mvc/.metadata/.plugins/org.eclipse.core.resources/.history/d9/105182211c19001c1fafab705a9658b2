@@ -1,0 +1,20 @@
+package kr.co.hana.loan.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.co.hana.loan.vo.ReviewFileVO;
+
+@Repository
+public class LoanDAOImpl implements LoanDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+
+	public int uploadFile(ReviewFileVO rfvo) {
+		int result = sqlSessionTemplate.insert("uploadFile",rfvo);
+		return result;
+	}
+
+}

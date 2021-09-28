@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.contractPaperBox{
+	display:flex;
+	margin-bottom:50px;
+}
+
+.paperBox{
+	width:50%;
+}
+
+.paperBox a{
+	width:50%;
+}
+
+.paperBox a img{
+	width:100%;
+}
+
+#contractinfo{
+	margin-top:20px;
+	maring-botoom:100px;
+}

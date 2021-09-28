@@ -1,0 +1,11 @@
+package kr.co.hana.loan.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class LoanController {
+	@GetMapping("/loan")
+	public String loanMain() {
+		return "loan/loanForm";
+	}
+}

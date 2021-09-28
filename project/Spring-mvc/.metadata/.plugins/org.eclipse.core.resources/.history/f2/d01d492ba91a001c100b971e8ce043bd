@@ -1,0 +1,101 @@
+/**
+ * 
+ */
+
+var lgt = $('.forum-item').length
+console.log(lgt)
+
+$('.forum-item').eq(0).show()
+$('.forum-item').eq(1).show()
+$('.forum-item').eq(2).show()
+$('.forum-item').eq(3).show()
+$('.forum-item').eq(4).show()
+$('.forum-item').eq(5).show()
+
+$('.forum-item').eq(6).hide()
+$('.forum-item').eq(7).hide()
+$('.forum-item').eq(8).hide()
+$('.forum-item').eq(9).hide()
+$('.forum-item').eq(10).hide()
+$('.forum-item').eq(11).hide()
+
+
+$(document).ready(function(){
+	$('#errtel').hide()
+	$('#cortel').hide()
+	$('#phoneckOkBtn').hide()
+	$('.page-link').click(function(){
+		
+		var page = $(this).html()
+		if( page == 1){
+			$('.forum-item').eq(0).show()
+			$('.forum-item').eq(1).show()
+			$('.forum-item').eq(2).show()
+			$('.forum-item').eq(3).show()
+			$('.forum-item').eq(4).show()
+			$('.forum-item').eq(5).show()
+			
+			$('.forum-item').eq(6).hide()
+			$('.forum-item').eq(7).hide()
+			$('.forum-item').eq(8).hide()
+			$('.forum-item').eq(9).hide()
+			$('.forum-item').eq(10).hide()
+			$('.forum-item').eq(11).hide()
+		}else{
+			$('.forum-item').eq(0).hide()
+			$('.forum-item').eq(1).hide()
+			$('.forum-item').eq(2).hide()
+			$('.forum-item').eq(3).hide()
+			$('.forum-item').eq(4).hide()
+			$('.forum-item').eq(5).hide()
+			
+			$('.forum-item').eq(6).show()
+			$('.forum-item').eq(7).show()
+			$('.forum-item').eq(8).show()
+			$('.forum-item').eq(9).show()
+			$('.forum-item').eq(10).show()
+			$('.forum-item').eq(11).show()
+			
+		}
+	});
+	
+	$('#phoneckBtn').click(function(){
+		
+		
+		var phNum = $('input[name=phoneNumber]').val()
+		
+		$.ajax({
+			type:'GET'
+			, url: '/HomeOneHana/check/sendSMS/'+phNum
+			, success:function(data){
+				var checkNum = data
+				
+				$('input[name=phonecertificate]').keyup(function(){
+					var certiNum = $('input[name=phonecertificate]').val()
+					if(certiNum==""){
+						$('#errtel').hide()
+						$('#cortel').hide()
+						$('#phoneckOkBtn').hide()
+					}else if(certiNum == checkNum){
+						$('#errtel').hide()
+						$('#cortel').fadeIn()
+						$('#phoneckOkBtn').fadeIn()
+						$('#submitBtn').removeAttr('disabled')
+					}else{
+						$('#errtel').fadeIn()
+						$('#cortel').fadeOut()
+						$('#phoneckOkBtn').fadeOut()
+						$('#submitBtn').attr("disabled", "disabled")
+					}
+				})
+			},error:function(){
+				console.log('Err')
+			}
+		})
+		
+	})
+	
+})
+
+
+

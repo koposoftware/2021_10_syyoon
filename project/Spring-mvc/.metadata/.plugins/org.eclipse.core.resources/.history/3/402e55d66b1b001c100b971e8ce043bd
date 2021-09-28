@@ -1,0 +1,5 @@
+package kr.co.hana.dashboard.controller;
+
+public class DashboardController {
+
+}

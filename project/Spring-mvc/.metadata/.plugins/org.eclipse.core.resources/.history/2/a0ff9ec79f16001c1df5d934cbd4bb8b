@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search.dao.SearchDAO">
+	
+	<select id="checkHomeInfo" parameterType="String" resultType="searchHomeVO">
+		select *
+		from homelist
+		where rnadres = #{rnadres}
+
+	</select>
+	
+	<select id="getHomelist" parameterType="brtcSignguVO" resultType="searchHomeVO">
+		select * 
+		from homelist
+		where brtccode = #{brtccode} and signgucode = #{signgucode}
+	</select>
+	
+	<select id="getHomeDetail" parameterType="String" resultType="searchHomeVO">
+		select *
+		from homedetail d, homelist l
+		where l.hsmpsn = d.hsmpsn and l.rnadres=#{rnadres}
+	</select>
+	
+	<select id="brtcSigCode" parameterType="brtcSignguVO" resultType="brtcSignguVO">
+		select brtcnm, brtccode, signgunm, signgucode
+		from brtcsigngu
+		where brtcnm=#{brtcnm} and signgunm like #{signgunm}
+	</select>
+	 
+	<select id="BrtcList" resultType="String">
+		select distinct brtcnm
+		from brtcsigngu
+	</select>
+	
+	<insert id="addFavoriteHome" parameterType="favoriteVO">
+		insert into favorite(id, hsmpsn, favseq)
+			values(#{id},#{hsmpsn},SEQ_FAVSEQ.nextval)
+	</insert>
+	
+	<delete id="delFavoriteHome" parameterType="favoriteVO">
+		delete from favorite 
+			where id=#{id} and hsmpsn=#{hsmpsn}
+	</delete>
+	
+
+</mapper>

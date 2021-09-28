@@ -1,0 +1,11 @@
+package kr.co.hana.consult.vo;
+
+public class ChatFileVO {
+	
+	private int fileid;
+	private String filesavenm;
+	private String fileorinm;
+	private String filesize;
+	private String roomid;
+
+}

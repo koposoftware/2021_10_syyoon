@@ -1,0 +1,23 @@
+package kr.co.hana.dashboard.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+
+
+@Repository
+public class DashboardDAOImpl implements DashboardDAO {
+	
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	public List<UserDashBoardVO> getUsers(String managerid){
+		List<UserDashBoardVO> result = sqlSessionTemplate.selectList("dashboard.dao.dashboardDAO.getUsers",managerid);
+		return result;
+	}
+
+}

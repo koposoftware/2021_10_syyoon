@@ -1,0 +1,240 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HomeOneHana::모의청약</title>
+<link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/subscription/subscription.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script 
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>
+			
+	</header>
+	<section>
+
+		<div class="container"> 
+			<div class="col-md-12 bgcol">  
+			    <div class="col-md-4">      
+			        <div class="portlet light profile-sidebar-portlet bordered">
+			            <div class="profile-usertitle">
+			                <div class="profile-usertitle-name"> 모의청약 </div>
+			                <div class="profile-usertitle-job"> practice subscription </div>
+			            </div>
+			      
+			            <div class="profile-usermenu">
+			                <ul class="nav">
+			                    <li class="active">
+			                        <a href="#">
+			                            <i class="icon-home"></i> Ticket List </a>
+			                    </li>
+			                    <li>
+			                        <a href="#">
+			                            <i class="icon-settings"></i> Support Staff </a>
+			                    </li>
+			                    <li>
+			                        <a href="#">
+			                            <i class="icon-info"></i> Configurations </a>
+			                    </li>
+			                </ul>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="col-md-8"> 
+			        <div class="portlet light bordered">
+			            <div class="portlet-title tabbable-line">
+			                <div class="caption caption-md">
+			                    <i class="icon-globe theme-font hide"></i>
+			                    <span class="caption-subject font-blue-madison bold uppercase">행복주택</span>
+			                </div>
+			            </div>
+			            <div class="portlet-body">
+			                <div>
+
+			                
+			                    <!-- Tab panes -->
+			                    <div class="tab-content">
+			                        <div role="tabpanel" class="tab-pane active" id="home">
+			                            <form method="get" action="${ pageContext.request.contextPath }/subscription">
+			                              <div class="form-group" >
+			                                <label class="ititle" >공급구분</label>
+			                                	<ul class="nav btnBox" id="inputcerti">
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="대학생" value="대학생" name="certification" ><label class="icontent" for="대학생"> 대학생</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="취업준비생" value="취업준비생" name="certification" ><label class="icontent" for="취업준비생"> 취업준비생</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="청년" value="청년" name="certification" ><label class="icontent" for="청년"> 청년</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="사회초년생" value="사회초년생" name="certification" ><label class="icontent" for="사회초년생"> 사회초년생</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="신혼부부"  value="신혼부부" name="certification" ><label class="icontent" for="신혼부부" > 신혼부부</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="예비신혼부부" value="예비신혼부부" name="certification" ><label class="icontent" for="예비신혼부부"> 예비신혼부부</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="한부모가족" value="한부모가족" name="certification" ><label class="icontent" for="한부모가족"> 한부모가족</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="고령자" value="고령자" name="certification" ><label class="icontent" for="고령자"> 고령자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="주거급여수급자" value="주거급여수급자" name="certification" ><label class="icontent" for="주거급여수급자"> 주거급여수급자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="산업단지근로자" value="산업단지근로자" name="certification" ><label class="icontent" for="산업단지근로자"> 산업단지근로자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="1인창조기업" value="1인 창조기업" name="certification" ><label class="icontent" for="1인창조기업"> 1인창조기업</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="해당지자체장추천창업자및예비창업자" value="해당 지자체장 추천 창업자 및 예비 창업자" name="certification" ><label class="icontent" for="해당지자체장추천창업자및예비창업자"> 해당지자체장추천창업자및예비창업자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="지역전략산업종사자" value="지역전략산업 종사자" name="certification" ><label class="icontent" for="지역전략산업종사자"> 지역전략산업종사자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="장기근속자" value="장기근속자" name="certification" ><label class="icontent" for="장기근속자"> 장기근속자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="etc1" value="위 공급구분에 해당하지 않는 임시사용자" name="certification" ><label class="icontent" for="etc1"> 위 공급구분에 해당하지 않는 임시사용자</label></li>
+			                                		<li class="btnOutline"><input type="radio" onClick="getvalue(this.value)" id="etc2" value="위 공급구분에 해당하지 않는 기존거주자" name="certification" ><label class="icontent" for="etc2"> 위 공급구분에 해당하지 않는 기존거주자</label></li>
+			                                	</ul>
+			                              </div>
+			                                <div id="ranking-group">
+			                                
+			                                </div>
+			                                <div id="insertdetailinfo">
+			                                	<div class="form-group">
+			                                		<div class="detailBox">
+			                                			<div class="detailtitle">
+			                                				<div class="ititle">학교정보</div>
+			                                			</div>
+				                                		<table class="detailinfotbl" id="schooltbl">
+				                                			<tr>
+				                                				<th><div class="icontent">학교명</div></th>
+				                                				<td><input type="text" name="schoolname"></td>
+				                                			</tr>
+				                                			<tr>
+				                                				<th><div class="icontent">소재지</div></th>
+				                                				<td><input type="text" id="addr1" name="schooladdr"><input type="button" class="detailbtn" value="소재지검색" onclick="execDaumPostcode()"></td>
+				                                			</tr>
+				                                			<tr>
+				                                				<th><div class="icontent">학생분류</div></th>
+				                                				<td>
+				                                					<div class="radioBox">
+					                                					<div><input type="radio" id="재학생" name="schooltype" value="재학생"><label for="재학생"  class="ranktitle"> 재학생</label></div>
+						                                				<div><input type="radio" id="복학예정" name="schooltype" value="복학예정"><label for="복학예정"  class="ranktitle"> 복학예정</label></div>
+						                                				<div><input type="radio" id="입학예정" name="schooltype" value="입학예정"><label for="입학예정"  class="ranktitle"> 입학예정</label></div>
+					                                				</div>
+					                                			</td>
+				                                			</tr>
+				                                		</table>
+				                                	</div>
+				                                		
+				                                	<div class="detailBox">	
+				                                		<div class="detailtitle">
+			                                				<div class="ititle">세대원정보</div>
+					                                		<div class="isubtitle">
+					                                		<span>본인의 주민등록본에 등재된 세대원은 동일세대를, 등재되어있지 않은 세대원은 분리세대를 체크하세요.</span>
+					                                		<input type="button" class="detailbtn" value="추가"><input type="button" class="detailbtn" value="삭제"></div>
+			                                			</div>
+				                                		<table class="detailinfotbl" id="hometbl">
+				                                			<thead>
+					                                			<tr>
+					                                				<th><div class="icontent">신청자와의 관계</div></th>
+					                                				<th><div class="icontent">성명</div></th>
+					                                				<th><div class="icontent">주민등록번호</div></th>
+					                                				<th><div class="icontent">신청자가 속한<br>세대주와의 관계</div></th>
+					                                				<th><div class="icontent">세대구분</div></th>
+					                                			</tr>
+				                                			</thead>
+				                                			<tbody>
+				                                				<tr>
+				                                					<td>본인</td>
+				                                					<td>박이름</td>
+				                                					<td>951234-5678900</td>
+				                                					<td><select>
+				                                							<option selected>선택</option>
+				                                							<option>부모</option>
+				                                							<option>자식</option>
+				                                							<option>형제</option>
+				                                							<option>조부모</option>
+				                                						</select>
+				                                					</td>
+				                                					<td>
+				                                						<input type="radio" id="seperate" name="familytype" value="분리세대"><label for="seperate" >분리세대</label>
+				                                						<input type="radio" id="same" name="familytype" value="동일세대"><label for="same" >동일세대</label>
+				                                					</td>
+				                                			</tbody>
+				                                		</table>
+				                                	</div>	
+				                                	<div class="detailBox" >	
+				                                		<div class="detailtitle">
+			                                				<div class="ititle">가구원수</div>
+			                                			</div>
+				                                		<table class="detailinfotbl">
+				                                			<tr>
+				                                				<th><div class="icontent">가구원 수<br>(신청자·태아포함)</div></th>
+				                                				<td><select>
+			                                							<option selected>선택</option>
+			                                							<option>1</option>
+			                                							<option>2</option>
+			                                							<option>3</option>
+			                                							<option>4</option>
+			                                						</select>
+			                                						임신중인 태아가 있을 경우 '태아수 입력'버튼을 눌려주세요<input type="button" class="detailbtn" value="태아수 입력"><input type="text">명
+			                                					</td>
+				                                			</tr>
+				                                		</table>
+				                                		
+				                                	</div>
+				                                	<div class="detailBox">	
+				                                		<div class="detailtitle">
+			                                				<div class="ititle">신청자 인적사항</div>
+			                                			</div>
+				                                		<input type="button" value="회원가입정보와 동일">
+				                                		<table class="detailinfotbl">
+				                                		
+				                                			<tr>
+				                                				<th><div class="icontent">신청자 이름</div></th>
+				                                				<td><input type="text" name="name"></td>
+				                                			</tr>
+				                                			<tr>
+				                                				<th><div class="icontent">주민등록번호</div></th>
+				                                				<td><input type="text" name="rescode"></td>
+				                                			</tr>
+				                                			<tr>
+				                                				<th><div class="icontent">주민등록상 주소</div></th>
+				                                				<td><input type="text" name="addrs"></td>
+				                                			</tr>
+				                                			<tr>
+				                                				<th><div class="icontent">연락처</div></th>
+				                                				<td><input type="text" name="tel"></td>
+				                                			</tr>
+				                                			<tr>
+				                                				<th><div class="icontent">이메일</div></th>
+				                                				<td><input type="text" name="email"></td>
+				                                			</tr>
+				                                			<tr>
+			                                				<th><div class="icontent">혼인여부</div></th>
+				                                				<td>
+				                                					<div style="border:1px solid #008485;"><input type="radio" id="재학생" name="marry" value="N"><label for="재학생"  class="ranktitle"> 미혼</label></div>
+				                                					<div style="border:1px solid #008485;"><input type="radio" id="복학예정" name="marry" value="Y"><label for="복학예정"  class="ranktitle"> 기혼</label></div>
+				                                				</td>
+			                                				</tr>	
+				                                		</table>
+				                              		</div>
+				                              </div>
+			                                </div>
+			                              <button type="submit" class="btn btn-default">Submit</button>
+			                            </form>
+			                        </div>
+			                        <div role="tabpanel" class="tab-pane" id="profile">Profile</div>
+			                        <div role="tabpanel" class="tab-pane" id="messages">Messages</div>
+			                        <div role="tabpanel" class="tab-pane" id="settings">Settings</div>
+			                    </div>
+			                
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			</div>
+
+	</section>
+	<script src="${ pageContext.request.contextPath }/resources/js/subscription/subscription.js"></script>
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>

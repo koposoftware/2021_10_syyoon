@@ -1,0 +1,12 @@
+package kr.co.hana.dashboard.service;
+
+import java.util.List;
+
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+
+public interface DashboardService {
+	
+	List<UserDashBoardVO> getUsers(String managerid);
+	Map<String, Integer> getUserCnt();
+
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="homelist"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="homelist"/>
+			<item value="console"/>
+			<item value="fadein 2s;"/>
+			<item value="fadein 1s;"/>
+			<item value="btnText"/>
+			<item value="07-"/>
+			<item value="main"/>
+			<item value="header"/>
+			<item value="Buttons"/>
+			<item value="Log out"/>
+			<item value="sendMsg"/>
+			<item value="right"/>
+			<item value="consultHandler"/>
+			<item value="active"/>
+			<item value="forum-icon"/>
+		</list>
+		<list key="replacehistory">
+			<item value="fadein 1s;"/>
+			<item value="09-"/>
+			<item value="#004e66"/>
+			<item value="#274c5e"/>
+			<item value="#008485"/>
+			<item value="etc_cts"/>
+			<item value="infos"/>
+			<item value="SearchHomeVO"/>
+			<item value="#B5B5B5"/>
+			<item value="#E90061"/>
+			<item value="rgba(0,140,140,.40)"/>
+			<item value="rgba(0,140,140,.60)"/>
+			<item value="HomeOneHana"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="779"/>
+		<item key="DIALOG_Y_ORIGIN" value="723"/>
+		<item key="DIALOG_WIDTH" value="288"/>
+		<item key="DIALOG_HEIGHT" value="367"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>

@@ -1,0 +1,16 @@
+package kr.co.hana.scheduler;
+
+import org.python.util.PythonInterpreter;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LhScheduler {
+	
+	private static PythonInterpreter intPre;
+	@Scheduled(cron="0 14 14 * * *")
+	public void getHomeData() {
+		intPre = new PythonInterpreter();
+		intPre.execfile("D:/2021_java_db/spring-workspace/soyo-Practice/src/main/clt/apiScheduler.py");
+	}
+}

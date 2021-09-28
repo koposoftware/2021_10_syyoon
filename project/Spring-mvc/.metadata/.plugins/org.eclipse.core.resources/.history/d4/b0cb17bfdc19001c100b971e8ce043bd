@@ -1,0 +1,5 @@
+package kr.co.hana.mypage.dao;
+
+public class MypageDAOImpl implements MypageDAO {
+
+}

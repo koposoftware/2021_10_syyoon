@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dashboard.dao.dashboardDAO">
+
+	<select id="getUsers" parameterType="String" resultType="loginVO">
+		select contractcode, userid, name, loanname, status, CONTRACTDT
+		from(
+		    select c.contractcode, c.userid, u.name , h.name as loanname, r.status, r.CONTRACTDT, 
+		            row_number() over(partition by c.contractcode order by contractdt desc) as rowidx
+		    from loancontract c, loanrecord r , hana_loan h, userinfo u
+		    where c.contractcode = r.contractcode and c.loancode = h.code and u.id = c.userid and c.managerid = #{managerid}
+		) a
+		where rowidx=1
+	</select>
+</mapper>

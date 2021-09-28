@@ -1,0 +1,14 @@
+package kr.co.hana.consult.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class ReservationController {
+	
+	@GetMapping("/consult/reservation")
+	public String reservationInfo() {
+		System.out.println("온라인상담조회");
+		return "consult/reservation";
+	}
+}

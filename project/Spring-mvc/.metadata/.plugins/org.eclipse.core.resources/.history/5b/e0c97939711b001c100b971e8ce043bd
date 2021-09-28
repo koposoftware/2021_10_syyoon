@@ -1,0 +1,10 @@
+package kr.co.hana.dashboard.vo;
+
+public class DownloadFileVO {
+	
+	private String enrolldt;
+	private String file_ori_name;
+	private String file_save_name;
+	private double filesize;
+
+}

@@ -1,0 +1,6 @@
+package kr.co.hana.loan.Service;
+
+public interface LoanService {
+	
+	int uploadFile(ReviewFileVO rfvo);
+}

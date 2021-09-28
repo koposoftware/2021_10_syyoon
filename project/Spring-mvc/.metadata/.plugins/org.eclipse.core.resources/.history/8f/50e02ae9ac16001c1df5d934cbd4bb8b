@@ -1,0 +1,5 @@
+package kr.co.hana.schedule.dao;
+
+public class ScheduleDAOImpl implements ScheduleDAO{
+
+}

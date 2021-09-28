@@ -1,0 +1,53 @@
+package kr.co.hana.consult.handler;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import kr.co.hana.login.vo.LoginVO;
+
+
+public class ConsultHandler extends TextWebSocketHandler {
+
+	private List<WebSocketSession> sessionList;
+	
+	public ConsultHandler() {
+		sessionList = new ArrayList<WebSocketSession>();
+		
+	}
+	
+	
+
+	@Override
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		//System.out.println("afterConnectionEstablished");
+		sessionList.add(session);
+	}
+	
+
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		Map<String,Object> map = session.getAttributes();
+		LoginVO login = (LoginVO) map.get("loginVO");
+		System.out.println("로그인 한 아이디 : " + login.toString());
+
+		for(WebSocketSession sess: sessionList) {
+			//System.out.println("handleTextMessage" + message);
+
+			sess.sendMessage( new TextMessage( login.getId()+":"+login.getName()+":"+message.getPayload()));				
+		}
+	}
+	
+
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		sessionList.remove(session);
+	}
+	
+
+}

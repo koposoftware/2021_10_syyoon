@@ -1,0 +1,5 @@
+package kr.ac.hana.dashboard.vo;
+
+public class UserDashBoardVO {
+
+}

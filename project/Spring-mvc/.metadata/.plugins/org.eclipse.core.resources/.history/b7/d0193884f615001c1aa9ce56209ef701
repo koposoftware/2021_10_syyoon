@@ -1,0 +1,5 @@
+package kr.co.hana.login.service;
+
+public interface LoginService {
+
+}

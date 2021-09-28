@@ -1,0 +1,11 @@
+package kr.co.hana.mypage.dao;
+
+import java.util.List;
+
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+
+public interface MypageDAO {
+	
+	List<FavoriteScheduleVO> getAllFavorite(String id);
+
+}

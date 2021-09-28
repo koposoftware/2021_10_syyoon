@@ -1,0 +1,5 @@
+package kr.co.hana.loan.Service;
+
+public interface LoanService {
+
+}

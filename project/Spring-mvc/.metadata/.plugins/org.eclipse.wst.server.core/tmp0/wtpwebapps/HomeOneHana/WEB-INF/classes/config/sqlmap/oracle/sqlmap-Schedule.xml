@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search.dao.ScheduleDAO">
+	
+	<insert id="addFavoriteNotice" parameterType="favoriteScheduleVO" >
+		insert into favoritentice(id, noticecode, favnotiseq, noticeend, noticetitle)
+	    values(#{id}, #{noticecode}, SEQ_NOTI_FAVSEQ.nextval, #{noticeend}, #{noticetitle})
+	</insert>
+	
+	<delete id="delFavoriteNotice" parameterType="favoriteScheduleVO">
+		delete from favoritentice where id=#{id} and noticecode=#{noticecode}
+	</delete>
+	
+	<select id="getFavoriteNoticeOne" parameterType="favoriteScheduleVO" resultType="favoriteScheduleVO">
+		select to_char(enrolldt,'YYYY-MM-DD') as enrolldt, id, noticecode, 
+		    to_char(noticeend,'YYYY-MM-DD') as noticeend, noticetitle
+		from favoritentice 
+		where id=#{id} and noticecode=#{noticecode}
+	</select>
+
+</mapper>

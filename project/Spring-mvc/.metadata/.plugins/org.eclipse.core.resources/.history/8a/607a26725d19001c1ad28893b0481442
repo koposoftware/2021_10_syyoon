@@ -1,0 +1,102 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomeOneHana::관리자모드</title>
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/chat/chat.css" />
+	<script src="${ pageContext.request.contextPath }/resources/js/chat/chat.js"></script>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://use.typekit.net/hoy3lrg.js"></script>
+	<script>
+	var user = JSON.parse('${sessionScope.loginVO}')
+	var userId = user.id
+	var userNm = user.name
+	var socketId = ""
+	console.log(user)
+	
+	
+		try {
+			Typekit.load({
+				async : true
+			});
+		} catch (e) {
+		}
+	</script>
+  </head>
+  <body>
+    <div
+      class="flex h-screen bg-gray-50 dark:bg-gray-900"
+      :class="{ 'overflow-hidden': isSideMenuOpen }">
+		<jsp:include page="../include/sider.jsp" />
+		
+      <!-- Backdrop -->
+      
+      <div class="flex flex-col flex-1 w-full">
+      	<jsp:include page="../include/header.jsp" />
+      	
+      	
+        <main  class="section">
+ 			<div class="container" style="margin:auto;">
+                
+                <div id="divide" class="row">
+                    <div id="customerInfo" class="col-lg-6 m-15px-tb">
+                        <div class="resume-box">
+                            고객정보
+                        </div>
+                    </div>
+                    <div id="chatArea" class="col-lg-6 m-15px-tb">
+                        <div class="resume-box">
+                            <!-- chatstart -->
+                           	<div id="chatTing">
+                           		<div id="chattitle">
+                           			<h2>김하나</h2>
+                           		</div>
+                           		<div id="chatContents">
+                           			<div class="sendchatBlock">
+                           				<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>
+                           				<div class="send">
+                           					<div class="sendtext">나다-!</div>
+                           				</div>
+                           			</div>
+                           			<div class="replychatBlock">
+                           				<div class="reply">
+                           					<div class="replytext">환영합니다 호갱님~</div>
+                           				</div>
+                           				<div class="replyimg"><img src="${ pageContext.request.contextPath }/resources/img/하나은행-ci.png"></div>
+                           			</div>
+                           		</div>
+                           		<div id="sendArea">
+                           			<div id="textBox"><input type="text" ></div>
+                           			<div id="sendBtn"><button><i class="fas fa-paper-plane fa-lg"></i></button></div>
+                           		</div>
+                           	</div>    
+                                                
+
+                            <!-- chat end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+      </div>
+      
+      <script>
+		$(document).ready(function(){
+			var content = '<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>'
+			$(content).prependTo('#chatMenu')    	  
+			
+		})
+	</script>
+      
+    </div>
+  </body>
+</html>

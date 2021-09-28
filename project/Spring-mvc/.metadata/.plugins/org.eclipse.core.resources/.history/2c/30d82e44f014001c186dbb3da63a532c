@@ -1,0 +1,120 @@
+/**
+ * 
+ */
+
+function getvalue(value){
+	if(value == '대학생'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" >상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" id="일반1" value="일반공급1순위"><label for="일반1" class="ranktitle">일반공급 1순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역(서울특별시)또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시)이 재학 중인 대학 소재지인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" id="일반2" name="rank" value="일반공급2순위"><label for="일반2" class="ranktitle">일반공급 2순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항 각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>이 재학 중인 대학 소재지인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급3순위"><span class="ranktitle">일반공급 3순위</span></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급1순위"><span class="ranktitle">우선공급 1순위</span></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구에 소재하는 대학에 재학중이거나 다음학기에 입학 또는 복학예정인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급2순위"><span class="ranktitle">우선공급 2순위</span></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 소재하는 대학에 재학중이거나 다음학기에 입학 또는 복학예정인 자</div></div>'
+							
+							+ '</div></div>')
+
+		
+	}else if( value == '취업준비생'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급1순위"><span class="ranktitle">일반공급 1순위</span></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역(서울특별시)또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시)에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급2순위"><span class="ranktitle">일반공급 2순위</span></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항 각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급3순위"><span class="ranktitle">일반공급 3순위</span></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급1순위"><span class="ranktitle">우선공급 1순위</span></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급2순위"><span class="ranktitle">우선공급 2순위</span></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 거주하는 자</div></div>'
+							
+							+ '</div></div>')
+		
+		
+	}else if(value=='청년' || value == '사회초년생' || value=='한부모가족'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급1순위"><span class="ranktitle">일반공급 1순위</span></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역(서울특별시)또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시)에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급2순위"><span class="ranktitle">일반공급 2순위</span></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항 각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>이 거주지나 소득 근거지인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급3순위"><span class="ranktitle">일반공급 3순위</span></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급1순위"><span class="ranktitle">우선공급 1순위</span></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구에 거주하거나 거주지나 소득 근거지가 있는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급2순위"><span class="ranktitle">우선공급 2순위</span></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 거주하거나 거주지나 소득 근거지가 있는 자</div></div>'
+							
+							+ '</div></div>')
+		
+	}else if(value== '신혼부부' || value=='예비신혼부부'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급1순위"><span class="ranktitle">일반공급 1순위</span></div>'
+							+ '<div class="rankcontent" >신청자 본인 또는 배우자(예비신혼부부의 경우 대표신청자 또는 예비배우자)의 거주지나 소득 근거지가 해당 주택건설지역(서울특별시) 또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시, 양주시)인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급2순위"><span class="ranktitle">일반공급 2순위</span></div>'
+							+ '<div class="rankcontent" >신청자 본인 또는 배우자(예비신혼부부의 경우 대표신청자 또는 예비배우자)의 거주지나 소득 근거지가 해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급3순위"><span class="ranktitle">일반공급 3순위</span></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급1순위"><span class="ranktitle">우선공급 1순위</span></div>'
+							+ '<div class="rankcontent" >신청자 본인이 행복주택이 위치하는 마포구, 서대문구에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급2순위"><span class="ranktitle">우선공급 2순위</span></div>'
+							+ '<div class="rankcontent" >신청자 본인이 행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 거주하는 자</div></div>'
+							
+							+ '</div></div>')
+		
+	}else{
+		
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="일반공급"><span class="ranktitle">일반공급</span></div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급1순위"><span class="ranktitle">우선공급 1순위</span></div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" value="우선공급2순위"><span class="ranktitle">우선공급 2순위</span></div></div>'
+							
+							+ '</div></div>')
+		
+	}
+}
+
+$('input:radio[name=rank]').on('click', function(){
+	var valueCheck = $('input:radio[name=rank]:checked').val();
+	console.log(valueCheck) 
+})
+
+
+
+

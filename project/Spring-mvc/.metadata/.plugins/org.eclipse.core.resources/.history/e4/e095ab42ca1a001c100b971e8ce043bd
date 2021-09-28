@@ -1,0 +1,15 @@
+package kr.co.hana.chat.service;
+
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.chat.vo.LoanInfoVO;
+
+@Service
+public class ChatServiceImpl implements ChatService {
+
+	public LoanInfoVO getLoanInfo(String loanname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

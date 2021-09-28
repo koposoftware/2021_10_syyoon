@@ -1,0 +1,11 @@
+package kr.co.hana.loan.Service;
+
+import java.util.List;
+
+import kr.co.hana.loan.vo.ReviewFileVO;
+
+public interface LoanService {
+	
+	void uploadFile(List<ReviewFileVO> rfvo);
+	void contractLogProcedure(EnrollVO enroll);
+}

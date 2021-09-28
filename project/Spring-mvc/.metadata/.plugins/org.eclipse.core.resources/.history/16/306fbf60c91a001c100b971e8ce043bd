@@ -1,0 +1,10 @@
+package kr.co.hana.chat.vo;
+
+public class LoanInfoVO {
+	private String chagedt;
+	private String baserate;
+	private String addrate;
+	private String finalrate;
+	
+
+}

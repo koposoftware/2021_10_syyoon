@@ -1,0 +1,74 @@
+package hana.test;
+
+import java.util.List;
+
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import kr.co.hana.loan.vo.EnrollLoanVO;
+import kr.co.hana.search.vo.BrtcSignguVO;
+import kr.co.hana.search.vo.SearchHomeVO;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:config/spring/spring-mvc.xml" })
+public class DAOTest2 {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	@Ignore
+	@Test
+	public void getHomeDetail() {
+		
+		String address = "서울특별시 광진구 영화사로9길 95-15";
+		List<SearchHomeVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getHomeDetail", address);
+		System.out.println(result.get(0));
+		
+	}
+	
+	
+	@Ignore
+	@Test
+	public void getNearHome(){
+		
+		/*
+		SearchHomeVO searchInfo = new SearchHomeVO();
+		searchInfo.setRnadres("제주특별자치도 서귀포시 서귀포동포동");
+		searchInfo.setLati("33.450701");
+		searchInfo.setLongs("126.570667");
+		
+		
+		
+		String rnadres = searchInfo.getRnadres();
+		String seLat = searchInfo.getLati();
+		String seLng = searchInfo.getLongs();
+		List<SearchHomeVO> nearHome = new ArrayList<SearchHomeVO>();
+		*/
+		BrtcSignguVO brtc = new BrtcSignguVO();
+		brtc.setBrtccode(11);
+		brtc.setSigngucode(215);
+		List<SearchHomeVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getHomelist", brtc);
+		
+	
+		System.out.println(result.get(0));
+
+	}
+	
+	@Test
+	public void contractLogProcedure() {
+		EnrollLoanVO enroll=new EnrollLoanVO();
+		enroll.setUserid("ryu94");
+		enroll.setManagerid("admin2");
+		enroll.setLoanname("신혼부부전세론");
+		int result = sqlSessionTemplate.insert("loan.dao.LoanDAO.contractLogProcedure",enroll);		
+		System.out.println(result);
+	
+	}
+	
+
+}

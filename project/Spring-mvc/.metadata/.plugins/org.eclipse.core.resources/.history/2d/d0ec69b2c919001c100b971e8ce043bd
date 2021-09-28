@@ -1,0 +1,23 @@
+package hana.daotest;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+
+public class TestDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	/**
+	 * 관리중인 유저 불러오기
+	 */
+	public void getUsers(String managerid){
+		List<UserDashBoardVO> result = sqlSessionTemplate.selectList("dashboard.dao.dashboardDAO.getUsers","admin1");
+
+	}
+
+}

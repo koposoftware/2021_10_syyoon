@@ -1,0 +1,7 @@
+package kr.co.hana.subscription.controller;
+
+
+@Controller
+public class SubscriptionController {
+
+}

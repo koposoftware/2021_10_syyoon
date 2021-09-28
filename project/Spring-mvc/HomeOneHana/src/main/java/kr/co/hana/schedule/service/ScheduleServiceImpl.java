@@ -127,7 +127,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     			try {
     				ScheduleDetailVO schedule = new ScheduleDetailVO();
     				JSONObject ds = (JSONObject) jObject.getJSONArray("dsSplScdl").get(c);
-    				System.out.println(ds.toString());
+    				//System.out.println(ds.toString());
     				schedule.setSbsc_acp_clsg_dt(ds.getString("SBSC_ACP_CLSG_DT")); 
     				schedule.setPpr_sbm_ope_anc_dt(ds.getString("PPR_SBM_OPE_ANC_DT"));
     				schedule.setPpr_acp_clsg_dt(ds.getString("PPR_ACP_CLSG_DT"));
@@ -196,7 +196,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     				
 				JSONObject sbd = (JSONObject) jObject.getJSONArray("dsSbd").get(c);
 				Set sbdkey = sbd.keySet();
-				System.out.println(sbdkey);
+				//System.out.println(sbdkey);
 				if(sbdkey.contains("LGDN_ADR")) {
 					String addr = sbd.getString("LGDN_ADR");
 					System.out.println(addr);

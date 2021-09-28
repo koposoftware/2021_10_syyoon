@@ -1,0 +1,11 @@
+package kr.co.hana.main.controller;
+
+
+@Controller
+public class MainController {
+	
+	@GetMapping("/main")
+	public String dashMain() {
+		return "main/main";
+	}
+}

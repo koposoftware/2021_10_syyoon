@@ -1,0 +1,13 @@
+package kr.co.hana.dashboard.service;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+import kr.co.hana.dashboard.dao.DashboardDAO;
+
+@Repository
+public class DashboardServiceImpl implements DashboardDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+}

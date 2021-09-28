@@ -1,0 +1,32 @@
+package hana.daotest;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:config/spring/spring-mvc.xml" })
+public class TestDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	/**
+	 * 관리중인 유저 불러오기
+	 */
+	@Test
+	public void getUsers(String managerid){
+		List<UserDashBoardVO> result = sqlSessionTemplate.selectList("dashboard.dao.dashboardDAO.getUsers","admin1");
+		
+	}
+
+}

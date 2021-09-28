@@ -1,0 +1,47 @@
+package kr.co.hana.loan.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import kr.co.hana.loan.Service.LoanService;
+
+@Controller
+public class LoanController {
+	
+	@Autowired
+	private LoanService loanservice;
+	
+	
+	@GetMapping("/loan")
+	public String loanMain() {
+		System.out.println("대출볼래?");
+		return "loan/loan";
+	}
+	
+	@GetMapping("/loan/review")
+	public String loanReview(HttpServletRequest req,
+            @ModelAttribute("article") BoardVO article,
+            MultipartHttpServletRequest mhsq) throws IllegalStateException,
+            IOException{
+		System.out.println("대출심사파일업로드");
+		
+		return "loan/reviewfile";
+	}
+	
+	@PostMapping("/fileres")
+	public String loanReviewFileuploadResult() {
+		/*?chkAll=on
+		 * &chkEtc1=on
+		 * &chkEtc2=on
+		 * &contractpaper=210915-예시페이지.pptx
+		 * &receipt=HANAPAY_DA2.zip
+		 * &residentcerti=kopoOpenBankPj02.zip
+		 * &familycerti=아이디어.txt
+		
+		*/
+		System.out.println("대출심사파일업로드완");
+		return "loan/fileresult";
+	}
+}

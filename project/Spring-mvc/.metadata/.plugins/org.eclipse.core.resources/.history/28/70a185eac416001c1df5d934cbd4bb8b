@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+
+
+
+	var count=0
+	let cnt=0
+	for(let home of homenmSet){
+		//console.log(home)
+		//$('#imgBtns').append('<button id="img'+home+'" class="photobtn">'+home+'</button>')
+		$('#mapBtnBox').append('<input type="button" id="map'+home+'" class="mapBtn" value="'+home+'">')
+		$('#homemap').append('<p style="margin-right:7px;">'+'#'+home+'</p>')
+		count+=1
+	}
+	
+	for(let i in imgList){
+		if(i == 0){
+			$('.carousel-indicators').append('<li data-target="#carouselExampleIndicators" data-slide-to="'+i+' class="active"></li>')
+			$('.carousel-inner').append('<div class="carousel-item active" style="height:100%;"><img class="d-block w-100" src="'+imgList[i].fileurl+'" alt="'+imgList[i].filenm+'"></div>')
+		}else{
+			$('.carousel-indicators').append('<li data-target="#carouselExampleIndicators" data-slide-to="'+i+'"></li>')
+			$('.carousel-inner').append('<div class="carousel-item" style="height:100%;"><img class="d-block w-100" src="'+imgList[i].fileurl+'" alt="'+imgList[i].filenm+'"></div>')				
+		}
+			
+	}
+	
+	
+	

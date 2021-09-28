@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+
+
+.fc-header-toolbar {
+padding-top: 1em;
+padding-left: 1em;
+padding-right: 1em;
+}
+
+
+출처: https://nowonbun.tistory.com/368 [명월 일지]

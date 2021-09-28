@@ -18,9 +18,9 @@ public class ConsultController {
 	
 	@GetMapping("/consult/chat")
 	public String OnlineConsult(String loanname, HttpSession session, Model model) throws Exception {		
-		System.out.println("chat-!");
+		//System.out.println("chat-!");
 		
-		System.out.println(loanname);
+		//System.out.println(loanname);
 		Gson gson = new Gson();
 		LoginVO login = (LoginVO) session.getAttribute("loginVO");
 		String loginjson = gson.toJson(login);

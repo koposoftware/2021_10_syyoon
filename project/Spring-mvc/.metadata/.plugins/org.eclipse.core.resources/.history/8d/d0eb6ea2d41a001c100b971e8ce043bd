@@ -1,0 +1,48 @@
+package kr.co.hana.chat.vo;
+
+public class LoanInfoVO {
+	private String name;
+	private String changedt;
+	private String baserate;
+	private String addrate;
+	private String finalrate;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getChagedt() {
+		return chagedt;
+	}
+	public void setChagedt(String chagedt) {
+		this.chagedt = chagedt;
+	}
+	public String getBaserate() {
+		return baserate;
+	}
+	public void setBaserate(String baserate) {
+		this.baserate = baserate;
+	}
+	public String getAddrate() {
+		return addrate;
+	}
+	public void setAddrate(String addrate) {
+		this.addrate = addrate;
+	}
+	public String getFinalrate() {
+		return finalrate;
+	}
+	public void setFinalrate(String finalrate) {
+		this.finalrate = finalrate;
+	}
+	@Override
+	public String toString() {
+		return "LoanInfoVO [name=" + name + ", chagedt=" + chagedt + ", baserate=" + baserate + ", addrate=" + addrate
+				+ ", finalrate=" + finalrate + "]";
+	}
+	
+	
+	
+
+}

@@ -1,0 +1,35 @@
+package kr.co.hana.chat.handler;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+
+@Configuration
+@EnableWebSocketMessageBroker
+public class ChatConfig implements WebSocketMessageBrokerConfigurer{
+	/* ������ config
+	 * @Enable... + WebSocketMsgBrokerConfigurer ����ü
+	 * �޽����� �߰�//����� �ϴ� ���Ŀ�� �����Ѵ�..
+	 * �ΰ��� �޼ҵ� �������̵� �ʿ�
+	 */
+	
+
+	
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		// stomp���� preifx URL �����ϴ� �κ�
+		registry.addEndpoint("/consult/chat").withSockJS();
+		// WebSocket����� ���� �ص�����Ʈ.. Ŭ���̾�Ʈ���� Socket������ ���⿡ ������ ���ڿ��� �����ؾ� ����� �ȴ�.
+		// withSockJS�� ���� : web socket ���·� ������ �Ұ����� ��� http�� ����Ͽ� ������ ���ӵǵ��� �����.
+	}
+	
+
+	public void configureMessageBroker(MessageBrokerRegistry config) {
+		config.enableSimpleBroker("/consult");
+		// �ش� ���ڿ��� �����ϴ� msg �ּҰ��� �޾� ó���ϴ� Broker Ȱ��ȭ�Ѵ�.
+		config.setApplicationDestinationPrefixes("/app");
+		// Ŭ���̾�Ʈ�� ������ �޽��� ���� �� �ٿ��� �ϴ� url prefix.
+	}
+
+}

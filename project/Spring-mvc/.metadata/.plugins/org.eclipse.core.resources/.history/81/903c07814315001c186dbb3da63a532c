@@ -1,0 +1,11 @@
+/**
+ * 
+ */
+
+var lgt = $('.forum-item').length
+console.log(lgt)
+
+function atext(this){
+	var txt = $(this).text()
+	console.log(txt)	
+}

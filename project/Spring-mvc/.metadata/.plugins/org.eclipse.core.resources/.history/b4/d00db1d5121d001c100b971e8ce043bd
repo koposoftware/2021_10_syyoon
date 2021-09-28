@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+
+#chatArea{
+	font-family:"Noto Sans KR";
+	
+	height:660px;
+}
+
+
+
+#chattitle{
+	border: 1px solid #008485;
+	text-align:center;
+	height:8%;
+	background-color:#008485;
+	padding:15px;
+}
+
+#chattitle h2{
+	margin:auto;
+	color:#fff;
+	font-size:20px;
+	font-weight:700;
+}
+
+#chatContents{
+	padding:20px;
+	border-left: 1px solid #008485;
+	border-right: 1px solid #008485;
+ 	overflow-y:scroll; 
+	height:85%;
+}
+
+#sendArea{
+	border-left: 1px solid #008485;
+	border-right: 1px solid #008485;
+	border-bottom: 1px solid #008485;
+	display:flex;
+	height:7%;
+	background-color:rgba(167,182,191,.4);
+}
+
+#textBox{
+	
+	width: 89.95%;
+    height: 100%;
+    
+}
+
+#textBox>input[type=text]{
+	border: 5px solid rgba(167,182,191,.4);
+	padding:5px;
+	width: 95%;
+    height: 53%;	
+}
+
+#textBox>input[type=text]:focus{
+	outline:0;	
+}
+
+#sendBtn{
+	width:10%;
+	height:100%;
+}
+
+#sendBtn>button{
+	border:0;
+	color:#fff;
+	padding:5px;
+	width:100%;
+	height:100%;
+}
+#sendBtn>button:hover{
+	background-color:rgba(167,182,191,.4);
+}
+#sendBtn>button:focus{
+	outline:0;
+}
+
+.userchatBlock{
+	margin-top:7px;
+	margin-bottom:7px;
+	justify-content: right;
+	text-align:right;
+	display:flex;
+	width:100%;
+}
+
+.userChat{
+	margin-top:3px;
+	padding:10px;
+	margin-right:20px;
+	position:relative;
+	border-radius: 10px;
+	height:100%;
+	background-color:rgba(167,182,191,.2);
+}
+
+.userChat:after, .userChat:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.userChat:after {
+	border-left-color: rgba(167,182,191,.2);
+	border-width: 7px;
+	margin-top: -7px;
+}
+
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #c2e1f5;
+	border-width: 7px;
+	margin-top: -7px;
+}
+
+.userImg{
+	padding:7px;
+	width:35px;
+	height:35px;
+	text-align:center;
+	background-color:#b5b5b5;
+	border-radius: 50%;
+	color:#fff;
+}
+
+
+
+
+.chatbotBlock{
+	margin-top:7px;
+	margin-bottom:7px;
+	justify-content: left;
+	text-align:left;
+	display:flex;
+	width:100%;
+}
+
+
+.chatbotImg div{
+	background-image: url("../../img/hana-ci.png");
+	width:50px;
+	height:50px;
+}
+
+.chatbot {
+	padding:10px;
+	margin-left:20px;
+	position:relative;
+	border-radius: 10px;
+	height:100%;
+	position: relative;
+	background: rgba(0,140,140,.3);
+}
+.chatbot:after, .chatbot:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.chatbot:after {
+
+	border-right-color: rgba(0,140,140,.3);
+	border-width: 7px;
+	margin-top: -7px;
+}
+.chatbot:before {
+	border-width: 7px;
+	margin-top: -7px;
+}

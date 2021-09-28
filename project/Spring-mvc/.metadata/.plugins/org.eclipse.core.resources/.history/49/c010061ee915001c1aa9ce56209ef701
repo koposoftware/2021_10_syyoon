@@ -1,0 +1,7 @@
+package kr.co.hana.mypage.controller;
+
+
+@Controller
+public class MyPageController {
+
+}

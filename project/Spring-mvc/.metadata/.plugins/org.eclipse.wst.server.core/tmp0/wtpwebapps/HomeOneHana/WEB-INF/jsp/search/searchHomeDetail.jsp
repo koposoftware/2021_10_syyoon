@@ -1,0 +1,200 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HomeOneHana::주택정보</title>
+<link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/search/searchHomeDetail.css" rel="stylesheet">
+<script>
+	var searchvo = JSON.parse('${searchjson}')
+	
+	var detailst = []
+	<c:forEach items='${homeDetail}' var="item">
+		var dct = {
+			rnadres : "${item.rnadres}", // 도로명주소
+			insttnm : "${item.insttnm}", // 공급기관
+			suplytynm : "${item.suplytynm}", // 공급유형
+			
+			competde : "${item.competde}", // 준공일
+			housetynm : "${item.housetynm}",  // 주택유형
+			hshldco : "${item.hshldco}" , //세대수
+			suplyprevusear : "${item.suplyprevusear}", // 공급전용면적
+			suplycmnusear : "${item.suplycmnusear}", // 공급공용면적
+			stylenm : "${item.stylenm}", // 형명
+			parkngco : "${item.parkngco}", //주차대수
+			buldstlenm : "${item.buldstlenm}" , // 건물형태
+			heatmthddetailnm : "${item.heatmthddetailnm}", // 난방
+			elvtrlnstlatnm : "${item.elvtrlnstlatnm}", //승강기설치
+			bassrentgtn : "${item.bassrentgtn}", // 기본임대보증금
+			bassmtrntchrg : "${item.bassmtrntchrg}", // 기본 월임대료
+			basscnvrsgtnlmt :  "${item.basscnvrsgtnlmt}" // 기본 전환보증금
+		}
+		detailst.push(dct); // 위에 list나 변수를 선언하고 alert 자리에 담으면 차례대로 값을 받는다.
+	</c:forEach>
+	
+</script>
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>	
+	</header>
+	<section>
+		
+		<div id="banner" class="container">
+			<div id="mprvOut">
+				<div id="maprvContainer" class="view_map">
+					<div id="mapWrapper">
+						<div id="map"></div>
+						<input type="button" id="btnRoadview" onclick="toggleMap(false)" title="로드뷰 보기" value="로드뷰">
+					</div>
+					
+					<div id="rvWrapper">
+						<div id="roadviewmap"></div>
+						<input type="button" id="btnMap" onclick="toggleMap(true)" title="지도 보기" value="지도">				
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript"
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1a97b6fe13f3e81929bc1b4c686c0b10&libraries=services,clusterer,drawing"></script>
+		 <script type="text/javascript"
+			src="${pageContext.request.contextPath }/resources/js/search/searchHomeDetail-kakaoMap.js"></script>	
+		<div>
+		<div id="welcome" class="container">
+			<div class="title">
+			  <h2 style="font-weight:700;">${searchvo.rnadres}</h2>
+			</div>
+		</div>
+			<div class="container">  
+				<table id="summarytbl" class="infotbl">
+					<thead>
+						<tr>
+							<th>공급기관</th>
+							<th>공급유형</th>
+							<th>건물종류</th>
+							<th>건물형태</th>
+							<th>난방방식</th>
+							<th>주차대수</th>
+							<th>세대수</th>
+							<th>준공일</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>${homeDetail[0].insttnm}</td>
+							<td>${homeDetail[0].suplytynm}</td>
+							<td><c:if test="${homeDetail[0].housetynm eq '{}' }">-</c:if>
+								<c:if test="${homeDetail[0].housetynm ne '{}'}">${homeDetail[0].housetynm}</c:if>
+							</td>
+							<td><c:if test="${homeDetail[0].buldstlenm eq '{}' }">-</c:if>
+								<c:if test="${homeDetail[0].buldstlenm ne '{}'}">${homeDetail[0].buldstlenm}</c:if>
+							</td>
+							<td>
+								<c:if test="${homeDetail[0].heatmthddetailnm eq '{}' }">-</c:if>
+								<c:if test="${homeDetail[0].heatmthddetailnm ne '{}'}">${homeDetail[0].heatmthddetailnm}</c:if>
+							</td>
+							<td>
+								${homeDetail[0].parkngco}
+							</td>
+							<td>
+								${homeDetail[0].hshldco}
+							</td>
+							<td>
+								<c:if test="${homeDetail[0].competde eq '{}' }">-</c:if>
+								<c:if test="${homeDetail[0].competde ne '{}' }">${homeDetail[0].competde}</c:if>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+			
+			
+		<div class="infobox">
+			<div id="three-column" class="container">
+				<div><span class="arrow-down"></span></div>
+				<div class="title">
+					<h2>상세정보</h2>
+				</div>
+		
+			</div>
+			<div class="container">
+				<table id="rntfeetbl" class="infotbl">
+					<thead>
+						<tr>
+							<th>평형(유형)</th>
+							<th>공급공용면적</th>
+							<th>공급전용면적</th>
+							<th>기본임대보증금</th>
+							<th>기본월임대료</th>
+							<th>기본전환보증금</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${homeDetail}" var="home" varStatus="loop">
+							<tr>
+								<td>${home.stylenm}</td>
+								<td>${home.suplycmnusear}</td>
+								<td>${home.suplyprevusear}</td>
+								<td>${home.bassrentgtn}</td>
+								<td>${home.bassmtrntchrg}</td>
+								<td>${home.basscnvrsgtnlmt}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="infobox">
+		<div id="portfolio" class="container">
+			<div id="commentBox">
+				<div class="container mt-5">
+				    <div class="d-flex justify-content-center row">
+				        <div >
+				            <div class="d-flex flex-column comment-section">
+				                <div class="bg-white p-2">
+				                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+				                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">김하나</span><span class="date text-black-50">2021-09-09</span></div>
+				                    </div>
+				                    <div class="mt-2">
+				                        <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				                    </div>
+				                </div>
+				                <div class="bg-white">
+				                    <div class="d-flex flex-row fs-12">
+				                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+				                        <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+				                        <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+				                    </div>
+				                </div>
+				                <div class="bg-light p-2">
+				                    <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
+				                    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">등록</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">취소</button></div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+		
+			
+
+	</section>
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	$('#Menu2').click(function(){
+		$('#meenu1').hide()
+	})
+	
+})

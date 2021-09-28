@@ -1,0 +1,20 @@
+package kr.co.hana.mypage.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.mypage.dao.MypageDAO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+
+@Service
+public class MypageServiceImpl implements MypageService {
+	@Autowired
+	private MypageDAO mypagedao;
+
+	public List<FavoriteScheduleVO> getAllFavorite(String id) {
+		 List<FavoriteScheduleVO> result = mypagedao.getAllFavorite(id);
+		return result;
+	}
+}

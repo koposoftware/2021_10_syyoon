@@ -1,0 +1,71 @@
+package kr.co.hana.mypage.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.co.hana.loan.vo.EnrollLoanVO;
+import kr.co.hana.login.vo.LoginVO;
+import kr.co.hana.mypage.service.MypageService;
+import kr.co.hana.mypage.vo.AccountVO;
+import kr.co.hana.mypage.vo.LoanContractVO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+import kr.co.hana.search.Service.SearchService;
+import kr.co.hana.search.vo.FavoriteVO;
+
+@Controller
+public class MypageController {
+	
+
+	@Autowired
+	private MypageService mypageservice;
+	
+	@Autowired
+	private SearchService searchservice;
+	
+	
+	@GetMapping("/mypage")
+	public String myPageMain(HttpSession session, Model model) {
+		LoginVO log = (LoginVO) session.getAttribute("loginVO");
+		
+		// 즐겨찾은 공고
+		List<FavoriteScheduleVO> favNotice = mypageservice.getAllFavoriteNoti(log.getId());
+		model.addAttribute("favoriteNotice", favNotice);
+		
+		//즐겨찾은 집
+		List<FavoriteVO> favHome = searchservice.getFavoriteHome(log.getId());
+		model.addAttribute("favoriteHome", favHome);
+		
+		//계약상황
+		List<LoanContractVO> contracts = mypageservice.getContract(log.getId());
+		model.addAttribute("contractList", contracts);
+		
+		//계좌정보
+		List<AccountVO> accounts = mypageservice.getAccount(log.getId());
+		model.addAttribute("accountList", accounts);
+		
+		
+		return "mypage/mypage";
+	}
+	
+	@GetMapping("/loan/contract")
+	public String loanContract(int contractcode, HttpSession session, Model model) {
+		System.out.println("계약서작성해볼래");
+		LoginVO log = (LoginVO) session.getAttribute("loginVO");
+		//계좌정보
+		List<AccountVO> accounts = mypageservice.getAccount(log.getId());
+		model.addAttribute("accountList", accounts);
+		
+		// 계약상품 정보
+		EnrollLoanVO contractinfo = mypageservice.getContractInfo(contractcode);
+		model.addAttribute("contractinfo", contractinfo);
+
+		return "mypage/loancontract";
+	}
+	
+}

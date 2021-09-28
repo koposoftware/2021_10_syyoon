@@ -1,0 +1,143 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700);
+@import url(http://fonts.googleapis.com/css?family=Cardo:400,400italic,700);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+
+@font-face {
+  font-family: "elegant-theme-line";
+  src: url('../fonts/elegant-theme-line.ttf?1439850014') format('truetype'), url('../fonts/elegant-theme-line.eot?1439850014') format('embedded-opentype'), url('../fonts/elegant-theme-line.svg?1439850014') format('svg'), url('../fonts/elegant-theme-line.woff?1439850014') format('woff'); 
+  unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+  }
+
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: rgba(167, 182, 191, .60);
+  min-height: 100vh; }
+
+.brand-wrapper {
+  margin-bottom: 19px; }
+  .brand-wrapper .logo {
+    height: 37px; }
+
+.login-card {
+  border: 0;
+  border-radius: 27.5px;
+  box-shadow: 0 10px 30px 0 rgba(167, 182, 191, .80);
+  overflow: hidden; }
+  .login-card-img {
+    border-radius: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover; }
+  .login-card .card-body {
+    padding: 85px 60px 60px; }
+    @media (max-width: 422px) {
+      .login-card .card-body {
+        padding: 35px 24px; } }
+  .login-card-description {
+    font-size: 25px;
+    color: #000;
+    font-weight: normal;
+    margin-bottom: 23px; }
+  .login-card form {
+    max-width: 326px; }
+  .login-card .form-control {
+    border: 1px solid #d5dae2;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    min-height: 45px;
+    font-size: 13px;
+    line-height: 15;
+    font-weight: normal; }
+    .login-card .form-control::-webkit-input-placeholder {
+      color: #B5B5B5; }
+    .login-card .form-control::-moz-placeholder {
+      color: #B5B5B5; }
+    .login-card .form-control:-ms-input-placeholder {
+      color: #B5B5B5; }
+    .login-card .form-control::-ms-input-placeholder {
+      color: #B5B5B5; }
+    .login-card .form-control::placeholder {
+      color: #B5B5B5; }
+  .login-card .login-btn {
+    padding: 13px 20px 12px;
+    background-color: #008485;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #fff;
+    margin-bottom: 24px; }
+    .login-card .login-btn:hover {
+      border: 1px solid #008485;
+      background-color: transparent;
+      color: #008485; }
+  .login-card .forgot-password-link {
+    font-size: 14px;
+    color: #B5B5B5;
+    margin-bottom: 12px; }
+  .login-card-footer-text {
+    font-size: 13px;
+    color: #0d2366;
+    margin-bottom: 60px; }
+    @media (max-width: 767px) {
+      .login-card-footer-text {
+        margin-bottom: 24px; } }
+  .login-card-footer-nav a {
+    font-size: 14px;
+    color: #919aa3; }
+
+/*# sourceMappingURL=login.css.map */
+
+.log-btn{
+	display: inline-block;
+	align-text:center;
+	font-weight: bold;
+	width: 185px;
+	height: 30px;
+}
+
+
+.kakao{
+	font-size:13px;
+	color: #3a1c1c;
+	border: solid 1px #FEE500;
+	background-color: #FEE500;
+}
+
+.kakao:hover{
+	color: #FEE500;
+	border: solid 1px #3a1c1c;
+	background-color:#3a1c1c;
+}
+
+.kko{
+	font-size:13px;
+	color: #3a1c1c;
+}
+.kko:hover{
+	color: #FEE500;
+}
+
+.logo{
+	font-size: 25px;
+	color: rgb(0,140,140);
+	font-weight:700;
+}
+.logo:link{
+	color: rgb(0,140,140);
+	text-decoration:none;
+}
+.logo:visited{
+	color: rgb(0,140,140);
+	text-decoration:none;
+}
+.logo:hover{
+	color: rgb(0,140,140);
+	text-decoration:none;
+}
+
+
+

@@ -1,0 +1,11 @@
+package kr.co.hana.scheduler;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class LhScheduler {
+	@Scheduled(cron="0 14 14 * * *")
+	public void getHomeData() {
+		
+	}
+}

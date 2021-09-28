@@ -40,14 +40,14 @@ public class LoanController {
 	
 	@GetMapping("/loan")
 	public String loanMain() {
-		System.out.println("대출볼래?");
+		//System.out.println("대출볼래?");
 		return "loan/loan";
 	}
 	
 	@GetMapping("/loan/review")
 	public String loanReview(EnrollLoanVO enroll, Model model){
-		System.out.println("대출심사파일업로드");
-		System.out.println(enroll.toString());
+		//System.out.println("대출심사파일업로드");
+		//System.out.println(enroll.toString());
 		model.addAttribute("enrollVO", enroll);
 		
 		return "loan/reviewfile";
@@ -55,7 +55,7 @@ public class LoanController {
 	
 	@PostMapping("/loan/file/result")
 	public String loanReviewFileuploadResult(MultipartHttpServletRequest mhsq,EnrollLoanVO enroll) throws IllegalStateException,IOException {
-		System.out.println("데이터 넘기기 ");
+		//System.out.println("데이터 넘기기 ");
 		/*?chkAll=on
 		 * &chkEtc1=on
 		 * &chkEtc2=on
@@ -65,7 +65,7 @@ public class LoanController {
 		 * &familycerti=아이디어.txt
 		
 		*/
-		System.out.println(enroll.toString());
+		//System.out.println(enroll.toString());
 		int contractcode = loanservice.contractLogProcedure(enroll);
 		Iterator<String> iter = mhsq.getFileNames();
 		List<ReviewFileVO> rfvoList = new ArrayList<ReviewFileVO>();
@@ -78,7 +78,7 @@ public class LoanController {
 			
 			// 원본 파일명
 			String oriFileName = mFile.getOriginalFilename();
-			System.out.println("원본 파일명 : " + oriFileName);
+			//System.out.println("원본 파일명 : " + oriFileName);
 			
 			
 			
@@ -120,7 +120,7 @@ public class LoanController {
 	
 	@GetMapping("/loan/contract")
 	public String loanContract(int contractcode, HttpSession session, Model model) {
-		System.out.println("계약서작성해볼래");
+		//System.out.println("계약서작성해볼래");
 		
 		model.addAttribute("contractcode", contractcode);
 		LoginVO log = (LoginVO) session.getAttribute("loginVO");

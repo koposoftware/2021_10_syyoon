@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+
+$('menu2').hide()
+$(document).ready(function(){
+	$('#Menu2').click(function(){
+		$('#menu1').hide()
+		$('#menu2').show()
+	})
+	
+})

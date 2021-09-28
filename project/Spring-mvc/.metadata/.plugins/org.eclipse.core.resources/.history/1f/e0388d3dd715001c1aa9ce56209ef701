@@ -1,0 +1,28 @@
+package kr.co.hana.consult.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.co.hana.login.vo.LoginVO;
+
+@Controller
+public class ConsultController {
+	
+	@GetMapping("/consult/chat")
+	public String OnlineConsult(HttpSession session, Model model) throws Exception {		
+		System.out.println("chat-!");
+		LoginVO login = (LoginVO) session.getAttribute("loginVO");
+		
+		model.addAttribute("loginVO",login);
+		
+		return "consult/consult";
+	}
+	
+
+	
+
+
+}

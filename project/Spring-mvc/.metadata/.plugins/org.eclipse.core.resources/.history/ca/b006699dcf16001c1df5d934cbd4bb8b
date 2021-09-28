@@ -1,0 +1,182 @@
+package kr.co.hana.schedule.controller;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
+import kr.co.hana.login.vo.LoginVO;
+import kr.co.hana.schedule.service.ScheduleService;
+import kr.co.hana.schedule.vo.DetailFileVO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+import kr.co.hana.schedule.vo.ScheduleDetailVO;
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+@Controller
+public class ScheduleController {
+	
+	@Autowired
+	private ScheduleService scheduleservice;
+	
+
+	
+	@GetMapping("/schedule")
+	public String scheduleMain() throws IOException {
+		System.out.println("공고스케듈");
+		return "schedule/schedule";
+	}
+	
+	
+	@ResponseBody
+	@GetMapping("/scheduleList")
+	public List<ScheduleVO> scheduleList() throws IOException {
+		System.out.println("공고볼사람~");
+		String[] cnpLst = {"11","26","27","28","29","30","31","36110","41","42","43","44","45","46","47","48","50"};
+		List<ScheduleVO> allList = new ArrayList<ScheduleVO>();
+		
+		SimpleDateFormat df = new SimpleDateFormat ("yyyy.MM.dd");
+		Calendar start = Calendar.getInstance();
+		start.setTime(new Date());
+		start.add(Calendar.DATE, -30);
+		String st = df.format(start.getTime());
+		
+		Calendar end = Calendar.getInstance();
+		end.setTime(new Date());
+		end.add(Calendar.DATE, 7);
+		String en = df.format(end.getTime());
+
+		for(int i=0; i<cnpLst.length; i++) {
+			List<ScheduleVO> notice = scheduleservice.getNoticeList(cnpLst[i], st, en);
+			//System.out.println(notice.size());
+			if(notice != null) {
+				allList.addAll(notice);				
+			}
+		}
+				
+		System.out.println("cnt = "+ allList.size());
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonText = mapper.writeValueAsString( allList );		
+
+		return allList;
+	}
+	
+	//  /{spl_inf_tp_cd}/{ccr_cnnt_sys_ds_cd}/{pan_id}/{upp_ais_tp_cd}/{ais_tp_cd}
+	@GetMapping("/schedule/detail")
+	public String scheduleDetail(@ModelAttribute ScheduleVO scvo, Model model, RedirectAttributes redirect, HttpSession session) throws IOException {
+		System.out.println("공고상세");
+		List<ScheduleDetailVO> detailinfo = scheduleservice.getDetailInfo(scvo);
+		
+		if(detailinfo==null) { // API null
+			/*
+			* https://apply.lh.or.kr/LH/index.html?gv_url=SIL::CLCC_SIL_0065.xfdl
+			* &gv_menuId=1010203
+			* &gv_param=CCR_CNNT_SYS_DS_CD:03,PAN_ID:2015122300009564,LCC:Y
+			*/
+
+			redirect.addAttribute("gv_url", scvo.getDtl_url());
+			redirect.addAttribute("menu_id", scvo.getMenu_id());
+			redirect.addAttribute("ccr_cnnt_sys_ds_cd", scvo.getCcr_cnnt_sys_ds_cd());
+			redirect.addAttribute("pan_id", scvo.getPan_id());
+			return "redirect:/schedule/empty";
+			
+		}else {
+
+			List<DetailFileVO> detailimg = scheduleservice.getDetailImg(scvo);
+			List<DetailFileVO> detailfile = scheduleservice.getDetailFile(scvo);
+			String goLH = "https://apply.lh.or.kr/LH/index.html?gv_url="+scvo.getDtl_url()+"&gv_menuId="+scvo.getMenu_id()
+							+"&gv_param=CCR_CNNT_SYS_DS_CD:"+scvo.getCcr_cnnt_sys_ds_cd()+",PAN_ID:"+scvo.getPan_id()+",LCC:Y";
+			
+
+
+				Gson gson = new Gson();
+				String json = gson.toJson(scvo);
+				model.addAttribute("favoriteParam", json);// NoticeFavorite
+
+				model.addAttribute("LHPage", goLH);
+				model.addAttribute("noticetitle", scvo.getPan_nm());
+				model.addAttribute("detailinfo", detailinfo);
+				model.addAttribute("detailimg", detailimg);
+				model.addAttribute("detailfile", detailfile);				
+
+			return "schedule/scheduleDetail";
+		}
+	}
+	
+	@GetMapping("/schedule/empty")
+	public String scheduleErr(@RequestParam("gv_url") String gv_url,@RequestParam("menu_id") String menu_id,
+			@RequestParam("ccr_cnnt_sys_ds_cd") String ccr, @RequestParam("pan_id") String pan_id, Model model) {
+
+		//https://apply.lh.or.kr/LH/index.html?gv_url=SIL::CLCC_SIL_0060.xfdl&gv_menuId=1010203&gv_param=CCR_CNNT_SYS_DS_CD:03,PAN_ID:2015122300009539,LCC:Y
+		String uri="https://apply.lh.or.kr/LH/index.html?gv_url="+gv_url+"&gv_menuId="+menu_id+"&gv_param=CCR_CNNT_SYS_DS_CD:"+ccr+",PAN_ID:"+pan_id+",LCC:Y";
+		model.addAttribute("url", uri);
+		return "schedule/scheduleErr";
+	}
+	
+	@GetMapping("/favorite/add/notice")
+	@ResponseBody
+	public int addFavoriteNotice(ScheduleVO scvo, HttpSession session) {
+		System.out.println("추가해쩡");
+		
+		LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+		FavoriteScheduleVO fsvo = new FavoriteScheduleVO();
+		//fsvo.setId("onehana");
+		fsvo.setId(loginVO.getId());
+		
+		String noticecode = scvo.getSpl_inf_tp_cd() + "-"+ scvo.getCcr_cnnt_sys_ds_cd()+"-"+ scvo.getPan_id()
+							+"-"+scvo.getUpp_ais_tp_cd()+"-"+scvo.getDtl_url()+"-"+scvo.getMenu_id();
+		fsvo.setNoticecode(noticecode);
+		fsvo.setNoticetitle(scvo.getPan_nm());
+		fsvo.setNoticeend(scvo.getPan_dt());
+		
+		
+		/* pan_dt : 제목
+		 * *****spl_inf_tp_cd=062
+			*****ccr_cnnt_sys_ds_cd=03
+			*****pan_id=2015122300009566
+			*****upp_ais_tp_cd=06
+		 */
+		int result = scheduleservice.addFavoriteNotice(fsvo);
+		
+		return result;
+	}
+	
+	
+	@GetMapping("/favorite/del/notice")
+	@ResponseBody
+	public int delFavoriteNotice(ScheduleVO scvo, HttpSession session) {
+		System.out.println("즐겨찾기삭제해쪙");
+		
+		LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+		FavoriteScheduleVO fsvo = new FavoriteScheduleVO();
+		//fsvo.setId("onehana");
+		fsvo.setId(loginVO.getId());
+		
+		String noticecode = scvo.getSpl_inf_tp_cd() + "-"+ scvo.getCcr_cnnt_sys_ds_cd()+"-"+ scvo.getPan_id()
+					+"-"+scvo.getUpp_ais_tp_cd()+"-"+scvo.getDtl_url()+"-"+scvo.getMenu_id();
+		fsvo.setNoticecode(noticecode);
+		int result = scheduleservice.delFavoriteNotice(fsvo);
+		return result;
+	}
+
+	
+	
+	
+	
+	
+}

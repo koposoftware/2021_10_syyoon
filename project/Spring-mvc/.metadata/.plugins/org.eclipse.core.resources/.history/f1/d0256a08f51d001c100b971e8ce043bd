@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+.contractPaperBox{
+	justify-content:center;
+	display:flex;
+	margin-bottom:50px;
+}
+
+.paperBox{
+	width:50%;
+}
+
+.paperBox a{
+	width:50%;
+}
+
+.paperBox a img{
+	width:100%;
+}
+
+#contractinfo{
+	margin-top:50px;
+	margin-bottom:100px;
+}
+
+.contracttbl{
+	width:100%;
+	border-top:2px solid #b5b5b5;
+	border-bottom:2px solid #b5b5b5;
+}
+.contracttbl thead{
+	background-color:rgba(167,182,191,.2);
+}
+
+.contracttbl thead tr td{
+	border-right:1px solid #b5b5b5;
+}
+
+.mkAccBox{
+	margin-top:20px;
+	margin-bottom:100px;
+}
+
+tbody tr:hover{
+	background-color:rgba(167,182,191,.1);
+}

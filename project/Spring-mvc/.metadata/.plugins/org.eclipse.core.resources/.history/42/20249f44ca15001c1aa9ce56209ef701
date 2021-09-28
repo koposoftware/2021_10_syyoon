@@ -1,0 +1,10 @@
+package kr.co.hana.consult.vo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ChatChannelVO {
+	
+	private Map<Integer, ChatRoomVO> storage = new HashMap<>();
+
+}

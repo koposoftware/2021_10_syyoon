@@ -1,0 +1,5 @@
+package kr.co.hana.mypage.service;
+
+public interface MypageService {
+
+}

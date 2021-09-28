@@ -1,0 +1,14 @@
+package kr.co.hana.consult.vo;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Chat_room {
+	private int ROOM_ID;
+	private String ROOM_NAME;
+	private String MEMBER_ID;
+	private String C_FILE_SAV_NAME;
+	private String C_NICK_NAME;
+
+}

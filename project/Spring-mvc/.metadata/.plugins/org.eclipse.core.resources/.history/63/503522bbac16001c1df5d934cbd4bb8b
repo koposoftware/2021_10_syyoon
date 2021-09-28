@@ -1,0 +1,7 @@
+package kr.co.hana.schedule.dao;
+
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+public interface ScheduleDAO {
+	int addFavoriteNotice(ScheduleVO scvo);
+}

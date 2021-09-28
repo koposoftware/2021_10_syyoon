@@ -1,0 +1,503 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HomeOneHana::하나원큐 전(월)세대출</title>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/loan/loan.css" rel="stylesheet">
+
+	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>
+			
+	</header>
+	<section>
+		<div class="body">
+			<div class="container" >
+			
+		
+	
+			    <div class="col-lg-12">
+			        <div class="wrapper wrapper-content animated fadeInRight">
+			
+			            <div class="ibox-content m-b-sm border-bottom">
+			                <div class="p-xs">
+			                    <div class="pull-left m-r-md titleicon">
+			                        <i class="fas fa-hand-holding-usd text-navy mid-icon"></i>
+			                    </div>
+			                    <h2>하나원큐 전(월)세대출</h2>
+			                    <span>지금 대출가능한 상품을 확인해보세요.</span>
+			                </div>
+			            </div>
+					
+			            <div class="ibox-content forum-container">
+			
+			                <div class="forum-title">
+			                    <div class="pull-right forum-desc">
+			                        <small>전체 12개 전(월)세대출</small>
+			                    </div>
+			                    <h3>Hana1Q Loan</h3>
+			                </div>
+							<div id="loanContents">
+			                <div class="forum-item active">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-home"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1420277_115194.jsp?_menuNo=98786" class="forum-item-title">주택신보 전세자금대출</a>
+			                            <div class="forum-sub-title">임차보증금의 80%이내, 최고 222백만원까지 (전세, 반전세 계약 모두 가능합니다)</div>
+			                        </div>
+			                        <div class="col-md-2 forum-info" >
+			                            <span class="views-number loanmax">
+			                               2억2천2백만원
+			                            </span>
+			                            <div>
+			                                <small>최대</small>
+			                            </div>
+			                        </div>
+			        
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+		
+	                
+			                <div class="forum-item">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fa fa-bolt"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1420276_115194.jsp?_menuNo=98786" class="forum-item-title">우량주택전세론</a>
+			                            <div class="forum-sub-title">아파트, 연립, 다세대, 주거용 오피스텔, 공공임대 아파트까지 우량주택전세론으로 내 집처럼 당당하게</div>
+			                        </div>
+			                        <div class="col-md-2 forum-info">
+				              
+				                            <span class="views-number loanmax">
+				                               5억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                     </div>
+				                   
+				        
+				                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+			                   
+			                    </div>
+			                </div>
+			                <div class="forum-item active">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fa fa-calendar"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1420287_115194.jsp?_menuNo=98786" class="forum-item-title">하나 전세금안심대출</a>
+			                            <div class="forum-sub-title">주택도시보증공사의 전세자금대출특약보증과 전세보증금반환보증의 결합상품으로 보증서를 담보로 전세대출 지원하고 반환보증을 통해 임대차계약 만료 시 전세보증금을 안전하게 반환하여 대출금을 상환할 수 있는 상품입니다. </div>
+			                        </div>
+			                   
+			                        <div class="col-md-2 forum-info">
+			                            <span class="views-number loanmax">
+			                               4억원
+			                            </span>
+			                            <div>
+			                                <small>최대</small>
+			                            </div>
+			                        </div>
+			         
+			        
+			                       <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+			                        
+			                    </div>
+			                </div>
+			                <div class="forum-item">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fa fa-star"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1448536_115194.jsp?_menuNo=98786" class="forum-item-title">신혼부부전세론</a>
+			                            <div class="forum-sub-title">임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능합니다) </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               2억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            <div class="forum-item active">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-baby"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1454262_115194.jsp?_menuNo=98786" class="forum-item-title">다둥이전세론</a>
+			                            <div class="forum-sub-title">임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능합니다) </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               2억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            
+				            <div class="forum-item">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fab fa-ello"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1459846_115194.jsp?_menuNo=98786" class="forum-item-title">복지지킴이전세론</a>
+			                            <div class="forum-sub-title">임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능합니다) </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               2억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            <div class="forum-item active">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-heart"></i>
+			                            </div>
+			                            <a href="forum_post.html" class="forum-item-title">한사랑전세론</a>
+			                            <div class="forum-sub-title">임차보증금의 90%이내, 최대 2억원까지(전세,반전세 계약 모두 가능합니다) </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               2억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            
+				             <div class="forum-item">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-running"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1462557_115194.jsp?_menuNo=98786" class="forum-item-title">하나 청년전세론</a>
+			                            <div class="forum-sub-title">청년층 주거비용 경감을 위해 임차보증금의 90%이내, 최대 1억원까지(전세,반전세 계약 모두 가능합니다) </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               1억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            <div class="forum-item active">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-hand-holding-heart"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1465823_115194.jsp?_menuNo=98786" class="forum-item-title">서울특별시 신혼부부 임차보증금대출</a>
+			                            <div class="forum-sub-title">서울특별시 융자추천 선정 신혼부부대상 </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               1억원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            <div class="forum-item">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-people-carry"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1465824_115194.jsp?_menuNo=98786" class="forum-item-title">서울특별시 청년 임차보증금대출</a>
+			                            <div class="forum-sub-title">서울특별시 융자추천 선정 만 39세 이하의 청년 대상 </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               7천만원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            
+				            <div class="forum-item active">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-money-check-alt"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1462746_115194.jsp?_menuNo=98786" class="forum-item-title">하나 청년월세론</a>
+			                            <div class="forum-sub-title">청년층 주거비용 경감을 위해 대출기간 13년 내에서 최대 12백만원까지 </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            <span class="views-number loanmax">
+				                               12백만원
+				                            </span>
+				                            <div>
+				                                <small>최대</small>
+				                            </div>
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				            
+				            
+				            
+				            <div class="forum-item">
+			                    <div class="row">
+			                        <div class="col-md-9">
+			                            <div class="forum-icon">
+			                                <i class="fas fa-chart-pie"></i>
+			                            </div>
+			                            <a href="https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1471223_115194.jsp?_menuNo=98786" class="forum-item-title">하나 부분분할상환 전세론</a>
+			                            <div class="forum-sub-title">임차보증금의 80%이내 최대 222백만원 까지(전세, 반전세 계약 모두 가능합니다) </div>
+			                        </div>
+			                  
+				                        <div class="col-md-2 forum-info">
+				                            
+				                        </div>
+			        	
+			                        <div class="col-md-1 forum-info">
+			                            <span class="views-number">
+			                                <a href="#" data-toggle="modal" data-target="#exampleModal">
+												<i class="fas fa-comments" style="color:#b5b5b5;"></i></a>
+			                            </span>
+			                            <div>
+			                                <small>즉시상담</small>
+			                            </div>
+			                        </div>
+				                </div>
+				            </div>
+				           </div>
+				            
+			            	<div class="pagebtn">
+				                <nav aria-label="Page navigation example">
+								  <ul class="pagination" style="justify-content: center;">
+								    <li class="page-item">
+								      <a class="page-link" href="#" aria-label="Previous">
+								        <span aria-hidden="true">&laquo;</span>
+								        <span class="sr-only">Previous</span>
+								      </a>
+								    </li>
+								    <li class="page-item"><a class="page-link" href="#">1</a></li>
+								    <li class="page-item"><a class="page-link" href="#">2</a></li>
+								    <li class="page-item">
+								      <a class="page-link" href="#" aria-label="Next">
+								        <span aria-hidden="true">&raquo;</span>
+								        <span class="sr-only">Next</span>
+								      </a>
+								    </li>
+								  </ul>
+								</nav>
+							</div>
+			        </div>
+			       
+			    </div>
+			  </div>
+			</div>
+		</div>
+		 <!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">전화번호 인증하기</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		      	<div>
+		      		<div class="modalsubtitle">
+		      		대출상담은 본인인증이 필요한 서비스입니다.<br>휴대전화번호를 입력하신 후, 인증번호를 입력하세요!
+		      		</div>
+		      		<div class="phoneval">
+						<span style="margin:7px">휴대전화</span> 
+						<input id="tel"
+							class="input100" type="text" name="phoneNumber"
+							placeholder="-는 제외하고 입력하세요.">
+					<button type="button" id="phoneckBtn" class="ckbtn">인증하기</button>
+					</div>
+		      	</div>
+		      	<div class="phonecerti">
+			        <div style="height:35px;">
+							<input id="tel"
+								class="input100" type="text" name="phonecertificate"
+								placeholder="인증번호를 입력하세요">
+					</div>
+					<div class="pwerrmsg">
+							<span id="errtel" style="color:#E90061; ">인증번호가 일치하지 않습니다.</span>
+							<span id="cortel" style="color:#008485;">인증번호가 일치합니다.</span>
+					</div>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" id="phonecloseBtn" class="clsbtn" data-dismiss="modal">닫기</button>
+		        <button type="button" id="phoneckOkBtn" class="btn btn-primary" data-dismiss="modal">인증</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</section>
+	<script src="${ pageContext.request.contextPath }/resources/js/loan/loan.js"></script>
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+package kr.co.hana.consult.vo;
+
+
+public class ChatRoomVO {
+	private int roomid;
+	private String roomnm;
+	private String userid;
+	private String filesavenm;
+	private String usernm;
+	public int getRoomid() {
+		return roomid;
+	}
+	public void setRoomid(int roomid) {
+		this.roomid = roomid;
+	}
+	public String getRoomnm() {
+		return roomnm;
+	}
+	public void setRoomnm(String roomnm) {
+		this.roomnm = roomnm;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getFilesavenm() {
+		return filesavenm;
+	}
+	public void setFilesavenm(String filesavenm) {
+		this.filesavenm = filesavenm;
+	}
+	public String getUsernm() {
+		return usernm;
+	}
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+	@Override
+	public String toString() {
+		return "ChatRoomVO [roomid=" + roomid + ", roomnm=" + roomnm + ", userid=" + userid + ", filesavenm="
+				+ filesavenm + ", usernm=" + usernm + "]";
+	}
+	
+	
+
+}

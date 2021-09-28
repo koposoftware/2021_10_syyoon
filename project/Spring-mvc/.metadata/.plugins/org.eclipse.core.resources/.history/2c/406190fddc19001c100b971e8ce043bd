@@ -1,0 +1,6 @@
+package kr.co.hana.mypage.dao;
+
+
+public interface MypageDAO {
+
+}

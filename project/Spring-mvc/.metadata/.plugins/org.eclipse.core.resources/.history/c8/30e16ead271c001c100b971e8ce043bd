@@ -1,0 +1,16 @@
+package kr.co.hana.dashboard.vo;
+
+public class UserCreditVO {
+	
+	
+	private int health_insurance;
+	private int people_insurance;
+	private int hired_insurance;
+	private int industrial_insurance;
+	
+	private int workyear;
+	private String companynm;
+	private String stockyn;
+	private String job;
+
+}

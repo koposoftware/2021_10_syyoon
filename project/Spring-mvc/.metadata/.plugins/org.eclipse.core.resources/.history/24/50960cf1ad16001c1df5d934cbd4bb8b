@@ -1,0 +1,17 @@
+package kr.co.hana.schedule.dao;
+
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+public class ScheduleDAOImpl implements ScheduleDAO{
+
+	public int addFavoriteNotice(ScheduleVO scvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int delFavoriteNotice(ScheduleVO scvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

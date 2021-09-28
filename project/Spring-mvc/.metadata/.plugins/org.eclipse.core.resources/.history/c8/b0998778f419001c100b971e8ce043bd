@@ -1,0 +1,51 @@
+package kr.co.hana.mypage.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.mypage.dao.MypageDAO;
+import kr.co.hana.mypage.vo.LoanContractVO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+
+@Service
+public class MypageServiceImpl implements MypageService {
+	@Autowired
+	private MypageDAO mypagedao;
+
+	/**
+	 * 좋아요누른 공고 리스트 가져오기
+	 */
+	public List<FavoriteScheduleVO> getAllFavoriteNoti(String id) {
+		 List<FavoriteScheduleVO> result = mypagedao.getAllFavoriteNoti(id);
+		 for(int i =0; i<result.size(); i++) {
+			 FavoriteScheduleVO res = result.get(i);
+			 String changeCode = getNoticeDetailURL(res.getNoticecode());
+			 res.setNoticecode(changeCode);
+		 }
+		return result;
+	}
+
+	/**
+	 * 계약이력 가져오기
+	 */
+	public List<LoanContractVO> getContract(String id) {
+		List<LoanContractVO> result = mypagedao.getContract(id);
+		return result;
+	}
+	
+	public String getNoticeDetailURL(String code) {
+		String mainaddr = "https://apply.lh.or.kr/LH/index.html";
+		String[] spCode = code.split("-");
+		
+		String result=mainaddr+"?gvurl="+spCode[4]+"&gv_menuId="+spCode[5]
+							+"&gv_param=CCR_CNNT_SYS_DS_CD:"+spCode[1]
+							+ ",PAN_ID:"+spCode[2]
+							+ ",LCC:Y";
+		System.out.println(result);
+		return result;
+	}
+	
+	
+}

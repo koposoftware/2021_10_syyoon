@@ -1,0 +1,115 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HomeOneHana::관리자모드</title>
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/chat/chat.css" />
+	<script src="${ pageContext.request.contextPath }/resources/js/chat/chat.js"></script>
+	
+    
+  </head>
+  <body>
+    <div
+      class="flex h-screen bg-gray-50 dark:bg-gray-900"
+      :class="{ 'overflow-hidden': isSideMenuOpen }">
+		<jsp:include page="../include/sider.jsp" />
+		
+      <!-- Backdrop -->
+      
+      <div class="flex flex-col flex-1 w-full">
+      	<jsp:include page="../include/header.jsp" />
+      	
+      	
+        <main  class="section gray-bg" id="resume">
+ 			<div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="section-title">
+                            <h2>Experience</h2>
+                            <p>I design and develop services for customers of all sizes, specializing in creating stylish, modern websites</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 m-15px-tb">
+                        <div class="resume-box">
+                            <ul>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <span class="time">2019 - Present</span>
+                                    <h5>Art Director - Facebook Inc</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <span class="time">2019 - Present</span>
+                                    <h5>Art Director - Facebook Inc</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <span class="time">2019 - Present</span>
+                                    <h5>Art Director - Facebook Inc</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 m-15px-tb">
+                        <div class="resume-box">
+                            <ul>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <span class="time">2019 - Present</span>
+                                    <h5>Art Director - Facebook Inc</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <span class="time">2019 - Present</span>
+                                    <h5>Art Director - Facebook Inc</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </li>
+                                <li>
+                                    <div class="icon">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <span class="time">2019 - Present</span>
+                                    <h5>Art Director - Facebook Inc</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+      </div>
+      
+      <script>
+		$(document).ready(function(){
+			var content = '<span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>'
+			$(content).prependTo('#chatMenu')    	  
+			
+		})
+	</script>
+      
+    </div>
+  </body>
+</html>

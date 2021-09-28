@@ -1,0 +1,14 @@
+package kr.co.hana.main.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MainController {
+	
+	@GetMapping("/main")
+	public String dashMain() {
+		System.out.println("대쉬보드메인");
+		return "main/main";
+	}
+}

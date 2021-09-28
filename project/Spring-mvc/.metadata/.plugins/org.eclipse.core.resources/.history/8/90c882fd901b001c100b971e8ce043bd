@@ -1,0 +1,49 @@
+/**
+ * 
+ */
+
+
+
+
+
+$(document).ready(function(){
+	
+	
+	function updateStatus(code, result){
+	$.ajax({
+		url:"/HomeOneHana-Admin/main/review/statusupdate/"+code+"/"+result
+		, method:'get'
+		, success:function(e){
+			console.log(e)
+		}, error:function(){
+			alert('Err!')
+		}
+	
+	});
+}
+	
+	$('#accept').click(function(){
+		$('#exampleModalLongTitle').empty()
+		$('#exampleModalLongTitle').append('대출승인')
+		$('.modal-body').empty()
+		$('.modal-body').append('대출이 승인되었습니다!')
+		updateStatus(concode,'대출승인')
+		
+		
+		
+	})
+	$('#reject').click(function(){
+		$('#exampleModalLongTitle').empty()
+		$('#exampleModalLongTitle').append('대출거절')
+		$('.modal-body').empty()
+		$('.modal-body').append('대출이 거절되었습니다')
+		updateStatus(concode,'대출거절')
+	})
+	
+	$('#okBtn').click(function(){
+		location.href="/HomeOneHana-Admin/main"
+	})
+	
+	
+	
+})

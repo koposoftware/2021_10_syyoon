@@ -1,0 +1,26 @@
+package kr.co.hana.schedule.vo;
+
+public class DetailFIleVO {
+	
+	private String filemm;
+	private String fileurl;
+	public String getFilemm() {
+		return filemm;
+	}
+	public void setFilemm(String filemm) {
+		this.filemm = filemm;
+	}
+	public String getFileurl() {
+		return fileurl;
+	}
+	public void setFileurl(String fileurl) {
+		this.fileurl = fileurl;
+	}
+	@Override
+	public String toString() {
+		return "DetailFIleVO [filemm=" + filemm + ", fileurl=" + fileurl + "]";
+	}
+	
+	
+
+}

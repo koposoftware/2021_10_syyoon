@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.sectionout {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.sectioninner {
+	margin: auto;
+}
+
+.sectionpad{
+	padding:50px;
+}
+
+#titlesection {
+	width: 100%;
+	height: 300px;
+	background-color: rgb(0, 140, 140);
+}
+
+#titlebox {
+	font-family: "Noto Sans KR";
+	font-weight: bold;
+	font-size: 45px;
+	color: #fff;
+}
+
+.swiper {
+	width: 1200px;
+	height: 400px;
+}
+
+
+
+.chatBox{
+	width:300px;
+}
+
+
+
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: rgba(167,182,191,0.60);
+	/* Center slide text vertically */
+	color:#000;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.swiper-slide:hover{
+	background:rgba(0,140,140,0.7);
+}
+
+.swiper-slide:hover h3,p>a:hover{
+	color:#fff;
+}
+
+#btnBox{
+	margin-bottom:65px;
+}
+
+

@@ -1,0 +1,19 @@
+package kr.co.hana.main.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.co.hana.login.vo.LoginVO;
+
+@Controller
+public class MainController {
+	
+	@GetMapping("/main")
+	public String dashMain(HttpSession session) {
+		System.out.println("대쉬보드메인");
+		LoginVO loginvo = session.getAttribute("loginVO");
+		return "main/main";
+	}
+}

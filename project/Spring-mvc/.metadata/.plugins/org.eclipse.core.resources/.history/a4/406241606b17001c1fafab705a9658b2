@@ -1,0 +1,316 @@
+package kr.co.hana.schedule.service;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.schedule.dao.ScheduleDAO;
+import kr.co.hana.schedule.vo.DetailFileVO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+import kr.co.hana.schedule.vo.ScheduleDetailVO;
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+@Service
+public class ScheduleServiceImpl implements ScheduleService{
+	
+	@Autowired
+	private ScheduleDAO scheduledao;
+	
+	
+	/**
+	 * �쁽�옱 怨듦퀬以묒씤嫄�!
+	 */
+	public List<ScheduleVO> getNoticeList(String cnp_cd, String stdt, String clsdt ) throws IOException{
+		
+		
+		List<ScheduleVO> resultList = new ArrayList<ScheduleVO>();
+		
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeInfo1/lhLeaseNoticeInfo1"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("PG_SZ","UTF-8") + "=" + URLEncoder.encode("50", "UTF-8")); /*�븳 �럹�씠吏� 寃곌낵 �닔*/
+        urlBuilder.append("&" + URLEncoder.encode("PAGE","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*�럹�씠吏� 踰덊샇*/
+        urlBuilder.append("&" + URLEncoder.encode("PAN_NM","UTF-8") + "=" + URLEncoder.encode("紐⑥쭛", "UTF-8")); /*怨듦퀬紐낆쑝濡� 議고쉶*/
+        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode("06", "UTF-8")); /*怨듦퀬�쑀�삎肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("CNP_CD","UTF-8") + "=" + URLEncoder.encode(cnp_cd, "UTF-8")); /*吏��뿭肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("PAN_SS","UTF-8") + "=" + URLEncoder.encode("怨듦퀬以�", "UTF-8")); /*怨듦퀬�긽�깭肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("PAN_NT_ST_DT","UTF-8") + "=" + URLEncoder.encode(stdt, "UTF-8")); /*怨듦퀬寃뚯떆�씪*/
+        urlBuilder.append("&" + URLEncoder.encode("CLSG_DT","UTF-8") + "=" + URLEncoder.encode(clsdt, "UTF-8")); /*怨듦퀬留덇컧�씪*/
+        
+        String result = getSb(urlBuilder);
+        //System.out.println(result);
+        if(result.charAt(0) == '[') {
+        	JSONArray jArray = new JSONArray(result);
+        	JSONObject jObject = (JSONObject) jArray.get(1);
+        	JSONArray dsList = jObject.getJSONArray("dsList");
+        	
+        	for(int i=0; i<dsList.length(); i++) {
+        		JSONObject list = (JSONObject) dsList.get(i);
+        		if(list != null) {
+        			ScheduleVO sche = new ScheduleVO();
+        			sche.setPan_ss(list.getString("PAN_SS"));
+        			sche.setPan_nt_st_dt(list.getString("PAN_NT_ST_DT"));
+        			sche.setAis_tp_cd(list.getString("AIS_TP_CD"));
+        			sche.setSpl_inf_tp_cd(list.getString("SPL_INF_TP_CD"));
+        			sche.setCnp_cd_nm(list.getString("CNP_CD_NM"));
+        			sche.setPan_id(list.getString("PAN_ID"));
+        			sche.setAis_tp_cd_nm(list.getString("AIS_TP_CD_NM"));
+        			sche.setClsg_dt(list.getString("CLSG_DT"));
+        			sche.setPan_dt(list.getString("PAN_DT"));
+        			sche.setUpp_ais_tp_cd(list.getString("UPP_AIS_TP_CD"));
+        			sche.setPan_nm(list.getString("PAN_NM"));
+        			sche.setDtl_url(list.getString("DTL_URL"));
+        			sche.setCcr_cnnt_sys_ds_cd(list.getString("CCR_CNNT_SYS_DS_CD"));
+        			
+        			resultList.add(sche);
+        		}
+        	}
+        }
+        
+		return resultList;
+	}
+	
+	
+	/**
+	 * 二쇳깮�젙蹂� 由ъ뒪�듃 諛섑솚
+	 */
+	public List<ScheduleDetailVO> getDetailInfo(ScheduleVO scvo) throws IOException {
+
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦툒�젙蹂닿뎄遺꾩퐫�뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨좉컼�꽱�꽣�뿰怨꾩떆�뒪�뀥援щ텇肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦퀬�븘�씠�뵒*/
+        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� �긽�쐞留ㅻЪ�쑀�삎肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 留ㅻЪ�쑀�삎肄붾뱶*/
+        
+        List<ScheduleDetailVO> resultList = new ArrayList<ScheduleDetailVO>();
+        
+        String result = getSb(urlBuilder);
+
+        JSONArray jArray = new JSONArray(result);
+        JSONObject jObject = (JSONObject) jArray.get(1);
+        Set haveKey = jObject.keySet();
+        //System.out.println("가진 키 : "+haveKey);
+        JSONObject checks = (JSONObject) jObject.getJSONArray("resHeader").get(0);
+        String check = checks.getString("SS_CODE");
+
+
+        if(!check.equals("N")) {
+    		JSONArray count = jObject.getJSONArray("dsSbd");
+    		//System.out.println("주택수 : "+count.length());
+    		//System.out.println("주택정보 : "+count.toString());
+    		for(int c=0; c<count.length(); c++) {
+    			
+    			ScheduleDetailVO schedule = new ScheduleDetailVO();
+    			JSONObject ds = (JSONObject) jObject.getJSONArray("dsSplScdl").get(c);
+    			if(!ds.isNull("SBSC_ACP_CLSG_DT")) {
+    				schedule.setSbsc_acp_clsg_dt(ds.getString("SBSC_ACP_CLSG_DT")); 
+    			}else {
+    				schedule.setSbsc_acp_clsg_dt("-");
+    			}
+   
+    			schedule.setPpr_sbm_ope_anc_dt(ds.getString("PPR_SBM_OPE_ANC_DT"));
+    			schedule.setPpr_acp_clsg_dt(ds.getString("PPR_ACP_CLSG_DT"));
+    			schedule.setPzwr_anc_dt(ds.getString("PZWR_ANC_DT"));
+    			schedule.setCtrt_ed_dt(ds.getString("CTRT_ED_DT"));
+    			schedule.setSbsc_acp_st_dt(ds.getString("SBSC_ACP_ST_DT"));
+    			schedule.setCtrt_st_dt(ds.getString("CTRT_ST_DT"));
+    			schedule.setPpr_acp_st_dt(ds.getString("PPR_ACP_ST_DT"));
+    			
+    			JSONObject sbd = (JSONObject) jObject.getJSONArray("dsSbd").get(c);
+    			schedule.setLgdn_adr(sbd.getString("LGDN_ADR"));
+    			schedule.setLgdn_dtl_adr(sbd.getString("LGDN_DTL_ADR"));
+    			schedule.setHsh_cnt(sbd.getString("HSH_CNT"));
+    			schedule.setHtn_fmla_desc(sbd.getString("HTN_FMLA_DESC"));
+    			schedule.setLcc_nt_nm(sbd.getString("LCC_NT_NM"));
+    			schedule.setDdo_ar(sbd.getString("DDO_AR"));
+    			schedule.setMvin_xpc_ym(sbd.getString("MVIN_XPC_YM"));
+    			
+    			JSONObject ctr = (JSONObject) jObject.getJSONArray("dsCtrtPlc").get(0);
+    			schedule.setSil_ofc_gud_fcts(ctr.getString("SIL_OFC_GUD_FCTS").replaceAll("\n", "<br>"));
+    			
+    			JSONObject etc = (JSONObject) jObject.getJSONArray("dsEtcInfo").get(0);
+    			schedule.setEtc_cts(etc.getString("ETC_CTS").replaceAll("\n", "<br>"));
+    			resultList.add(schedule);
+    		}
+    		return resultList;
+    	}
+        	return null;
+    }
+    
+	
+
+	
+	
+	/**
+	 * 이미지디테일
+	 * @param scvo
+	 * @return
+	 * @throws IOException
+	 */
+	public List<DetailFileVO> getDetailImg(ScheduleVO scvo) throws IOException {
+
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦툒�젙蹂닿뎄遺꾩퐫�뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨좉컼�꽱�꽣�뿰怨꾩떆�뒪�뀥援щ텇肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦퀬�븘�씠�뵒*/
+        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� �긽�쐞留ㅻЪ�쑀�삎肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 留ㅻЪ�쑀�삎肄붾뱶*/
+        
+        List<ScheduleDetailVO> resultList = new ArrayList<ScheduleDetailVO>();
+        
+        String result = getSb(urlBuilder);
+
+        JSONArray jArray = new JSONArray(result);
+        JSONObject jObject = (JSONObject) jArray.get(1);
+       
+        JSONArray imgs = jObject.getJSONArray("dsSbdAhfl");
+        List<DetailFileVO> imgList = new ArrayList<DetailFileVO>();
+        for(int i=0; i<imgs.length();i++) {
+        	JSONObject img = imgs.getJSONObject(i);
+        	DetailFileVO imgvo = new DetailFileVO();
+        	imgvo.setHomenm(img.getString("LCC_NT_NM"));
+        	imgvo.setFilenm(img.getString("LS_SPL_INF_UPL_FL_DS_CD_NM"));
+        	imgvo.setFileurl(img.getString("AHFL_URL"));
+        	imgList.add(imgvo);
+        }
+
+        
+        return imgList;
+    }
+	
+	
+	/**
+	 * 
+	 */
+	public List<DetailFileVO> getDetailFile(ScheduleVO scvo) throws IOException {
+
+		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552555/lhLeaseNoticeDtlInfo1/getLeaseNoticeDtlInfo1"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=wzVGH0RoH4TBmxGKJY4GBkDozdkN0n6aQcP6R3RFMGoyjFZzW6wLW5XW1ikRufIwVjTGMxqlOguEoEMgTQUqVw%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("SPL_INF_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getSpl_inf_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦툒�젙蹂닿뎄遺꾩퐫�뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("CCR_CNNT_SYS_DS_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getCcr_cnnt_sys_ds_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨좉컼�꽱�꽣�뿰怨꾩떆�뒪�뀥援щ텇肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("PAN_ID","UTF-8") + "=" + URLEncoder.encode(scvo.getPan_id(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 怨듦퀬�븘�씠�뵒*/
+        urlBuilder.append("&" + URLEncoder.encode("UPP_AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getUpp_ais_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� �긽�쐞留ㅻЪ�쑀�삎肄붾뱶*/
+        urlBuilder.append("&" + URLEncoder.encode("AIS_TP_CD","UTF-8") + "=" + URLEncoder.encode(scvo.getAis_tp_cd(), "UTF-8")); /*遺꾩뼇�엫��怨듦퀬臾몄“�쉶 API�쓽 �듅�젙 怨듦퀬�쓽 �쓳�떟 硫붿떆吏� 以� 留ㅻЪ�쑀�삎肄붾뱶*/
+        
+        List<ScheduleDetailVO> resultList = new ArrayList<ScheduleDetailVO>();
+        
+        String result = getSb(urlBuilder);
+
+        JSONArray jArray = new JSONArray(result);
+        JSONObject jObject = (JSONObject) jArray.get(1);
+        //�떎�슫濡쒕뱶 �뙆�씪
+        JSONArray files = jObject.getJSONArray("dsAhflInfo");
+        List<DetailFileVO> fileList = new ArrayList<DetailFileVO>();
+        for(int i=0; i<files.length(); i++) {
+        	JSONObject file = files.getJSONObject(i);
+        	DetailFileVO filevo = new DetailFileVO();
+        	filevo.setFilenm(file.getString("CMN_AHFL_NM"));
+        	filevo.setFileurl(file.getString("AHFL_URL"));
+        	filevo.setHomenm(file.getString("SL_PAN_AHFL_DS_CD_NM"));
+        	fileList.add(filevo);
+        }
+
+        return fileList;
+    }
+	
+	
+	
+	/**
+	 * API�젙蹂대�� String�쑝濡� 諛섑솚.
+	 */
+	public String getSb(StringBuilder urlBuilder) throws IOException{
+		URL url = new URL(urlBuilder.toString());
+       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+       conn.setRequestMethod("GET");
+       conn.setRequestProperty("Content-type", "application/json");
+       //System.out.println("Response code: " + conn.getResponseCode());
+       BufferedReader rd;
+       if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+           rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+       } else {
+           rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+       }
+       StringBuilder sb = new StringBuilder();
+       String line;
+       while ((line = rd.readLine()) != null) {
+           sb.append(line);
+       }
+       rd.close();
+       conn.disconnect();
+       
+       String result = sb.toString();
+		return result;
+	}
+	
+	/**
+	 * 怨듦퀬利먭꺼李얘린 異붽�
+	 * @param fsvo
+	 * @return
+	 */
+	public int addFavoriteNotice(FavoriteScheduleVO fsvo) {
+		int result = scheduledao.addFavoriteNotice(fsvo);
+		return result;
+	}
+	
+	/**
+	 * 怨듦퀬 利먭꺼李얘린 �궘�젣
+	 * @param fsvo
+	 * @return
+	 */
+	public int delFavoriteNotice(FavoriteScheduleVO fsvo) {
+		int result = scheduledao.delFavoriteNotice(fsvo);
+		return result;
+	}
+	
+	
+	/**
+	 * 利먭꺼李얘린 �뻽�뒗吏� �솗�씤
+	 */
+	public FavoriteScheduleVO getFavoriteNoticeOne(FavoriteScheduleVO fsvo) {
+		FavoriteScheduleVO result = scheduledao.getFavoriteNoticeOne(fsvo);
+		return result;
+	}
+	
+	
+	/**
+	 * 紐⑥쭛怨듦퀬 �궇吏쒓퀎�궛媛��졇�삤湲�
+	 */
+	public List<String> getStEnDate() {
+		List<String> result = new ArrayList<String>();
+		SimpleDateFormat df = new SimpleDateFormat ("yyyy.MM.dd");
+		Calendar start = Calendar.getInstance();
+		start.setTime(new Date());
+		start.add(Calendar.DATE, -30);
+		String st = df.format(start.getTime());
+		result.add(st);
+		
+		Calendar end = Calendar.getInstance();
+		end.setTime(new Date());
+		end.add(Calendar.DATE, 7);
+		String en = df.format(end.getTime());
+		result.add(en);
+		
+		return result;
+	}
+	
+	
+	
+	
+
+}

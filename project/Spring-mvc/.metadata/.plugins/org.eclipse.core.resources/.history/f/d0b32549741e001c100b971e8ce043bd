@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage.dao.MypageDAO">
+
+	<select id="getAllFavoriteNoti" parameterType="String" resultType="favoriteScheduleVO">
+		select to_char(enrolldt,'YYYY-MM-DD') as enrolldt, id, noticecode, 
+		    to_char(noticeend,'YYYY-MM-DD') as noticeend, noticetitle
+		from favoritentice
+		where id=#{id} and noticeend>sysdate
+	</select>
+	
+	<select id="getContract" parameterType="String" resultType="loanContractVO">
+		select contractcode, loanname, status, to_char(stratdt,'YYYY-MM-DD') as stratdt,
+				to_char(contractdt,'YYYY-MM-DD') as contractdt
+		from(
+		 	select c.contractcode, c.stratdt, r.loanseq, h.name as loanname, r.status, r.CONTRACTDT
+		    ,row_number() over(partition by c.contractcode order by r.loanseq desc) as rowidx
+		    from loancontract c, loanrecord r , hana_loan h
+		    where c.contractcode = r.contractcode and c.loancode = h.code and c.userid=#{id}
+		)
+		where rowidx=1
+		order by stratdt desc
+	</select>
+	
+	<select id="getAccount" parameterType="String" resultType="accountVO">
+		select u.id, u.account, u.balance, u.code, h.name, u.alias, to_char(u.enrolldt, 'YYYY-MM-DD') as enrolldt
+		from useraccount u, userinfo i, hana_loan h
+		where i.id=u.id and h.code = u.code and u.id = #{id}
+	</select>
+	
+	<select id="getContractInfo" parameterType="Integer" resultType="enrollLoanVO">
+		select l.name as loanname, c.principal, l.finalrate, l.duedate
+		from loancontract c, hana_loan l
+		where c.loancode = l.code and c.contractcode = #{contractcode}
+	
+	</select>
+	
+	<select id="getLoanAccount" parameterType="String" resultType="accountVO">
+		select a.loanaccount, l.name as loanname,l.finalrate, 
+        c.principal, a.REPAYAMOUNT, a.account, u.alias, 
+        to_char(a.accountdt,'YYYY-MM-DD') as accountdt, A.DUEDATE
+		from loanaccount a, loancontract c, hana_loan l, useraccount u
+		where a.contractcode = c.contractcode and l.code = c.loancode 
+		    and u.account=a.account and c.userid=#{id}
+	
+	</select>
+
+</mapper>

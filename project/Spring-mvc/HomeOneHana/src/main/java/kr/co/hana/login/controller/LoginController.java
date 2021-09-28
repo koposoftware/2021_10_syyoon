@@ -23,7 +23,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String loginForm() {
-		System.out.println("로그인하자");
+		//System.out.println("로그인하자");
 		
 		return "login/login";
 	}
@@ -51,7 +51,7 @@ public class LoginController {
 		
 		session.setAttribute("loginVO", loginVO);
 		LoginVO lg = (LoginVO) session.getAttribute("loginVO");
-		System.out.println("세션등록완료 : "+lg.toString());
+		//System.out.println("세션등록완료 : "+lg.toString());
 		return "redirect:/";			
 	}
 	
@@ -59,7 +59,7 @@ public class LoginController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		
-		System.out.println("로그아웃-!");
+		//System.out.println("로그아웃-!");
 		//System.out.println(sessionStatus.isComplete());//false
 		//sessionStatus.setComplete(); 
 		//System.out.println(sessionStatus.isComplete()); // true

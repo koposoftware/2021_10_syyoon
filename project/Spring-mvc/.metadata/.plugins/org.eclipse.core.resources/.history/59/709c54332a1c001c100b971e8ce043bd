@@ -1,0 +1,85 @@
+package kr.co.hana.dashboard.service;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.dashboard.dao.DashboardDAO;
+import kr.co.hana.dashboard.vo.DownloadFileVO;
+import kr.co.hana.dashboard.vo.UserCreditVO;
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+
+@Service
+public class DashboardServiceImpl implements DashboardService {
+	
+	@Autowired
+	private DashboardDAO dashboarddao;
+	
+	
+	public List<UserDashBoardVO> getUsers(String managerid){
+		List<UserDashBoardVO> result = dashboarddao.getUsers(managerid);
+		return result;
+	}
+	
+	
+	/**
+	 * 집계
+	 */
+	public Map<String, Integer> getUserCnt(String managerid){
+		List<UserDashBoardVO> userList = getUsers(managerid);
+		Map<String, Integer> userinfo = new HashMap<String, Integer>();
+		int reject = 0;
+		int reviewing = 0;
+		int approve = 0;
+		for(int i = 0; i<userList.size(); i++) {
+			String status = userList.get(i).getStatus();
+			if(status.equals("심사중")) {
+				reviewing++;
+			}else if(status.equals("대출승인")) {
+				approve++;
+			}else if(status.equals("대출거절")) {
+				reject++;
+			}
+		}
+		userinfo.put("total", userList.size());
+		userinfo.put("reject", reject);
+		userinfo.put("reviewing", reviewing);
+		userinfo.put("approve", approve);
+		
+		
+		return userinfo;
+	}
+
+
+	/**
+	 * 파일가져오기
+	 */
+	public List<DownloadFileVO> getFiles(int contractcode) {
+		List<DownloadFileVO> result = dashboarddao.getFiles(contractcode);
+		return result;
+	}
+
+	/**
+	 * 대출승인,거절 업데이트
+	 */
+	public int statusUpdate(UserDashBoardVO dashinfo) {
+		int result = dashboarddao.statusUpdate(dashinfo);
+		return result;
+	}
+	
+	/**
+	 * Flask API 값 가져오기
+	 */
+	public UserCreditVO getUserCredit(String id) throws IOException, ParseException {
+		UserCreditVO result = new UserCreditVO();
+		return null;
+	}
+
+	
+	
+}

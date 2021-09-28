@@ -1,0 +1,9 @@
+package kr.co.hana.loan.dao;
+
+import kr.co.hana.loan.vo.EnrollLoanVO;
+import kr.co.hana.loan.vo.ReviewFileVO;
+
+public interface LoanDAO {
+	void uploadFile(ReviewFileVO rfvo);
+	void contractLogProcedure(EnrollLoanVO enroll);
+}

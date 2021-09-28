@@ -1,0 +1,19 @@
+package kr.co.hana.loan.vo;
+
+public class ReviewFIleVO {
+	/*
+	 *     NO    NUMBER(38) NOT NULL,
+		    ENROLLDT    DATE default sysdate NOT NULL,
+		    FILE_ORI_NAME    VARCHAR2(38) NOT NULL,
+		    FILE_SAVE_NAME    VARCHAR2(38) NOT NULL,
+		    FILESIZE    NUMBER(10) NOT NULL,
+		    CONTRACTCODE    NUMBER(20) NOT NULL
+	 */
+	private int no;
+	private String enrolldt;
+    private String file_ori_name;
+    private String file_save_name;
+    private long filesize;
+    private int contractcode;
+
+}

@@ -57,7 +57,7 @@ public class ScheduleController {
 			}
 		}
 				
-		System.out.println("cnt = "+ allList.size());
+		//System.out.println("cnt = "+ allList.size());
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonText = mapper.writeValueAsString( allList );		
 

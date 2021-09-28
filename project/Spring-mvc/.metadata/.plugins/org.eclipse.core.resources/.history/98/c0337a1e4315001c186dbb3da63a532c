@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+
+var lgt = $('.forum-item').length
+console.log(lgt)
+
+
+
+
+$(document).ready(function(){
+	
+	var pagebtn = $('.page-link').click(function(){
+		
+		return $(this).text
+	})
+	console.log(pagebtn)
+	
+	
+})

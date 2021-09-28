@@ -1,0 +1,5 @@
+package kr.co.hana.chat.dao;
+
+public interface ChatDAO {
+	LoanInfoVO getLoanInfo(String loanname);
+}

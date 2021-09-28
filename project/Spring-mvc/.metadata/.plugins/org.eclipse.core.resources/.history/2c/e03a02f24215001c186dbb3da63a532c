@@ -1,0 +1,10 @@
+/**
+ * 
+ */
+
+var lgt = $('.forum-item').length
+console.log(lgt)
+
+
+var pagebtn = $('.page-link').text
+console.log(pagebtn)

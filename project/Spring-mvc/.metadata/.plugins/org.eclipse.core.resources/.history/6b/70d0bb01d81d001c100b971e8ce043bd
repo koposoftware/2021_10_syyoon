@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.contractPaperBox{
+	display:flex;
+	margin-bottom:50px;
+}
+
+.paperBox{
+	width:50%;
+}
+
+.paperBox a{
+	width:50%;
+}
+
+.paperBox a img{
+	width:100%;
+}
+
+#contractinfo{
+	margin-top:20px;
+	margin-bottom:100px;
+}
+
+#contracttbl{
+	width:100%;
+	border-top:2px solid #b5b5b5;
+	border-bottom:2px solid #b5b5b5;
+}
+
+#contracttbl thead, #contracttbl tbody{
+	height:20px;
+}

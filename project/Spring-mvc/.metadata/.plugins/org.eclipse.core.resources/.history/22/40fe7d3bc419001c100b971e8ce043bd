@@ -1,0 +1,22 @@
+package kr.co.hana.dashboard.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.dashboard.dao.DashboardDAO;
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+
+@Service
+public class DashboardServiceImpl implements DashboardService {
+	
+	@Autowired
+	private DashboardDAO dashboarddao;
+	
+	public List<UserDashBoardVO> getUsers(String managerid){
+		List<UserDashBoardVO> result = sqlSessionTemplate.selectList("dashboard.dao.dashboardDAO.getUsers",managerid);
+		return result;
+	}
+	
+}

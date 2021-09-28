@@ -1,0 +1,13 @@
+package kr.co.hana.mypage.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MypageDAOImpl implements MypageDAO {
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	
+}

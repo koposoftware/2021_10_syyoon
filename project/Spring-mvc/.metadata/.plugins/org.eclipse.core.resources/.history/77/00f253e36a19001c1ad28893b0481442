@@ -1,0 +1,28 @@
+package kr.co.hana.chat.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.google.gson.Gson;
+
+import kr.co.hana.login.vo.LoginVO;
+
+@Controller
+public class ChatController {
+
+	@GetMapping("/consult/chat")
+	public String chatMain(HttpSession session, Model model) {
+		System.out.println("채팅해봐");
+		
+		Gson gson = new Gson();
+		LoginVO login = (LoginVO) session.getAttribute("managerVO");
+		String loginjson = gson.toJson(login);
+		model.addAttribute("managerVO",loginjson);
+		model.addAttribute("managervo",login);
+		return "chat/chat";
+	}
+	
+}

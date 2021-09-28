@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#contractPaperBox{
+	display:flex;
+}
+
+.paperBox{
+	width:50%;
+}
+
+.paperBox a{
+	width:50%;
+}
+
+.paperBox a img{
+	width:100%;
+}

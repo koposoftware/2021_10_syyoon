@@ -1,0 +1,12 @@
+package kr.co.hana.chat.controller;
+
+
+@Controller
+public class ChatController {
+
+	@GetMapping("/chat")
+	public String chatMain() {
+		return "chat/chat";
+	}
+	
+}

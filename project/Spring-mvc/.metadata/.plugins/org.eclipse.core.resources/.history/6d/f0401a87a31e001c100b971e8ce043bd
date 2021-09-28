@@ -1,0 +1,91 @@
+package kr.co.hana.dashboard.vo;
+
+public class UserCreditVO {
+	
+	
+	private String username;
+	private String tax_status;
+	
+	private Long health_insurance;
+	private Long people_insurance;
+	private Long hired_insurance;
+	private Long industrial_insurance;
+	
+	
+	private Long workyear;
+	private String companynm;
+	private String stockyn;
+	private String job;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getTax_status() {
+		return tax_status;
+	}
+	public void setTax_status(String tax_status) {
+		this.tax_status = tax_status;
+	}
+	public Long getHealth_insurance() {
+		return health_insurance;
+	}
+	public void setHealth_insurance(Long health_insurance) {
+		this.health_insurance = health_insurance;
+	}
+	public Long getPeople_insurance() {
+		return people_insurance;
+	}
+	public void setPeople_insurance(Long people_insurance) {
+		this.people_insurance = people_insurance;
+	}
+	public Long getHired_insurance() {
+		return hired_insurance;
+	}
+	public void setHired_insurance(Long hired_insurance) {
+		this.hired_insurance = hired_insurance;
+	}
+	public Long getIndustrial_insurance() {
+		return industrial_insurance;
+	}
+	public void setIndustrial_insurance(Long industrial_insurance) {
+		this.industrial_insurance = industrial_insurance;
+	}
+	public Long getWorkyear() {
+		return workyear;
+	}
+	public void setWorkyear(Long workyear) {
+		this.workyear = workyear;
+	}
+	public String getCompanynm() {
+		return companynm;
+	}
+	public void setCompanynm(String companynm) {
+		this.companynm = companynm;
+	}
+	public String getStockyn() {
+		return stockyn;
+	}
+	public void setStockyn(String stockyn) {
+		this.stockyn = stockyn;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	@Override
+	public String toString() {
+		return "UserCreditVO [username=" + username + ", tax_status=" + tax_status + ", health_insurance="
+				+ health_insurance + ", people_insurance=" + people_insurance + ", hired_insurance=" + hired_insurance
+				+ ", industrial_insurance=" + industrial_insurance + ", workyear=" + workyear + ", companynm="
+				+ companynm + ", stockyn=" + stockyn + ", job=" + job + "]";
+	}
+	
+	
+	
+	
+
+}

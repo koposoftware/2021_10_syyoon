@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HomeOneHana::</title>
+<link href="${ pageContext.request.contextPath }/resources/css/top/menubg.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>
+			
+	</header>
+	<section>
+		<div id="chatArea" class="col-lg-6 m-15px-tb">
+                        <div class="resume-box">
+                            <!-- chatstart -->
+                           	<div id="chatTing">
+                           		<div id="chattitle">
+                           			<h2 id="customs">고객상담</h2>
+                           		</div>
+                           		<div id="chatContents">
+                           		<%-- 
+                           			<div class="sendchatBlock">
+                           				<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>
+                           				<div class="send">
+                           					<div class="sendtext">나다-!</div>
+                           				</div>
+                           			</div>
+                           			<div class="replychatBlock">
+                           				<div class="reply">
+                           					<div class="replytext">환영합니다 호갱님~</div>
+                           				</div>
+                           				<div class="replyimg"><img src="${ pageContext.request.contextPath }/resources/img/하나은행-ci.png"></div>
+                           			</div>
+                           		--%>
+                           		</div>
+                           		<div id="sendArea">
+                           			<div id="textBox"><input type="text" id="msgs" ></div>
+                           			<div id="sendBtn"><button><i class="fas fa-paper-plane fa-lg"></i></button></div>
+                           		</div>
+                           	</div>    
+                                                
+
+                            <!-- chat end -->
+                        </div>
+                    </div>
+	
+	</section>
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>

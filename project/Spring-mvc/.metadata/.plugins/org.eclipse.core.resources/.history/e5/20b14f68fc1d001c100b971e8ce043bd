@@ -1,0 +1,69 @@
+package kr.co.hana.login.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import kr.co.hana.login.service.LoginService;
+import kr.co.hana.login.vo.LoginVO;
+
+@Controller
+public class LoginController {
+	
+	
+	@Autowired
+	private LoginService loginService;
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		System.out.println("로그인하자");
+		
+		return "login/login";
+	}
+	
+	@PostMapping("/login")
+	public String login(LoginVO login, Model model, HttpSession session) {
+		
+		LoginVO loginVO = loginService.login(login);
+		String dest = (String)session.getAttribute("dest");
+		String msg = "";
+		if(loginVO == null) {
+			//
+			msg = "유효하지 않은 정보입니다.";
+			model.addAttribute("msg",msg);
+			return "login/login";
+		}
+		
+		//DB에 있는 정보이면 로그인
+		model.addAttribute("loginVO", loginVO);
+		
+		if(dest!=null) {
+			session.removeAttribute("dest");
+			return "redirect:/" + dest;	
+		}
+		
+		session.setAttribute("loginVO", loginVO);
+		LoginVO lg = (LoginVO) session.getAttribute("loginVO");
+		System.out.println("세션등록완료 : "+lg.toString());
+		return "redirect:/";			
+	}
+	
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		
+		System.out.println("로그아웃-!");
+		//System.out.println(sessionStatus.isComplete());//false
+		//sessionStatus.setComplete(); 
+		//System.out.println(sessionStatus.isComplete()); // true
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	
+}

@@ -1,0 +1,13 @@
+package kr.co.hana.mypage.service;
+
+import java.util.List;
+
+import kr.co.hana.mypage.vo.LoanContractVO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+
+public interface MypageService {
+	
+	 List<FavoriteScheduleVO> getAllFavorite(String id);
+	 List<LoanContractVO> getContract(String id);
+
+}

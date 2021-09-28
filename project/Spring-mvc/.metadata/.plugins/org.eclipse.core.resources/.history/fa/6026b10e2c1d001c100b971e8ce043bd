@@ -1,0 +1,211 @@
+/**
+ * 
+ */
+
+function newMessage() {
+	message = $("#textBox input").val();
+	if ($.trim(message) == '') {
+		return false;
+	}
+	
+	/*if -> 나일때 왼쪽에 뜨게
+	else -> 상대방일때 오른쪽에 뜨게*/
+	$('#chatContents').append('<div class="replychatBlock">'
+			+ '<div class="reply">'
+			+ '<div class="replytext">'+message+'</div>'
+			+ '</div>'
+			+ '<div class="replyimg"><img src="/HomeOneHana-Admin/resources/img/하나은행-ci.png"></div>'
+			+ '</div></div>'
+			)
+	$('#textBox input').val(null);
+
+	sock.send(message);
+	$("#chatContents").animate({ scrollTop: $(document).height() }, "fast");
+};
+$('#sendBtn button').click(function() {
+	newMessage();
+});
+
+$(window).on('keydown', function(a) {
+	if (a.which == 13) {
+		newMessage();
+		return false;
+	}
+});
+
+///HomeOneHana/consult/chat
+///HomeOneHana-Admin/chat
+var sock = new SockJS("/HomeOneHana/consult/chat");
+sock.onopen = function(){
+	console.log('연결생성');
+	register();
+	
+};
+
+sock.onmessage = function(e) {
+	console.log('메시지왔다')
+	var mess = e.data
+	console.log(mess)
+	var arr = mess.replace("{","").replace("}","").replaceAll("\"","").split(",")
+	//일단 내꺼부터 등록해
+
+	
+	if(socketId == null){
+		socketId = arr[0]
+	}else{
+		if(socketId !=arr[0]){
+			$('#chatContents').append('<div class="sendchatBlock">'
+				+ '<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>'
+				+ '<div class="send">'
+				+ '<div class="sendtext">'+arr[1]+'</div>'
+				+ '</div></div>'
+				)
+			
+		}
+	}
+
+	console.log(arr)
+	if(arr.length == 4){
+		var getUserId = arr[2].split(':')[1]
+		if(userId != getUserId){
+			myUserId = getUserId
+			myUserName = arr[1].split(':')[1]
+			loanNm = arr[3].split(':')[1]
+			$('#customs').empty()
+			$('#customs').append(myUserName+'고객님과의 상담입니다.')
+			$('#LoanNameIn').empty()
+			$('#LoanNameIn').append(loanNm)
+			
+			
+			$('#chatContents').append('<div class="sendchatBlock">'
+			+ '<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>'
+			+ '<div class="send">'
+			+ '<div class="sendtext">'+myUserName+'님께서 입장하셨습니다.</div>'
+			+ '</div></div>'
+			)
+			
+			//$('#customerInput').append('<h2>'+myUserName+'고객님</h2>')
+			$.ajax({url:"/HomeOneHana-Admin/consult/loan"
+				, method:"get"
+				, data:{loanname:loanNm}
+				, success:function(data){
+					console.log(data)
+					$('#condition').empty()
+					$('#loan-changedt').empty()
+					$('#loan-baserate').empty()
+					$('#loan-addrate').empty()
+					$('#loan-finalrate').empty()
+					
+					
+					
+					$('#loan-changedt').append(data.changedt)
+					$('#loan-baserate').append(data.baserate)
+					$('#loan-addrate').append(data.addrate)
+					$('#loan-finalrate').append(data.finalrate)
+					$('#condition').append(
+						'<h4>대출대상</h4>'
+						+ '<ul id="condBox">'
+						+ '<li>아래의 조건을 모두 충족하는 손님</li>'
+						+ '<li>- 부동산중개업소를 통해 주택임대차계약을 체결하고 임차보증금의 5% 이상을 지불한 임차인<br>(임차보증금의 5% 지불 조건은 신규 임차자금에만 해당하며, 임대인이 공공주택사업자, (주)부영주택인 경우 생략)</li>'
+						+ '<li>- 주택임대차보호법상 대항력과 우선변제권을 확보하였거나 대출취급일로부터 3영업일 이내에 확보할 수 있는 임차인</li>'
+						+ '<li>- 성년인 세대주로 소득 대비금융비용부담율(DTI) 40% 이내인 임차인</li>'
+						+ '</ul>'
+					)
+					
+					loanLink = data.link
+					console.log(loanLink)
+					
+					
+				},error:function(){
+					console.log('err')
+				}
+			});
+		}
+	}
+	
+	console.log(myUserId+", "+myUserName+", "+loanNm)
+	
+	console.log("미영이화면 : "+socketId+", "+arr[0] + arr[1])
+	
+	
+	
+
+	$("#chatContents").animate({ scrollTop: $(document).height() }, "fast");
+
+}
+
+
+
+sock.onclose = function() {
+	$('#chatContents').append('<div class="sendchatBlock">'
+			+ '<div class="sendimg" ><i class="far fa-user-circle fa-2x"></i></div>'
+			+ '<div class="send">'
+			+ '<div class="sendtext">대화가 종료되었습니다.</div>'
+			+ '</div></div>'
+			)
+}
+
+
+function register(){
+	var msg = {
+		username : userNm,
+		userid : userId	
+		,loanname: loanNm
+	}
+	sock.send(JSON.stringify(msg))
+};
+
+function sendMsg(){
+	var msg = {
+		username : userNm,
+		userid : userId			
+	}	
+}
+
+
+$(document).ready(function(){
+	
+	$('#searchlimit').click(function(){
+		
+		var homeYN = $('input[name=homeYN]:checked').val()
+		var loc = $('#selectlocation').val()
+		var homeprice = $('input[name=homeprice]').val()+"0000"
+		var income = $('input[name=income]').val()+"0000"
+		
+		var ltv = 0
+		var homeltv = 0
+		var dti = 0
+		var res = homeprice*0.6
+		if(loc == "11"){
+			ltv = 40
+			dti = 40
+		}
+		if(homeYN == "N"){
+			homeltv = 10
+		}
+		console.log(homeYN)
+		console.log(ltv)
+		console.log(res*((ltv+homeltv)/100))
+		
+		$('#ltv').empty()
+		$('#limits').empty()
+		$('#ltv').append(ltv+'% (+'+homeltv+'%)')
+		$('#limits').append(res*((ltv+homeltv)/100)+'원')
+		
+	});
+	
+	$('#sendLimit').click(function(){
+		$('#chatContents').append('<div class="replychatBlock">'
+			+ '<div class="reply">'
+			+ '<div class="replytext"><div>대출정보를 확인하고 싶다면 아래 링크로 이동하세요!</div>'
+			+ '<a herf="'+loanLink+'>대출정보 확인하기</a>'
+			+'</div>'
+			+ '</div>'
+			+ '<div class="replyimg"><img src="/HomeOneHana-Admin/resources/img/하나은행-ci.png"></div>'
+			+ '</div></div>'
+			)
+			
+	})
+	
+})
+

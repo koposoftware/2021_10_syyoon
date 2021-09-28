@@ -1,0 +1,184 @@
+package kr.co.hana.search.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.xml.sax.SAXException;
+
+import com.google.gson.Gson;
+
+import kr.co.hana.login.vo.LoginVO;
+import kr.co.hana.schedule.service.ScheduleService;
+import kr.co.hana.schedule.vo.ScheduleDetailVO;
+import kr.co.hana.schedule.vo.ScheduleVO;
+import kr.co.hana.search.Service.SearchService;
+import kr.co.hana.search.vo.BrtcSignguVO;
+import kr.co.hana.search.vo.FavoriteVO;
+import kr.co.hana.search.vo.SearchHomeVO;
+
+@Controller
+public class SearchController {
+	
+	@Autowired
+	private SearchService searchservice;
+	
+	@Autowired
+	private ScheduleService scheduleservice;
+
+	
+	@GetMapping("/search")
+	public String searchHome(Model model, HttpSession session) throws IOException{
+		LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+		List<String> date = scheduleservice.getStEnDate();
+		List<ScheduleVO> notice = scheduleservice.getNoticeList("41", date.get(0), date.get(1));
+		Map<String, ScheduleVO> result = new HashMap<String, ScheduleVO>();
+		
+		for(int i = 0; i<2; i++) {
+			List<ScheduleDetailVO> ndetail = scheduleservice.getDetailInfo(notice.get(i));
+			if(ndetail !=null) {
+				for(int h = 0; h<ndetail.size(); h++) {
+					result.put(ndetail.get(h).getLgdn_adr(), notice.get(i));
+				}
+			}
+		}
+		
+		if(loginVO !=null) {//로그인 상태일 경우
+			String id = loginVO.getId();
+			List<FavoriteVO> favorites = searchservice.getFavoriteHome(id);	
+			model.addAttribute("loginVO", loginVO);
+			model.addAttribute("favoriteHome", favorites);	
+		}else {
+			model.addAttribute("loginVO", null);
+			model.addAttribute("favoriteHome", null);
+		}
+		
+		model.addAttribute("noticeAddrs", result.keySet());
+		model.addAttribute("notices",result);
+		
+		return "search/searchHome";
+	}
+
+	@GetMapping("/search/address")
+	public String searchAddress(String rnadres, Model model, HttpSession session) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException {
+		
+		//주소를 입력받으면~
+		Gson gson = new Gson();
+		System.out.println("입력주소 : "+rnadres);
+		
+		//검색한 주소정보로 위도경도 구하기
+		SearchHomeVO searchInfo = searchservice.getLatiLongs(rnadres);
+		
+		if(searchInfo != null) { // 좌표가 있는 주소 일때
+			searchInfo.setRnadres(rnadres);
+			String json = gson.toJson(searchInfo);
+			model.addAttribute("searchvo",json);
+
+			
+			
+			//시군구 코드 만들기
+			List<BrtcSignguVO> codeList = searchservice.getCodeList(rnadres);
+			if(codeList == null) {// 좌표는 나오는데 주소가 아니면 도로명주소 다시검색해서 반환후 시군구코드로 변환
+				String address = searchservice.getAddress(searchInfo);
+				codeList = searchservice.getCodeList(address);
+			}
+
+			
+			// 근처 주택 가져오기
+			List<SearchHomeVO> nearHomeA = searchservice.getNearHomeAll(searchInfo, codeList);
+			System.out.println(nearHomeA.size());
+			
+			if( nearHomeA.size() == 0) {
+				//근처에 주택없음
+				model.addAttribute("msg","주택이 존재하지 않습니다.");
+				model.addAttribute("nearHome", null);
+			}else {
+				
+				LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+				
+				if(loginVO !=null) {//로그인 상태일 경우
+					
+					String id = loginVO.getId();
+					List<FavoriteVO> favorites = searchservice.getFavoriteHome(id);					
+					model.addAttribute("loginVO", loginVO);
+					model.addAttribute("favoriteHome", favorites);	
+				}
+				model.addAttribute("msg",null);
+				model.addAttribute("nearHome", nearHomeA); 				
+			}
+
+		}else {
+			//주소가 없으면
+			System.out.println("주소없엉!");
+			model.addAttribute("msg","유효하지 않은 주소입니다.");
+			model.addAttribute("searchvo", null);
+			model.addAttribute("nearHome", null); 
+		}
+		
+		return "search/searchHome";
+	}
+	
+
+	@GetMapping("/search/Detail/{rnadres}")
+	public String searchHome(@PathVariable("rnadres") String rnadres, Model model) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException{
+		System.out.println("주택상세보기 : "+rnadres);
+		
+		Gson gson = new Gson();
+		//검색한 주소정보로 위도경도 구하기
+		SearchHomeVO searchInfo = searchservice.getLatiLongs(rnadres);
+		searchInfo.setRnadres(rnadres);
+		String json = gson.toJson(searchInfo);
+		model.addAttribute("searchvo",searchInfo);
+		model.addAttribute("searchjson",json);
+		
+		List<SearchHomeVO> homeDetail = searchservice.getHomeDetail(searchInfo);
+		//System.out.println(homeDetail);
+		model.addAttribute("homeDetail",homeDetail);
+
+		return "search/searchHomeDetail";
+	}
+
+
+	
+	
+	@GetMapping("/favorite/add/home")
+	@ResponseBody
+	public int favoritehomeAdd(int hsmpsn, HttpSession session) {
+		
+		LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+		FavoriteVO favorite = new FavoriteVO();
+		favorite.setId(loginVO.getId());
+
+		favorite.setHsmpsn(hsmpsn);
+		int result = searchservice.addFavoriteHome(favorite);
+	
+		return result;
+	}
+	
+	@GetMapping("/favorite/del/home")
+	@ResponseBody
+	public int favoritehomeDel(int hsmpsn, HttpSession session) {
+		
+		LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+		FavoriteVO favorite = new FavoriteVO();
+		favorite.setId(loginVO.getId());
+		//favorite.setId("onehana");
+		favorite.setHsmpsn(hsmpsn);
+		int result = searchservice.delFavoriteHome(favorite);
+		return result;
+	}
+	
+	
+	
+}

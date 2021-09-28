@@ -1,0 +1,12 @@
+package kr.co.hana.loan.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import kr.co.hana.loan.dao.LoanDAO;
+
+public class LoanServiceImpl implements LoanService{
+	
+	@Autowired
+	LoanDAO loandao;
+
+}

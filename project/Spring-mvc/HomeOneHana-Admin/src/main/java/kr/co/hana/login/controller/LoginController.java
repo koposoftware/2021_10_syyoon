@@ -15,7 +15,7 @@ public class LoginController {
 	
 	@RequestMapping("/")
 	public String home(){
-		System.out.println("메인은 로그인화면이지");
+		//System.out.println("메인은 로그인화면이지");
 		return "index";
 	}
 	
@@ -25,7 +25,7 @@ public class LoginController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		
-		System.out.println("로그아웃-!");
+		//System.out.println("로그아웃-!");
 		//System.out.println(sessionStatus.isComplete());//false
 		//sessionStatus.setComplete(); 
 		//System.out.println(sessionStatus.isComplete()); // true

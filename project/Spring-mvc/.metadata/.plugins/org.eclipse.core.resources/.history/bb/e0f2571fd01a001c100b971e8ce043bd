@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+
+
+.section {
+    padding: 50px 0;
+    position: relative;
+}
+
+.section-title h2 {
+    font-weight: 700;
+    color: #20247b;
+    font-size: 45px;
+    margin: 0 0 15px;
+    border-left: 5px solid #fc5356;
+    padding-left: 15px;
+}
+.section-title {
+    padding-bottom: 45px;
+}
+.section-title p {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Resume Box
+---------------------*/
+.resume-box {
+
+  background: #ffffff;
+  box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.08);
+  border-radius: 10px;
+  height:100%;
+  padding:20px;
+}
+
+#divide{
+	display:flex;
+}
+
+#divide>div{
+	width:100%;
+	margin:10px;
+	height:800px;
+}
+
+/*========================================================================
+
+
+
+============================================================================*/
+
+#chatTing{
+	height:100%;
+	border:1px solid #008485;
+	
+}
+
+#chattitle{
+	text-align:center;
+	height:8%;
+	background-color:#008485;
+	padding:15px;
+}
+
+#chattitle h2{
+	margin:auto;
+	color:#fff;
+	font-size:20px;
+	font-weight:700;
+}
+
+#chatContents{
+	padding:20px;
+
+ 	overflow-y:scroll; 
+
+	height:85%;
+}
+
+#sendArea{
+	display:flex;
+	height:7%;
+	background-color:rgba(167,182,191,.4);
+}
+
+#textBox{
+	
+	width:90%;
+	height:100%;
+}
+
+#textBox>input[type=text]{
+	border: 5px solid rgba(167,182,191,.4);
+	padding:5px;
+	width:100%;
+	height:100%;	
+}
+
+#textBox>input[type=text]:focus{
+	outline:0;	
+}
+
+#sendBtn{
+	width:10%;
+	height:100%;
+}
+
+#sendBtn>button{
+	color:#fff;
+	padding:5px;
+	width:100%;
+	height:100%;
+}
+#sendBtn>button:hover{
+	background-color:rgba(167,182,191,.4);
+}
+#sendBtn>button:focus{
+	outline:0;
+}
+
+.replychatBlock{
+	margin-top:7px;
+	margin-bottom:7px;
+	justify-content: right;
+	text-align:right;
+	display:flex;
+	width:100%;
+}
+
+.reply{
+	padding:10px;
+	margin-right:20px;
+	position:relative;
+	border-radius: 10px;
+	height:100%;
+	background-color:rgba(0,140,140,.2);
+}
+
+.reply:after, .reply:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.reply:after {
+	border-left-color: rgba(0,140,140,.2);
+	border-width: 7px;
+	margin-top: -7px;
+}
+
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #c2e1f5;
+	border-width: 7px;
+	margin-top: -7px;
+}
+
+.replyimg img{
+	width:45px;
+	height:45px;
+}
+
+
+.sendchatBlock{
+	margin-top:7px;
+	margin-bottom:7px;
+	justify-content: left;
+	text-align:left;
+	display:flex;
+	width:100%;
+}
+
+.sendimg{
+	margin-right:20px;
+	padding:7px;
+	width:45px;
+	height:45px;
+	text-align:center;
+	background-color:#b5b5b5;
+	border-radius: 50%;
+	color:#fff;
+}
+
+
+
+.send {
+	padding:10px;
+	margin-right:20px;
+	position:relative;
+	border-radius: 10px;
+	height:100%;
+	position: relative;
+	background: rgba(167,182,191,.3);
+}
+.send:after, .send:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.send:after {
+
+	border-right-color: rgba(167,182,191,.3);
+	border-width: 7px;
+	margin-top: -7px;
+}
+.send:before {
+	border-width: 7px;
+	margin-top: -7px;
+}
+
+.boxTempl{
+	margin-bottom:40px;
+}
+
+.boxTempl h4{
+	color:#008485;
+	margin-bottom:20px;
+	font-size:18px;
+	font-family:"Noto Sans KR";
+	font-weight:700;
+}
+
+.tbl{
+	margin:auto;
+	text-align:center;
+	width:100%;
+	border-top:2px solid #008485;
+	border-bottom:2px solid #008485;
+}
+
+.tbl th{
+	vertical-align:middle;
+	height:40px;
+	background-color:#008485;
+	color:#fff;
+}
+
+.tbl td{
+	vertical-align:middle;
+	height:40px;
+}
+

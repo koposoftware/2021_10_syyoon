@@ -1,0 +1,45 @@
+package kr.co.hana.search.vo;
+
+public class FavoriteVO {
+	
+	private String id;
+	private int hsmpsn;
+	private String enrolldt;
+	private String rnadres;
+	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getHsmpsn() {
+		return hsmpsn;
+	}
+	public void setHsmpsn(int hsmpsn) {
+		this.hsmpsn = hsmpsn;
+	}
+	public String getEnrolldt() {
+		return enrolldt;
+	}
+	public void setEnrolldt(String enrolldt) {
+		this.enrolldt = enrolldt;
+	}
+	public String getRnadres() {
+		return rnadres;
+	}
+	public void setRnadres(String rnadres) {
+		this.rnadres = rnadres;
+	}
+	@Override
+	public String toString() {
+		return "FavoriteVO [id=" + id + ", hsmpsn=" + hsmpsn + ", enrolldt=" + enrolldt + ", rnadres=" + rnadres + "]";
+	}
+	
+	
+
+	
+	
+	
+}

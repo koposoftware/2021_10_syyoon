@@ -1,0 +1,67 @@
+package homeonehana.api;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:config/spring/spring-mvc.xml" })
+public class APITest {
+	
+	@Test
+	public void test1() throws IOException {
+			
+			List<ScheduleVO> resultList = new ArrayList<ScheduleVO>();
+			
+			StringBuilder urlBuilder = new StringBuilder("http://3.36.90.58:5000/credit_auth_info/"); /*URL*/
+	        urlBuilder.append(URLEncoder.encode("onehana","UTF-8") ); /*한 페이지 결과 수*/
+	        URL url = new URL(urlBuilder.toString());
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("GET");
+	        conn.setRequestProperty("Content-type", "application/json");
+	        //System.out.println("Response code: " + conn.getResponseCode());
+	        BufferedReader rd;
+	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+	            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        } else {
+	            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+	        }
+	        StringBuilder sb = new StringBuilder();
+	        String line;
+	        while ((line = rd.readLine()) != null) {
+	            sb.append(line);
+	        }
+	        rd.close();
+	        conn.disconnect();
+			StringBuffer result = new StringBuffer();
+			String res = sb.toString();
+			for (int s = 0; s < result.length(); s++) {
+				if ('\\' == res.charAt(s) && 'u' == res.charAt(s + 1)) {
+					// 그 뒤 네글자는 유니코드의 16진수 코드이다. int형으로 바꾸어서 다시 char 타입으로 강제 변환한다.
+					Character r = (char) Integer.parseInt(res.substring(s + 2, s + 6), 16);
+					// 변환된 글자를 버퍼에 넣는다.
+					sb.append(r);
+					// for의 증가 값 1과 5를 합해 6글자를 점프
+					s += 5;
+				} else {
+					// ascii코드면 그대로 버퍼에 넣는다.
+					result.append(res.charAt(s));
+				}
+
+			}
+			System.out.println(result.toString());
+	        
+	}
+}

@@ -40,7 +40,7 @@ public class SearchController {
 	@GetMapping("/search/notice/address")
 	@ResponseBody
 	public Map<String, ScheduleVO> getNoticeAddress(String locationcode) throws IOException{
-		System.out.println("지역코드 : "+locationcode);
+		//System.out.println("지역코드 : "+locationcode);
 		List<String> date = scheduleservice.getStEnDate();
 		List<ScheduleVO> notice = scheduleservice.getNoticeList(locationcode, date.get(0), date.get(1));
 		Map<String, ScheduleVO> result = new HashMap<String, ScheduleVO>();
@@ -57,7 +57,7 @@ public class SearchController {
 				}
 			}
 		}
-		System.out.println(result.toString());
+		//System.out.println(result.toString());
 		return result;			
 	}
 	
@@ -119,7 +119,7 @@ public class SearchController {
 		
 		//주소를 입력받으면~
 		Gson gson = new Gson();
-		System.out.println("입력주소 : "+rnadres);
+		//System.out.println("입력주소 : "+rnadres);
 		
 		//검색한 주소정보로 위도경도 구하기
 		SearchHomeVO searchInfo = searchservice.getLatiLongs(rnadres);
@@ -176,7 +176,7 @@ public class SearchController {
 
 	@GetMapping("/search/Detail/{rnadres}")
 	public String searchHome(@PathVariable("rnadres") String rnadres, Model model) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException{
-		System.out.println("주택상세보기 : "+rnadres);
+		//System.out.println("주택상세보기 : "+rnadres);
 		
 		Gson gson = new Gson();
 		//검색한 주소정보로 위도경도 구하기

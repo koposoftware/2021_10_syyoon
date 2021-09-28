@@ -1,0 +1,22 @@
+package kr.co.hana.mypage.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.co.hana.search.Service.SearchService;
+
+@Controller
+public class MypageController {
+	
+
+	
+	@Autowired
+	private 
+	
+	@GetMapping("/mypage")
+	public String myPageMain() {
+		
+		return "mypage/mypage";
+	}
+}

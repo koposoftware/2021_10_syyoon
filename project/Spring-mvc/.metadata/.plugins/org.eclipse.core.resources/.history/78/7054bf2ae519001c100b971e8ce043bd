@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage.dao.MypageDAO">
+
+	<select id="getAllFavorite" parameterType="String" resultType="favoriteScheduleVO">
+		select to_char(enrolldt,'YYYY-MM-DD') as enrolldt, id, noticecode, 
+		    to_char(noticeend,'YYYY-MM-DD') as noticeend, noticetitle
+		from favoritentice
+		where id=#{id} and noticeend>sysdate
+	</select>
+	
+	<select id="getContract" parameterType="String" resultType="loanContractVO">
+		select loanname, status, contractdt
+		from(
+		 select c.contractcode, r.loanseq, h.name as loanname, r.status, r.CONTRACTDT
+		    ,row_number() over(partition by c.contractcode order by r.loanseq desc) as rowidx
+		    from loancontract c, loanrecord r , hana_loan h
+		    where c.contractcode = r.contractcode and c.loancode = h.code and c.userid=#{id}
+		)
+		where rowidx=1
+	</select>
+
+</mapper>

@@ -1,0 +1,8 @@
+package kr.co.hana.dashboard.dao;
+
+import kr.co.hana.dashboard.service.List;
+import kr.co.hana.dashboard.service.UserDashBoardVO;
+
+public interface DashboardDAO {
+	List<UserDashBoardVO> getUsers(String managerid);
+}

@@ -1,0 +1,13 @@
+package kr.co.hana.chat.dao;
+
+import kr.co.hana.chat.vo.LoanInfoVO;
+
+@Repository
+public class ChatDAOImpl implements ChatDAO {
+
+	public LoanInfoVO getLoanInfo(String loanname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

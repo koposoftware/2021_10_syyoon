@@ -48,7 +48,7 @@ public class MypageController {
 		//계약상황
 		List<LoanContractVO> contracts = mypageservice.getContract(log.getId());
 		model.addAttribute("contractList", contracts);
-		System.out.println(contracts.toString());
+		//System.out.println(contracts.toString());
 		
 		//계좌정보
 		List<AccountVO> accounts = mypageservice.getAccount(log.getId());
@@ -63,8 +63,8 @@ public class MypageController {
 	
 	@PostMapping("/mypage")
 	public String myPageMainP(int contractcode, String account, String accountdt, HttpSession session, Model model) {
-		System.out.println(contractcode);
-		System.out.println(account);
+		//System.out.println(contractcode);
+		//System.out.println(account);
 		//상태변경
 		LoanContractVO loanvo = new LoanContractVO();
 		loanvo.setAccountdt(accountdt);

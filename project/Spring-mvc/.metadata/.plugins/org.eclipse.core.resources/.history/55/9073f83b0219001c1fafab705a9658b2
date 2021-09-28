@@ -1,0 +1,10 @@
+package kr.co.hana.loan.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+public class LoanDAOImpl implements LoanDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+
+}

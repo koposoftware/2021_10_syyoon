@@ -1,0 +1,127 @@
+package kr.co.hana.dashboard.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.co.hana.dashboard.service.DashboardService;
+import kr.co.hana.dashboard.vo.DownloadFileVO;
+import kr.co.hana.dashboard.vo.UserCreditVO;
+import kr.co.hana.dashboard.vo.UserDashBoardVO;
+import kr.co.hana.login.service.LoginService;
+import kr.co.hana.login.vo.LoginVO;
+
+@Controller
+public class DashboardController {
+	
+	private static final String SAVE_PATH = "D:/homeOneHanaFile/";
+	
+	@Autowired
+	private LoginService loginService;
+	
+	@Autowired
+	private DashboardService dashboardservice;
+	
+	
+	@PostMapping("/main")
+	public String homeLogin(LoginVO login, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		System.out.println(login.toString());
+		LoginVO loginVO = loginService.login(login);
+		
+		String msg = "";
+		if(loginVO ==null) {
+			//로그인실패시 화면
+			msg = "유효하지 않은 정보입니다.";
+			model.addAttribute("msg",msg);
+			return "index";
+			
+		}else {
+			session.setAttribute("loginVO", loginVO);
+			LoginVO lg = (LoginVO) session.getAttribute("loginVO");
+			model.addAttribute("loginVO", loginVO);
+			System.out.println("세션등록완료 : "+lg.toString());
+			
+			List<UserDashBoardVO> userlst = dashboardservice.getUsers(lg.getId());
+			model.addAttribute("userList",userlst);
+			
+			Map<String,Integer> userCnt = dashboardservice.getUserCnt(lg.getId());
+			model.addAttribute("userCnt", userCnt);
+			return "dashboard/main";			
+		}
+		
+	}
+	
+	@GetMapping("/main")
+	public String dashMain(Model model) {
+		System.out.println("대쉬보드메인");
+		
+		return "dashboard/main";
+	}
+	
+	@GetMapping("/main/review")
+	public String dashDetail(int contractcode, String userid, Model model) throws IOException, ParseException {
+		System.out.println("심사결과");
+		System.out.println(contractcode);
+		System.out.println(userid);
+		List<DownloadFileVO> fileList = dashboardservice.getFiles(contractcode);
+		model.addAttribute("fileList",fileList);
+		model.addAttribute("contractcode", contractcode);
+		UserCreditVO credit = dashboardservice.getUserCredit(userid);
+		if(credit!=null) {
+			model.addAttribute("credit",credit);
+		}else {
+			model.addAttribute("credit",null);
+		}
+		
+		return "dashboard/loanreviewDetail";
+	}
+	
+	@GetMapping("/main/review/downloads")
+	@ResponseBody
+	public void fileDownload(DownloadFileVO downs, HttpServletResponse response) throws Exception {
+		String orifile = downs.getFile_ori_name();
+		String savfile = downs.getFile_save_name();
+		if(orifile == null || "".equals(orifile)) {
+			orifile=savfile;
+		}
+		
+		// 파일을 저장했던 위치에서 첨부파일을 읽어 byte[]형식으로 변환한다.
+		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File(SAVE_PATH+savfile));
+		
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
+		response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(orifile, "UTF-8")+"\";");
+		response.getOutputStream().write(fileByte);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+		
+	}
+	
+	@GetMapping("/main/review/statusupdate")
+	@ResponseBody
+	public int statusUpdate(@ModelAttribute UserDashBoardVO dashinfo) {
+		System.out.println(dashinfo);
+		//int result = dashboardservice.statusUpdate(dashinfo);
+		//return result;
+		return 0;
+	}
+	
+	
+
+}

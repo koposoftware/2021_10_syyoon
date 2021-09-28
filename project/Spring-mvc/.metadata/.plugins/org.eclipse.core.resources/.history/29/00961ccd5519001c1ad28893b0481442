@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+
+function newMessage() {
+	message = $("#textBox input").val();
+	if ($.trim(message) == '') {
+		return false;
+	}
+	
+	/*if -> 나일때 왼쪽에 뜨게
+	else -> 상대방일때 오른쪽에 뜨게*/
+	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+	$('.message-input input').val(null);
+	$('.contact.active .preview').html('<span>You: </span>' + message);
+	sock.send(message);
+	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+};

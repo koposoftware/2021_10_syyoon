@@ -1,0 +1,15 @@
+/**
+ * 
+ */
+
+var lgt = $('.forum-item').length
+console.log(lgt)
+
+$(document).ready(function(){
+	$('.page-link').click(function(){
+		var page = $(this).html()
+		if( page == 1){
+			$('.forum-item').eq(0).hide()
+		}
+	})
+})

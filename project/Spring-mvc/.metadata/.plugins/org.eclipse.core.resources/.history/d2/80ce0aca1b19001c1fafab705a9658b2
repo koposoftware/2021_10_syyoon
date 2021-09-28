@@ -1,0 +1,10 @@
+package kr.co.hana.loan.Service;
+
+import java.util.List;
+
+import kr.co.hana.loan.vo.ReviewFileVO;
+
+public interface LoanService {
+	
+	int uploadFile(List<ReviewFileVO> rfvo);
+}

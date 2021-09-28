@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+		
+		
+		<!-- font-awesome icon  -->
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+		
+        <!-- Favicon -->
+        <!-- <link href="/Practice-Web/Front/img/favicon.ico" rel="icon"> -->
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        
+        <link href="${ pageContext.request.contextPath }/resources/lib/animate/animate.min.css" rel="stylesheet">
+        <link href="${ pageContext.request.contextPath }/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="${ pageContext.request.contextPath }/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        
+     
+
+        <!-- Template Stylesheet -->
+        <link href="${ pageContext.request.contextPath }/resources/css/style.css" rel="stylesheet">
+
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-light navbar-light">
+    <div class="container-fluid">
+        <a href="${ pageContext.request.contextPath }/" class="navbar-brand">HomeOneHana</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <!-- <a href="Front/index2.jsp" class="nav-item nav-link active">Home</a> -->
+                <a href="${ pageContext.request.contextPath }/schedule" class="nav-item nav-link">공고일정</a>
+                <a href="${ pageContext.request.contextPath }/search" class="nav-item nav-link">주택찾기</a>
+                <a href="${ pageContext.request.contextPath }/loan" class="nav-item nav-link">하나대출</a>
+                <a href="${ pageContext.request.contextPath }/consult/reservation" class="nav-item nav-link">온라인상담</a>
+                <a href="#" class="nav-item nav-link">고객센터</a>
+
+                
+                <%--로그인사용자만 접근가능 --%>
+                <c:if test="${ not empty sessionScope.loginVO  }">
+	               	<a href="${ pageContext.request.contextPath }/logout" class="nav-item nav-link">로그아웃</a>
+	                <a href="#" class="nav-item nav-link"><i class="fas fa-user-circle fa-3x"></i></a>
+                </c:if>
+   
+            </div>
+        </div>
+    </div>
+</div>

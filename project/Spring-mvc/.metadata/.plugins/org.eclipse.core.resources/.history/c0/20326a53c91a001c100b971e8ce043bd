@@ -1,0 +1,5 @@
+package kr.co.hana.chat.vo;
+
+public class LoanInfoVO {
+
+}

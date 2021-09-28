@@ -1,0 +1,187 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HomeOneHana::주택찾기</title>
+
+<link
+	href="${ pageContext.request.contextPath }/resources/css/top/menubg.css"
+	rel="stylesheet">
+<link
+	href="${ pageContext.request.contextPath }/resources/css/search/searchHome.css"
+	rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+
+<!-- 데이터 넘기기 -->
+<script>
+
+	var noticeM = new Map();
+	var noticeAddrs = new Set();
+	
+	<c:if test="${not empty noticeAddrs}">
+		<c:forEach items="${noticeAddrs}" var="item" varStatus="loop">
+			noticeAddrs.add("${item}")
+		</c:forEach>
+	</c:if>
+	console.log(noticeAddrs)
+	
+	<c:if test="${not empty notices}">
+		var cons = "${notices}"
+		console.log(cons)
+	</c:if>
+
+	var hlst = new Array();
+
+	//var nhon = '${nearHome}'
+	<c:if test="${not empty nearHome}">
+	// 근처 주택 좌표및 정보.
+		<c:forEach items='${nearHome}' var="item" varStatus="loop">
+			var dct = {
+				hsmpsn : "${item.hsmpsn}", // 주택코드
+				rnadres : "${item.rnadres}", // 도로명주소
+				insttnm : "${item.insttnm}", // 공급기관
+				suplytynm : "${item.suplytynm}", // 공급유형
+				brtcnm : "${item.brtcnm}",   // 지역명
+				brtccode : "${item.brtccode}", // 지역코드
+				signgunm : "${item.signgunm}", // 시군구이름 
+				signgucode : "${item.signgucode}", // 시군구코드
+				housetynm : "${item.housetynm}",  // 주택유형
+				lati : "${item.lati}",
+				longs : "${item.longs}"
+			}
+			hlst.push(dct); // 위에 list나 변수를 선언하고 alert 자리에 담으면 차례대로 값을 받는다.
+		</c:forEach>
+	</c:if>
+		
+	// 즐겨찾기 누른 주택목록
+	var flist= new Array();
+
+	<c:if test="${not empty favoriteHome}">
+		<c:forEach items='${favoriteHome}' var="item" varStatus="loop">
+			var fav = {
+				id : "${item.id}",
+				hsmpsn : "${item.hsmpsn}", // 주택코드
+				rnadres : "${item.rnadres}", // 도로명주소
+				insttnm : "${item.insttnm}", // 공급기관
+				suplytynm : "${item.suplytynm}", // 공급유형
+				housetynm : "${item.housetynm}"  // 주택유형
+			}
+			flist.push(fav); // 위에 list나 변수를 선언하고 alert 자리에 담으면 차례대로 값을 받는다.
+		</c:forEach>		
+	</c:if>
+
+	var searchvo = null
+	// 검색한 정보의 경도, 위도, 주소반환
+	<c:if test="${not empty searchvo}">
+		searchvo = JSON.parse('${searchvo}')		
+	</c:if>
+	
+
+
+
+</script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/resources/js/search/searchHome.js"></script>
+	
+	
+</head>
+<body>
+	<header>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<jsp:include page="../include/topMenu.jsp" />
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+	<main style="display: flex;">
+
+		<div id="sideBtn">
+			<button type="button" id="searchHomeBtn" class="menuBtn" onclick="Showmenu(this.id)">
+				<i class="fas fa-home"></i>
+				<div class="btnText">주택찾기</div>
+			</button>
+			<hr class="divbtn">
+			<c:if test="${not empty sessionScope.loginVO }">
+				<button type="button" id="favoriteBtn" class="menuBtn" onclick="Showmenu(this.id)">
+					<i class="fas fa-star" style="color:#ffd400;"></i>
+					<div class="btnText">즐겨찾기</div>
+				</button>
+				<hr class="divbtn">
+			</c:if>
+		</div>
+
+		<aside class="sidebar">
+
+				<div id="sideMenu">
+				
+					<div id="searchHead" class="d-flex flex-column flex-shrink-0 p-3 border-bottom">
+						 <form id="searchArea"  method="get" action="${pageContext.request.contextPath }/search/address">
+							<div class="sArea" id="searchB">
+								<button id="searchBtn">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+							<div class="sArea" id="searchA">
+								<input type="text" id="searchAddr" name="rnadres"
+									placeholder="주소를 입력하세요"
+								<c:if test="${ not empty requestScope.addr }">value="${ requestScope.addr }"</c:if>>
+							</div>
+						</form>
+					</div>
+	
+					<c:if test="${ empty requestScope.nearHome }">
+						<div id="homelist" class="list-group list-group-flush border-bottom scrollarea">
+							Hello World!
+						</div>
+					</c:if>
+
+				<c:if test="${ not empty requestScope.nearHome }">
+					<div id="homelist" class="list-group list-group-flush border-bottom scrollarea">
+						<c:forEach items="${ requestScope.nearHome }" var="Home">
+							<div class="list-group-item list-group-item-action py-3 lh-tight">
+						        <div class="d-flex w-100 align-items-center justify-content-between">
+						          <strong id="Strongaddr" class="mb-1"><a href="${pageContext.request.contextPath }/search/Detail/${ Home.rnadres }" > ${Home.rnadres}</a></strong>
+						          <c:if test="${ not empty requestScope.loginVO }">
+						          	<span class="text-muted"><a id="${Home.hsmpsn}" class="favorite" onClick="getval(this.id)" href="#"><i class="far fa-star"></i></a></span>
+						          </c:if>
+						         
+						        </div>
+						        <div class="col-10 mb-1 small">${Home.suplytynm},${Home.insttnm},${Home.housetynm} </div>
+						   </div>
+						</c:forEach>
+					</div>	
+				</c:if>
+			    
+			</div>
+		</aside>
+
+
+		<section>
+			<!-- 지도 -->
+
+			<script type="text/javascript"
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fdb0fd8047707bf8af7800399c2f657d&libraries=services,clusterer,drawing"></script>
+			<div id="map"></div>
+			 <script type="text/javascript"
+				src="${pageContext.request.contextPath }/resources/js/search/searchHome-kakaoMap.js"></script>
+		</section>
+
+	</main>
+
+
+
+	<footer>
+		<jsp:include page="../include/bottomMenu.jsp" />
+	</footer>
+</body>
+</html>

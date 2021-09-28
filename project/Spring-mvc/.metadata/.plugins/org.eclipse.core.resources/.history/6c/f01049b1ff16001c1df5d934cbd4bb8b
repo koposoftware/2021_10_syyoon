@@ -1,0 +1,130 @@
+$(document).ready(function() {
+	$('aside').hide();
+
+	var addr = $('input[name=rnadres]').val()
+
+	if (vali(addr)) {
+		if ($('aside').css('display') === 'none') {
+			$('aside').show();
+			$('section').css({ 'width': '77%' })
+	
+		}
+	}
+	
+	$('#closeBtn').click(function(){
+		$('#hi').hide();
+
+	})
+	
+	
+	if(flist.length != 0){
+		for(const f in flist){
+			let favs = flist[f]
+			var stars = $('#'+favs.hsmpsn).children().attr('class')
+			if(stars !=null){
+				if(stars == 'far fa-star'){
+					$('#'+favs.hsmpsn).children().attr('class', 'fas fa-star')
+					$('#'+favs.hsmpsn).children().css({'color':'#ffd400'})	
+				}
+			}
+		}		
+	}
+	
+
+});
+
+// null 체크 함수(custom)
+function vali(value) {
+	if (!value) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+//사이드메뉴 열고 닫기
+function Showmenu(idnm) {
+	$('#homelist').empty()
+	if(idnm == 'searchHomeBtn'){
+		if ($('aside').css('display') === 'none') {
+			$('aside').show();
+			$('section').css({ 'width': '77%' })
+		} else {
+			$('aside').hide(700);
+			$('section').css({ 'width': '97%' })
+		}
+	} else {
+		console.log(flist)
+		for (const h in flist){
+			var favor = flist[h]
+			console.log(favor.rnadres)
+			
+			var content =	'<div class="list-group-item list-group-item-action py-3 lh-tight">'
+				content	+= '<div class="d-flex w-100 align-items-center justify-content-between">'
+				content	+= '<strong id="Strongaddr" class="mb-1"><a href="/HomeOneHana/search/Detail/'+favor.rnadres+'" >'+favor.rnadres+'</a></strong>'
+				content+= '<span class="text-muted"><a id="'+favor.hsmpsn+'" class="favorite" onClick="getval(this.id)" href="#"><i class="fas fa-star" style="color:#ffd400;"></i></a></span>'
+				content	+= '</div>'
+				content    += '<div class="col-10 mb-1 small">'+favor.suplytynm+','+favor.insttnm+','+favor.housetynm+'</div>'
+			  	content  += '</div>'
+			//$('#homelist').append(content).fadeIn(500)
+			$(content).appendTo('#homelist').hide().fadeIn(500)
+			
+		}
+		
+		if ($('aside').css('display') === 'none') {
+			$('aside').show();
+			$('section').css({ 'width': '77%' })
+		} 
+	}
+}
+
+
+
+function getval(data){
+	var starpoint = $('#'+data).children().attr('class')
+	//console.log(starpoint)
+	//far fa-star fas fa-star
+	if(starpoint == 'far fa-star'){ // 빈 별이면 채우기 (즐겨찾기 추가)
+		$.ajax({
+			url:"/HomeOneHana/favorite/add/home"
+			, data:{hsmpsn:data}
+			, success:function(e){
+				if(e == 1){
+					$('#'+data).children().attr('class', 'fas fa-star')
+					$('#'+data).children().css({'color':'#ffd400'})					
+				}
+			},error:function(){
+				console.log('err!')
+			}
+		})
+
+	}else{ // 채운별이면 비우기 ( 즐겨찾기 해제 )
+		
+		$.ajax({
+			url:"/HomeOneHana/favorite/del/home"
+			, data:{hsmpsn:data}
+			, success:function(e){
+				if(e == 1){
+					$('#'+data).children().attr('class', 'far fa-star')
+					$('#'+data).children().css({'color':'#b5b5b5'})
+				}
+			},error:function(){
+				console.log('err!')
+			}
+		})
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

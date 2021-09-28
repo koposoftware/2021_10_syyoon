@@ -1,0 +1,22 @@
+package kr.co.hana.schedule.service;
+
+import java.io.IOException;
+import java.util.List;
+
+import kr.co.hana.schedule.vo.DetailFileVO;
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+import kr.co.hana.schedule.vo.ScheduleDetailVO;
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+public interface ScheduleService {
+	
+	List<ScheduleVO> getNoticeList(String cnp_cd, String stdt, String clsdt) throws IOException;
+	String getSb(StringBuilder urlBuilder) throws IOException;
+	List<ScheduleDetailVO> getDetailInfo(ScheduleVO scvo) throws IOException;
+	List<DetailFileVO> getDetailImg(ScheduleVO scvo) throws IOException;
+	List<DetailFileVO> getDetailFile(ScheduleVO scvo) throws IOException;
+	int addFavoriteNotice(FavoriteScheduleVO fsvo);
+	int delFavoriteNotice(FavoriteScheduleVO fsvo);
+	FavoriteScheduleVO getFavoriteNoticeOne(FavoriteScheduleVO fsvo);
+
+}

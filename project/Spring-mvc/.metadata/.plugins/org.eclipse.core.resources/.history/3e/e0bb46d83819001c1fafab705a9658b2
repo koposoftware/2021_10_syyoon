@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+
+
+.section {
+    padding: 50px 0;
+    position: relative;
+}
+
+.section-title h2 {
+    font-weight: 700;
+    color: #20247b;
+    font-size: 45px;
+    margin: 0 0 15px;
+    border-left: 5px solid #fc5356;
+    padding-left: 15px;
+}
+.section-title {
+    padding-bottom: 45px;
+}
+.section-title p {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Resume Box
+---------------------*/
+.resume-box {
+
+  background: #ffffff;
+  box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.08);
+  border-radius: 10px;
+  height:100%;
+  padding:20px;
+}
+
+#divide{
+	display:flex;
+}
+
+#divide>div{
+	width:100%;
+	margin:10px;
+	height:800px;
+}
+
+/*========================================================================
+
+
+
+============================================================================*/
+
+#chatTing{
+	height:100%;
+	border:1px solid #008485;
+	
+}
+
+#chattitle{
+	height:8%;
+	background-color:#008485;
+	padding:auto;
+}
+
+#chattitle h2{
+	color:#fff;
+	font-size:20px;
+	font-weight:700;
+}
+
+#chatContents{
+	height:86%;
+}
+
+#sendArea{
+	height:6%;
+	background-color:#b5b5b5;
+}
+ 

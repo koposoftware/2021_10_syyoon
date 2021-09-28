@@ -1,0 +1,5 @@
+package kr.co.hana.dashboard.vo;
+
+public class UserCreditVO {
+
+}

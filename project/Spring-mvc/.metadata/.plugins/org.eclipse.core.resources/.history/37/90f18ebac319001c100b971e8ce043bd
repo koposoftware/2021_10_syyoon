@@ -1,0 +1,10 @@
+package kr.co.hana.dashboard.service;
+
+import org.springframework.stereotype.Repository;
+
+import kr.co.hana.dashboard.dao.DashboardDAO;
+
+@Repository
+public class DashboardServiceImpl implements DashboardDAO {
+
+}

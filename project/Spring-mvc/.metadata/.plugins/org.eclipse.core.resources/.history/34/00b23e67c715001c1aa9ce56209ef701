@@ -1,0 +1,11 @@
+package kr.co.hana.consult.vo;
+
+
+public class ChatRoomVO {
+	private int roomid;
+	private String roomnm;
+	private String userid;
+	private String filesavenm;
+
+
+}

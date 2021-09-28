@@ -1,0 +1,8 @@
+package kr.co.hana.dashboard.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class DashboardController {
+
+}

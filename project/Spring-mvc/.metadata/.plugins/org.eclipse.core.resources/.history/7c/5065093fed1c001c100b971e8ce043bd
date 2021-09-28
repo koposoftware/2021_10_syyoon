@@ -1,0 +1,5 @@
+package kr.co.hana.consult.listener;
+
+public class ChatListener implements EventListener{
+
+}

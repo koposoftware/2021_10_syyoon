@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+
+var lgt = $('div').length
+console.log(lgt)

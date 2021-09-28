@@ -1,0 +1,11 @@
+package kr.co.hana.schedule.controller;
+
+@Controller
+public class ScheduleController {
+	
+	@GetMapping("/schedule")
+	public String scheduleMain() {
+		System.out.println("스케쥴");
+		returbn "schedule/schedule";
+	}
+}

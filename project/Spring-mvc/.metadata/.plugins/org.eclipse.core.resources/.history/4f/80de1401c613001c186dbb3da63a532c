@@ -1,0 +1,609 @@
+/**
+ * 달력구현하기
+ */
+
+let date = new Date();
+console.log(date)
+
+const renderCalender = () => {
+const viewYear = date.getFullYear();
+const viewMonth = date.getMonth();
+
+
+  document.querySelector('.beforeMonth').innerHTML = `<i class="fas fa-arrow-left fa-lg"></i>`;
+  document.querySelector('.heading-section').textContent = `${viewYear}년 ${viewMonth+1}월`;
+  document.querySelector('.afterMonth').innerHTML = `<i class="fas fa-arrow-right fa-lg"></i>`;
+
+  const prevLast = new Date(viewYear, viewMonth, 0);
+  const thisLast = new Date(viewYear, viewMonth + 1, 0);
+
+  const PLDate = prevLast.getDate();
+  const PLDay = prevLast.getDay();
+
+  const TLDate = thisLast.getDate();
+  const TLDay = thisLast.getDay();
+
+  const prevDates = [];
+  const thisDates = [...Array(TLDate + 1).keys()].slice(1);
+  const nextDates = [];
+
+  if (PLDay !== 6) {
+    for (let i = 0; i < PLDay + 1; i++) {
+      prevDates.unshift(PLDate - i);
+    }
+  }
+
+  for (let i = 1; i < 7 - TLDay; i++) {
+    nextDates.push(i);
+  }
+
+  const dates = prevDates.concat(thisDates, nextDates);
+  const firstDateIndex = dates.indexOf(1);
+  const lastDateIndex = dates.lastIndexOf(TLDate);
+
+  dates.forEach((date, i) => {
+    const condition = i >= firstDateIndex && i < lastDateIndex + 1
+                      ? 'this'
+                      : 'other';
+
+	
+	if(i == 0 || i%7 == 0){
+		dates[i] = `<tr>`
+		dates[i] +=`<td class="text-center tdhei"><div class="date"><span class=${condition} style="color:#e90061;">${date}</span><div id=${viewYear}-${viewMonth+1}-${date} ></div></div></td>`
+	}else if(i==7 || i==14 || i==21 || i==28 || i==35){
+		dates[i] =`<td class="text-center tdhei"><div class="date"><span class=${condition} >${date}</span><div id=${viewYear}-${viewMonth+1}-${date}></div></div></td>`
+		dates[i] = `</tr>` 
+	}else{
+	    dates[i] = `<td class="text-center tdhei"><div class="date"><span class=${condition} >${date}</span><div id=${viewYear}-${viewMonth+1}-${date}></div></div></td>`;		
+	}
+  });
+
+  document.querySelector('.dates').innerHTML = dates.join('');
+
+  const today = new Date();
+  if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+    for (let date of document.querySelectorAll('.this')) {
+      if (+date.innerText === today.getDate()) {
+        date.classList.add('today');
+        break;
+      }
+    }
+  }
+};
+
+renderCalender();
+
+const prevMonth = () => {
+  date.setMonth(date.getMonth() - 1);
+  renderCalender();
+};
+
+const nextMonth = () => {
+  date.setMonth(date.getMonth() + 1);
+  renderCalender();
+};
+
+const goToday = () => {
+  date = new Date();
+  renderCalender();
+};
+
+
+
+	// Date받아와서 id값으로 만들기
+	function makeDate(NoticeDate){
+	
+		var ndateArray = NoticeDate.split('.')
+		var nMonth = ndateArray[1].split('')
+		var nDate = ndateArray[2].split('')
+		var result = ndateArray[0]+'-'
+		
+		if(nMonth[0] == '0'){
+			result += nMonth[1]+'-'
+		}else{
+			result += ndateArray[1]+'-'
+		}
+		
+		if(nDate[0] == '0'){
+			result += nDate[1]
+		}else{
+			result += ndateArray[2]
+		}
+		
+		return result
+	}
+	
+	 
+	function getLocationClass(brtcName){
+		
+		if(brtcName == '서울특별시') return 'seoul'
+		else if(brtcName == '경기도') return 'gyounggi'
+		else if(brtcName == '부산광역시') return 'busan'
+		else if(brtcName == '대구광역시') return 'daegu'
+		else if(brtcName == '광주광역시') return 'guangju'
+		else if(brtcName == '대전광역시') return 'daejeon'
+		else if(brtcName == '세종특별자치시') return 'sejong'
+		else if(brtcName == '강원도') return 'kangwon'
+		else if(brtcName == '충청북도') return 'choongbook'
+		else if(brtcName == '충청남도') return 'choongnam'
+		else if(brtcName == '전라북도') return 'jeonbook'
+		else if(brtcName == '전라남도') return 'jeonnam'
+		else if(brtcName == '경상북도') return 'gyoungbook'
+		else if(brtcName == '경상남도') return 'gyoungnam'
+		else if(brtcName == '제주특별자치도') return 'jeju'
+		else if(brtcName == '인천광역시') return 'incheon'
+	}
+	
+	
+	// id를 date값으로 다시 변환
+	function IdtoDate(Idname){
+		var Id = Idname.split('-')
+		var result = Id[0]+'.'
+		if( Id[1].length == 1){
+			result += '0'+Id[1]+'.'
+		}else{
+			result += Id[1]+'.'
+		}
+		if(Id[2].length == 1){
+			result += '0'+Id[2]
+		}else{
+			result += Id[2]
+		}
+		return result
+	}
+	
+	// 페이징
+	
+    function paging(){
+	//https://codepen.io/jaehee/pen/mRmNEX
+		var pageRow = 10;
+		$('#nav').remove()
+		var $home = $('#notList')
+		$home.after('<div id="nav">');
+		
+		var $tr = $($home).find('tbody tr')
+		var rowTotals = $tr.length;
+		var pageTotal = Math.ceil(rowTotals/pageRow);
+		for(var i = 0; i<pageTotal; i++){
+			$('<a href="#"></a>').attr('rel',i)
+								.html(i+1)
+								.appendTo("#nav");
+		}
+		
+		$tr.addClass('off-screen')
+			.slice(0, pageRow)
+			.removeClass('off-screen');
+
+		var $pagingLink = $('#nav a');
+		$pagingLink.on('click', function (evt) {
+			evt.preventDefault();
+			var $this = $(this);
+			if ($this.hasClass('active')) {
+				return;
+			}
+			$pagingLink.removeClass('active');
+			$this.addClass('active');
+	
+			// 0 => 0(0*4), 4(0*4+4)
+			// 1 => 4(1*4), 8(1*4+4)
+			// 2 => 8(2*4), 12(2*4+4)
+			// 시작 행 = 페이지 번호 * 페이지당 행수
+			// 끝 행 = 시작 행 + 페이지당 행수
+	
+			var currPage = $this.attr('rel');
+			var startItem = currPage * pageRow;
+			var endItem = startItem + pageRow;
+	
+			$tr.css('opacity', '0.0')
+					.addClass('off-screen')
+					.slice(startItem, endItem)
+					.removeClass('off-screen')
+					.animate({opacity: 1}, 300);
+	
+		});
+	
+		$pagingLink.filter(':first').addClass('active');	
+	
+	}
+	
+	//지역버튼 클릭
+	function noticeButtonClick(notice){
+		
+		$('.gyounggi').click(function(){
+
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			
+			
+			$('.modal-body').append('<div><select id="homeType"><option value="전체" selected>전체</option><option value="행복주택">행복주택</option><option value="국민임대">국민임대</option><option value="영구임대">영구임대</option><option value="장기전세">장기전세</option></select></div>')
+			$('.modal-body').append('<div><table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '경기도' && notinfo.pan_nt_st_dt == getdate){
+					const gv_url = notinfo.dtl_url.split('?')[1].split('&')[0]
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					console.log(gv_url)
+				
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+gv_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+				
+				
+				}
+			}
+			$('.modal-body').append('</tbody></table></div>')
+
+			
+			paging();
+			
+			
+			
+		})
+		
+		$('.seoul').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '서울특별시' && notinfo.pan_nt_st_dt == getdate){
+					const gv_url = notinfo.dtl_url.split('?')[1].split('&')[0]
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+				
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+gv_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+				
+				
+				
+				}
+			}
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.kangwon').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '강원도' && notinfo.pan_nt_st_dt == getdate){
+					const gv_url = notinfo.dtl_url.split('?')[1].split('&')[0]
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+				
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+gv_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+				
+				
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+			
+		})
+		
+		$('.busan').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '부산광역시' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+				
+				
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+			
+		})
+		
+		$('.daegu').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '대구광역시' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+			
+		})
+		
+		$('.guangju').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '광주광역시' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+			
+		})
+		
+		$('.sejong').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '세종특별자치시' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+	
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+			
+		})
+		
+		$('.choongbook').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '충청북도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+			
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+			
+		})
+		
+		$('.choongnam').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '충청남도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.jeonbook').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '전라북도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.jeonnam').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '전라남도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.gyoungbook').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '경상북도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.gyoungnam').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '경상남도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+				}
+			}
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.jeju').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '제주특별자치도' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			$('.modal-body').append('</tbody></table>')
+		})
+		
+		$('.incheon').click(function(){
+			let i = $(this).parents('div')
+			let idNm = i.attr('id')
+			var getdate = IdtoDate(idNm)
+			$('.modal-body').empty()
+			
+			$('.modal-body').append('<table id="notList"><thead><tr><th>주택유형</th><th>공고명</th><th>마감일</th></tr></thead><tbody>')
+	
+			for(let i=0; i<notice.length; i++){
+				let notinfo = notice[i]
+				if(notinfo.cnp_cd_nm == '인천광역시' && notinfo.pan_nt_st_dt == getdate){
+					const menuid = notinfo.dtl_url.split('&')[1].split('=')[1]
+					$('.modal-body  table tbody').append('<tr><td>'+notinfo.ais_tp_cd_nm+'</td><td><a href="/HomeOneHana/schedule/detail?pan_nm='+notinfo.pan_nm+'&spl_inf_tp_cd='+notinfo.spl_inf_tp_cd+'&ccr_cnnt_sys_ds_cd='+notinfo.ccr_cnnt_sys_ds_cd+'&pan_id='+notinfo.pan_id+'&upp_ais_tp_cd='+notinfo.upp_ais_tp_cd+'&ais_tp_cd='+notinfo.ais_tp_cd+'&dtl_url='+notinfo.dtl_url+'&menu_id='+menuid+'">'+notinfo.pan_nm+'</a></td><td>'+notinfo.clsg_dt+'</td></tr>')
+
+				}
+			}
+			$('.modal-body').append('</tbody></table>')
+		})
+
+	}
+
+
+$(document).ready(function(){
+
+	$.ajax({
+		url:'/HomeOneHana/scheduleList'
+		, type: 'GET'
+		, success:function(data){
+			
+			var notice = data
+			testData = notice; //추가
+			console.log(testData) //추가
+			console.log(notice[0])
+			console.log(notice.length)
+			
+			var brtc= new Set()
+
+			for(let i=0; i<notice.length; i++){
+				var notidate = makeDate(notice[i].pan_nt_st_dt)
+				brtc.add('#'+notidate+' '+notice[i].cnp_cd_nm)
+			}
+			
+			// 날짜에 맞게 뿌리기
+			for (let b of brtc){
+				let Info = b.split(' ')
+				//console.log(Info)
+				let classNm = getLocationClass(Info[1])
+				$(Info[0]).append('<button class='+classNm+' data-toggle="modal" data-target="#exampleModalCenter">' + Info[1]+ '</button>')	
+			}
+			
+			// 월 넘기는 클릭이벤트
+			$('#beforeMonth').click(function(){
+				for (let b of brtc){
+					let Info = b.split(' ')
+					let classNm = getLocationClass(Info[1])
+					$(Info[0]).append('<button class='+classNm+' data-toggle="modal" data-target="#exampleModalCenter">' + Info[1]+ '</button>')	
+				}
+				noticeButtonClick(notice);
+
+			})
+			
+			$('#afterMonth').click(function(){
+				for (let b of brtc){
+					let Info = b.split(' ')
+					let classNm = getLocationClass(Info[1])
+					//console.log(Info)
+					$(Info[0]).append('<button class='+classNm+' data-toggle="modal" data-target="#exampleModalCenter">' + Info[1] + '</button>')	
+				}
+			
+				noticeButtonClick(notice);
+				
+				
+			})
+			
+			$('#thisMonth').click(function(){
+				for (let b of brtc){
+					let Info = b.split(' ')
+					let classNm = getLocationClass(Info[1])
+					$(Info[0]).append('<button class='+classNm+' data-toggle="modal" data-target="#exampleModalCenter">' + Info[1]+ '</button>')	
+				}
+				
+				noticeButtonClick(notice);
+			})
+			
+			noticeButtonClick(notice);
+
+		}, error: function(){
+			console.log('실패')
+		}
+	})
+	
+	
+	
+});
+

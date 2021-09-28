@@ -1,0 +1,61 @@
+package hana.test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import kr.co.hana.schedule.service.ScheduleService;
+import kr.co.hana.schedule.vo.ScheduleDetailVO;
+import kr.co.hana.schedule.vo.ScheduleVO;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:config/spring/spring-mvc.xml" })
+public class searchNoticdTest {
+	
+	
+	@Autowired
+	private ScheduleService scheduleservice;
+	
+	
+	@Test
+	public void getScheduleAddr() throws IOException {
+		List<String> date = scheduleservice.getStEnDate();
+		List<ScheduleVO> notice = scheduleservice.getNoticeList("41", date.get(0), date.get(1));
+		System.out.println(notice.size());
+		List<ScheduleDetailVO> allList = new ArrayList<ScheduleDetailVO>();
+		Map<String, Object[]> result = new HashMap<String, Object[]>();
+		
+		for(int i = 0; i<notice.size(); i++) {
+			
+			List<ScheduleDetailVO> ndetail = scheduleservice.getDetailInfo(notice.get(i));
+			if(ndetail !=null) {
+				for(int h = 0; h<ndetail.size(); h++) {
+					Object[] arr = new Object[2];
+					System.out.println(h+" : "+ndetail.get(h).getLgdn_adr());
+					arr[0] = notice.get(i);
+					arr[1] = ndetail.get(h);
+					result.put(ndetail.get(h).getLgdn_adr(), arr);
+					//allList.add(ndetail.get(h));
+				}
+				
+			}
+			
+			Set<String> ks = result.keySet();
+			System.out.println(ks.toString());
+
+		}
+		System.out.println(allList.get(0));
+		System.out.println(allList.get(1));
+		
+	}
+
+}

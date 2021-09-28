@@ -1,0 +1,166 @@
+/**
+ * 
+ */
+
+function getvalue(value){
+	if(value == '대학생'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" >상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" onClick="getrank(this.value)" id="일반1" value="일반공급1순위"><label for="일반1" class="ranktitle">일반공급 1순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역(서울특별시)또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시)이 재학 중인 대학 소재지인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반2" name="rank" value="일반공급2순위"><label for="일반2" class="ranktitle">일반공급 2순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항 각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>이 재학 중인 대학 소재지인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반3" name="rank" value="일반공급3순위"><label for="일반3" class="ranktitle">일반공급 3순위</label></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선1" name="rank" value="우선공급1순위"><label for="우선1" class="ranktitle">우선공급 1순위</label></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구에 소재하는 대학에 재학중이거나 다음학기에 입학 또는 복학예정인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선2" name="rank" value="우선공급2순위"><label for="우선2" class="ranktitle">우선공급 2순위</label></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 소재하는 대학에 재학중이거나 다음학기에 입학 또는 복학예정인 자</div></div>'
+							
+							+ '</div></div>')
+
+		
+	}else if( value == '취업준비생'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반1" name="rank" value="일반공급1순위"><label for="일반1"  class="ranktitle">일반공급 1순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역(서울특별시)또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시)에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반2" name="rank" value="일반공급2순위"><label for="일반2" class="ranktitle">일반공급 2순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항 각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반3" name="rank" value="일반공급3순위"><label for="일반3" class="ranktitle">일반공급 3순위</label></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선1" name="rank" value="우선공급1순위"><label for="우선1"  class="ranktitle">우선공급 1순위</label></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선2" name="rank" value="우선공급2순위"><label for="우선2" class="ranktitle">우선공급 2순위</label></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 거주하는 자</div></div>'
+							
+							+ '</div></div>')
+		
+		
+	}else if(value=='청년' || value == '사회초년생' || value=='한부모가족'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반1" name="rank" value="일반공급1순위"><label for="일반1"  class="ranktitle">일반공급 1순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역(서울특별시)또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시)에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반2" name="rank" value="일반공급2순위"><label for="일반2" class="ranktitle">일반공급 2순위</label></div>'
+							+ '<div class="rankcontent" >해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항 각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>이 거주지나 소득 근거지인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반3" name="rank" value="일반공급3순위"><label for="일반3" class="ranktitle">일반공급 3순위</label></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선1" name="rank" value="우선공급1순위"><label for="우선1"  class="ranktitle">우선공급 1순위</label></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구에 거주하거나 거주지나 소득 근거지가 있는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선2" name="rank" value="우선공급2순위"><label for="우선2" class="ranktitle">우선공급 2순위</label></div>'
+							+ '<div class="rankcontent" >행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 거주하거나 거주지나 소득 근거지가 있는 자</div></div>'
+							
+							+ '</div></div>')
+		
+	}else if(value== '신혼부부' || value=='예비신혼부부'){
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle" for="inputLastName">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반1" name="rank" value="일반공급1순위"><label for="일반1"  class="ranktitle">일반공급 1순위</label></div>'
+							+ '<div class="rankcontent" >신청자 본인 또는 배우자(예비신혼부부의 경우 대표신청자 또는 예비배우자)의 거주지나 소득 근거지가 해당 주택건설지역(서울특별시) 또는 연접지역(의정부시, 남양주시, 구리시, 하남시, 성남시, 과천시, 안양시, 광명시, 부천시, 인천광역시, 김포시, 고양시, 양주시)인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반2" name="rank" value="일반공급2순위"><label for="일반2" class="ranktitle">일반공급 2순위</label></div>'
+							+ '<div class="rankcontent" >신청자 본인 또는 배우자(예비신혼부부의 경우 대표신청자 또는 예비배우자)의 거주지나 소득 근거지가 해당 주택건설지역이 속한 주택공급에 관한 규칙 제4조제3항각호의 지역(수도권(서울특별시, 인천광역시, 경기도))으로서 <u>1순위에 해당되지 않는 지역</u>인 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="일반3" name="rank" value="일반공급3순위"><label for="일반3" class="ranktitle">일반공급 3순위</label></div>'
+							+ '<div class="rankcontent" >일반 1,2순위에 해당되지 않는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선1" name="rank" value="우선공급1순위"><label for="우선1"  class="ranktitle">우선공급 1순위</label></div>'
+							+ '<div class="rankcontent" >신청자 본인이 행복주택이 위치하는 마포구, 서대문구에 거주하는 자</div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선2" name="rank" value="우선공급2순위"><label for="우선2" class="ranktitle">우선공급 2순위</label></div>'
+							+ '<div class="rankcontent" >신청자 본인이 행복주택이 위치하는 마포구, 서대문구의 서울특별시 지역에 거주하는 자</div></div>'
+							
+							+ '</div></div>')
+		
+	}else{
+		
+		$('#ranking-group').empty()
+		$('#ranking-group').append('<label class="ititle">상세공급구분</label>'
+							+ '<div  class="form-group">'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" name="rank" onClick="getrank(this.value)" id="일반1" value="일반공급"><label for="일반1" class="ranktitle">일반공급</label></div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선1" name="rank" value="우선공급1순위"><label for="우선1"  class="ranktitle">우선공급 1순위</label></div></div>'
+							
+							+ '<div class="rankBox"><div class="rank-title"><input type="radio" onClick="getrank(this.value)" id="우선2" name="rank" value="우선공급2순위"><label for="우선2" class="ranktitle">우선공급 2순위</label></div></div>'
+							
+							+ '</div></div>')
+		
+	}
+	
+}
+
+
+/*==========================================================
+							주소검색 API
+==========================================================*/
+	function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                //document.getElementById('post').value = data.zonecode;
+                document.getElementById('addr1').value = data.address;
+              	//document.getElementById('addr2').value=data.buildingName;
+            }
+        }).open();
+    }
+//==========================================================
+
+function getrank(rank){
+	if(rank){
+		$('#insertdetailinfo').empty()
+		var certivals = $('input[name=certification]:checked').val()
+		$('#insertdetailinfo').append('<label class="ititle">상세공급구분</label>'
+						+ '<div  class="form-group">')
+						//+ '</div>')
+		
+		if(certivals == '대학생'){
+			
+			
+		}
+		
+	}
+}
+
+
+
+

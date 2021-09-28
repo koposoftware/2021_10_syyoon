@@ -1,0 +1,23 @@
+package kr.co.hana.search.dao;
+
+import java.util.List;
+
+import kr.co.hana.search.vo.BrtcSignguVO;
+import kr.co.hana.search.vo.FavoriteVO;
+import kr.co.hana.search.vo.SearchHomeVO;
+
+public interface SearchDAO {
+	
+
+
+	BrtcSignguVO getBrtcSigCode(BrtcSignguVO brtcsig);
+	List<String> getBrtcList();
+	List<SearchHomeVO> getHomeList(BrtcSignguVO brtcsig);
+	List<SearchHomeVO> getHomeDetail(String rnadres);
+	List<SearchHomeVO> checkHomeInfo(String rnadres);
+	int addFavoriteHome(FavoriteVO favorite);
+	int delFavoriteHome(FavoriteVO favorite);
+	List<FavoriteVO>  getFavoriteHome(String id);
+	
+
+}

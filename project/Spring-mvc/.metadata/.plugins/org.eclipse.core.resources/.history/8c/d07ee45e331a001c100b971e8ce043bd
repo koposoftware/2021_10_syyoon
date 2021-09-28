@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+
+
+
+$(document).ready(function(){
+	$('#Menu1').click(function(){
+		$('#menu1').show()
+		$('#menu2').hide()
+	})
+	$('#Menu2').click(function(){
+		$('#menu1').hide()
+		$('#menu2').slideDown()
+	})
+	
+})

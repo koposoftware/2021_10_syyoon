@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+  	<typeAliases>
+  		<typeAlias type="kr.co.hana.login.vo.LoginVO" alias="loginVO"/>
+  		<typeAlias type="kr.co.hana.join.vo.JoinVO" alias="joinVO"/>
+  		<typeAlias type="kr.co.hana.search.vo.SearchVO" alias="searchVO"/>
+  		<typeAlias type="kr.co.hana.search.vo.SearchHomeVO" alias="searchHomeVO"/>
+  		<typeAlias type="kr.co.hana.search.vo.BrtcSignguVO" alias="brtcSignguVO"/>
+  		<typeAlias type="kr.co.hana.search.vo.FavoriteVO" alias="favoriteVO"/>
+  		<typeAlias type="kr.co.hana.schedule.vo.ScheduleVO" alias="scheduleVO"/>
+  	</typeAliases>
+  </configuration>

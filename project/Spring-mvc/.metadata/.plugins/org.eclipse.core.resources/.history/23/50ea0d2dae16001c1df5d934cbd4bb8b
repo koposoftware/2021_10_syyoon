@@ -1,0 +1,25 @@
+package kr.co.hana.schedule.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import kr.co.hana.schedule.vo.FavoriteScheduleVO;
+
+@Repository
+public class ScheduleDAOImpl implements ScheduleDAO{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+
+	public int addFavoriteNotice(FavoriteScheduleVO fsvo) {
+		int result = sqlSessionTemplate.insert("search.dao.ScheduleDAO.addFavoriteNotice", fsvo);
+		return 0;
+	}
+
+	public int delFavoriteNotice(FavoriteScheduleVO fsvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

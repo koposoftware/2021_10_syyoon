@@ -1,0 +1,6 @@
+package kr.co.hana.dashboard.service;
+
+@Repository
+public class DashboardServiceImpl {
+
+}

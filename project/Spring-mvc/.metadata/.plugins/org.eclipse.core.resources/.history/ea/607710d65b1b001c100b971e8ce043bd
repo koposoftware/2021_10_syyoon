@@ -1,0 +1,38 @@
+package kr.co.hana.loan.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.co.hana.loan.dao.LoanDAO;
+import kr.co.hana.loan.vo.EnrollLoanVO;
+import kr.co.hana.loan.vo.ReviewFileVO;
+
+@Service
+public class LoanServiceImpl implements LoanService{
+	
+	@Autowired
+	private LoanDAO loandao;
+
+	/**
+	 * 파일 insert,upload
+	 */
+	public void uploadFile(List<ReviewFileVO> rfvo) {
+		
+		for(int i = 0; i<rfvo.size(); i++) {
+			rfvo.get(i).setContractcode(1);
+			loandao.uploadFile(rfvo.get(i));
+		}
+	}
+	
+	/**
+	 * 계약 로그 insert
+	 */
+	public int contractLogProcedure(EnrollLoanVO enroll) {
+		int result = loandao.contractLogProcedure(enroll);
+		return result;
+		
+	}
+
+}

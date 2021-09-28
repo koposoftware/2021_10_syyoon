@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="loan.dao.LoanDAO">
+
+
+	
+
+	<insert id="uploadFile" parameterType="reviewFileVO">
+		INSERT INTO LOANFILE(NO,FILE_ORI_NAME,FILE_SAVE_NAME,FILESIZE,CONTRACTCODE)
+   			 VALUES(seq_loanfile.nextval,#{file_ori_name},#{file_save_name},#{filesize},#{contractcode})
+	</insert>
+	
+	<select id="contractLogProcedure" parameterType="enrollLoanVO" statementType="CALLABLE">
+	
+	
+		{
+			call LOANCONTRACT_LOG(
+			#{userid},
+			#{managerid},
+			#{loanname},
+			#{principal},
+			#{contractcode})
+		}
+	</select>
+
+</mapper>

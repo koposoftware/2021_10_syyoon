@@ -1,0 +1,12 @@
+package kr.co.hana.chat.service;
+
+import kr.co.hana.chat.vo.LoanInfoVO;
+
+public class ChatServiceImpl implements ChatService {
+
+	public LoanInfoVO getLoanInfo(String loanname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

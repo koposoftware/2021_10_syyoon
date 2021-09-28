@@ -1,0 +1,136 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html class=''>
+<head>
+<title>HomeOneHana::온라인상담</title>
+<!-- webSocket -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+
+
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<link rel="canonical"
+	href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+<link
+	href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300'
+	rel='stylesheet' type='text/css'>
+
+<script src="https://use.typekit.net/hoy3lrg.js"></script>
+<script>
+var user = JSON.parse('${requestScope.loginVO}')
+var userId = user.id
+var userNm = user.name
+var socketId = null
+
+console.log(user)
+
+
+	try {
+		Typekit.load({
+			async : true
+		});
+	} catch (e) {
+	}
+</script>
+
+
+
+<link rel='stylesheet prefetch'
+	href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+<link rel='stylesheet prefetch'
+	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<link
+	href="${ pageContext.request.contextPath }/resources/css/consult/consult.css"
+	rel="stylesheet">
+
+<!-- 
+
+A concept for a chat interface. 
+
+Try writing a new message! :)
+
+
+Follow me here:
+Twitter: https://twitter.com/thatguyemil
+Codepen: https://codepen.io/emilcarlsson/
+Website: http://emilcarlsson.se/
+
+-->
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+
+
+
+</head>
+<body style="font-family: 'Noto Sans KR';">
+
+
+	<div id="frame">
+		
+		<div class="content">
+			<div class="contact-profile">
+				<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+				<p>${requestScope.loginvo.id }(${requestScope.loginvo.name }님과의 대화방)</p>
+
+			</div>
+			<div class="messages">
+				<ul>
+					<li class="sent"><img
+						src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+						<p>여기가 상담 맛집인가여?</p></li>
+					<li class="replies"><img
+						src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<p>아주 잘 찾아오셨습니다 호갱님</p></li>
+				</ul>
+			</div>
+			<div class="message-input">
+				<div class="wrap">
+					<input type="text" placeholder="Write your message..." id="ans" />
+					<button><i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+					</button>
+					<button class="submit">
+						<i class="fa fa-paper-plane" aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 
+	<script
+		src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+	 -->
+	<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+	<script type="text/javascript"
+		src="${ pageContext.request.contextPath }/resources/js/consult/consult.js"></script>
+
+</body>
+
+
+</html>

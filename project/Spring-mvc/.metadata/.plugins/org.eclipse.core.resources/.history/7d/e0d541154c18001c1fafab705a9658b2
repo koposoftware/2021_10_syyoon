@@ -1,0 +1,168 @@
+/**
+	kakao 지도 API
+ */
+
+$(document).ready(function(){
+	
+	$("#selectlocation").change(function(){
+			var sele = $("#selectlocation option:selected").val()
+			console.log(sele)
+			$.ajax({
+				url:'/HomeOneHana/search/notice/address'
+				, type: 'GET'
+				, data:{locationcode:sele}
+				, success:function(data){
+					console.log(data)
+					var nocticeinfos = data
+					var noticekey = Object.keys(nocticeinfos)
+					$('#homelist>div:gt(0)').remove()
+					
+					
+					
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+							level: 10 // 지도의 확대 레벨
+						};
+
+					// 지도를 생성합니다    
+					var map = new kakao.maps.Map(mapContainer, mapOption);
+					
+					// 주소-좌표 변환 객체를 생성합니다
+					var geocoder = new kakao.maps.services.Geocoder();
+					let idx = 0
+					for(let nadd of noticekey){
+						//console.log(nadd)
+						//console.log(nocticeinfos)
+						//console.log(nocticeinfos[nadd]["pan_nm"])
+			
+						$('#homelist').append(
+							'<div class="list-group-item list-group-item-action py-3 lh-tight">'
+							+ '<div class="d-flex w-100 align-items-center justify-content-between">'
+							+ '<strong id="Strongaddr'+idx+'class="mb-1"><a href="'+nocticeinfos[nadd]["dtl_url"]+'" >'+nadd+'</a></strong>'
+							+ '</div>'
+							+ '<div class="col-10 mb-1 small">'+nocticeinfos[nadd]["pan_nm"]+'</div>'
+							+ '</div>'
+						)
+						
+						idx= idx+1
+						
+						
+						// 주소로 좌표를 검색합니다
+						geocoder.addressSearch(nadd, function(result, status) {
+						
+						    // 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+						
+						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							
+								var imageSrc = '/HomeOneHana/resources/img/search/notification-bell.png', // 마커이미지의 주소입니다    
+								    imageSize = new kakao.maps.Size(54, 54), // 마커이미지의 크기입니다
+								    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+								      
+								// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+								var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					    			markerPosition = coords; // 마커가 표시될 위치입니다
+								
+								
+						        // 결과값으로 받은 위치를 마커로 표시합니다
+						        var marker = new kakao.maps.Marker({
+						            map: map,
+						            position: coords,
+									image: markerImage
+						        });
+								
+								// 마커가 지도 위에 표시되도록 설정합니다
+								marker.setMap(map);  
+						
+						        // 인포윈도우로 장소에 대한 설명을 표시합니다
+						        var infowindow = new kakao.maps.InfoWindow({
+						            content: '<div class="noticewindow">'+nadd+'</div>',
+									removable : true
+						        });
+					
+								daum.maps.event.addListener(marker, 'click', function() {
+									//infowindow.setMap(map);
+									infowindow.open(map, marker);
+								});
+						        //infowindow.open(map, marker);
+						
+						        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+						        map.setCenter(coords);
+						    } 
+						});    
+					}
+					
+				}, error : function(){
+					console.log('err')
+				}
+			})
+		})
+})
+
+
+
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level: 10 // 지도의 확대 레벨
+	};
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+
+
+
+
+
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+for(let nadd of noticeAddrs){
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(nadd, function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+			var imageSrc = '/HomeOneHana/resources/img/search/notification-bell.png', // 마커이미지의 주소입니다    
+			    imageSize = new kakao.maps.Size(54, 54), // 마커이미지의 크기입니다
+			    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			      
+			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+			
+			
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords,
+				image: markerImage
+	        });
+			
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);  
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div class="noticewindow">'+nadd+'</div>',
+				removable : true
+	        });
+
+			daum.maps.event.addListener(marker, 'click', function() {
+				//infowindow.setMap(map);
+				infowindow.open(map, marker);
+			});
+	  
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+}
