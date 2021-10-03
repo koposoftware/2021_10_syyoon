@@ -11,7 +11,7 @@
 청년 고객층을 확보하기 위해 임대주택의 공급처인 LH의 청약 홈의 UI를 개선하고, 대출까지 제공하는 **‘홈 원하나’** 웹 서비스 개발을 기획하였습니다.
 <br><br>
 
-<img src="imgs/project00.jpg"/><br>
+<img src="imgs/주요기능.jpg"/><br>
 
 <br><br><br>
 
