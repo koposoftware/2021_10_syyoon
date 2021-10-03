@@ -23,7 +23,8 @@
  <br><br><br>
  
 # 3. 프로젝트 결과
-프로젝트 결과를 추가하세요. 발표자료. 시연동영상을 추가하세요.
+   <img src="imgs/project-result02.jpg"/><br>
+   <img src="imgs/project-result02.jpg"/><br>
 
 <br><br><br>
 
