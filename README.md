@@ -12,12 +12,14 @@
 
 <br><br><br>
 
-# 2. 프로젝트 제안서
+# 2. 프로젝트 구성
 
-프로젝트 제안서를 설명하세요. 발표자료와 동영상을 추가하세요. 시스템의 아키텍쳐 설명도 추가하세요.
-
-   <img src="pptimg.JPG"/>[프로젝트 제안서](/윤소영-홈원하나 프로젝트제안서.pdf)<br>
- 
+   <img src="pptimg.JPG"/>[프로젝트 주제 제안서 다운로드](/윤소영-홈원하나 프로젝트제안서.pdf)<br>
+   <img src="imgs/project01.jpg"/><br>
+   <img src="imgs/project02.jpg"/><br>
+   <img src="imgs/project03.jpg"/><br>
+   <img src="imgs/project04.jpg"/><br>
+   
  <br><br><br>
  
 # 3. 프로젝트 결과
@@ -26,7 +28,7 @@
 <br><br><br>
 
 ## 발표 ppt 
-   <img src="pptimg.JPG"/>[발표자료](/project.pptx)<br>
+   <img src="pptimg.JPG"/>[발표자료 다운로드 아직안올렸지룽...](/project.pptx)<br>
 
 <br><br><br>
 
@@ -36,11 +38,7 @@
 
 <br><br><br>
 
-# 5. 기타
-그외 프로젝트를 더욱 설명할수 있는 것들을 추가하세요
-
-
-# 6. 본인 소개
+# 5. 본인 소개
 
 | **이름** |윤소영|![gdKO](/gdko.jpg)|
 | **연락처** | soyo1228@naver.com||
