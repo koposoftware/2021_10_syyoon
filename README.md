@@ -24,7 +24,7 @@
  
 # 3. 프로젝트 결과
    <img src="imgs/project-result02.jpg"/><br>
-   <img src="imgs/project-result02.jpg"/><br>
+   <img src="imgs/project-result01.jpg"/><br>
 
 <br><br><br>
 
