@@ -14,7 +14,7 @@
 
 # 2. 프로젝트 구성
 
-   <img src="pptimg.JPG"/>[프로젝트 주제 제안서 다운로드](/윤소영-홈원하나 프로젝트제안서.pdf)<br>
+   <img src="pptimg.JPG"/>[프로젝트 주제 제안서 다운로드](/윤소영-홈원하나 프로젝트제안서.pdf)<br><br><br>
    <img src="imgs/project01.jpg"/><br>
    <img src="imgs/project02.jpg"/><br>
    <img src="imgs/project03.jpg"/><br>
