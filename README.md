@@ -17,7 +17,7 @@
 프로젝트 제안서를 설명하세요. 발표자료와 동영상을 추가하세요. 시스템의 아키텍쳐 설명도 추가하세요.
 
    <img src="ppt.jpg"/>[프로젝트 제안서](/윤소영-홈원하나 프로젝트제안서.pdf)<br>
-   <iframe id="ytplayer" type="text/html" width="640" height="360" src="/pptimg.JPG" frameborder="0"></iframe>
+   <iframe id="ytplayer" type="text/html" width="640" height="360" src="pptimg.JPG" frameborder="0"></iframe>
  
  <br><br><br>
  
