@@ -8,7 +8,7 @@
 
 <br>
 
-청년 고객층을 확보하기 위해 임대주택의 공급처인 LH의 청약 홈의 UI를 개선하고, 대출까지 제공하는 **‘홈 원하나’** 웹 서비스 개발을 기획하였습니다.
+청년 고객층을 확보하기 위해 임대주택의 공급처인 LH의 청약 홈의 UI를 개선하고, 대출까지 제공하는 `홈 원하나` 웹 서비스 개발을 기획하였습니다.
 <br><br>
 
 <img src="imgs/주요기능.jpg"/><br>
@@ -45,11 +45,10 @@
 # 5. 본인 소개
 
 | **이름** |윤소영|![syyoon](imgs/syyoon.jpg)|
-| **연락처** | soyo1228@naver.com||
-|| [깃블로그](https://yoon-ddo.github.io/) ||
-| **skill set** | Frontend - HTML, CSS, Javascript||
-|| Backend - Java, Spring, Oracle||
-|| Data Analysis - Python||
+| **연락처** | soyo1228@naver.com| [깃블로그](https://yoon-ddo.github.io/) |
+| **skill set** | | Frontend - HTML, CSS, Javascript |
+|| | Backend - Java, Spring, Oracle |
+|| | Data Analysis - Python |
 | **자격증** | 2021.06 | 정보처리기사 ( 한국산업인력공단 ) |
 || 2020.06 | SQLD ( 한국데이터산업진흥원 ) |
 || 2020.07 | ADsP ( 한국데이터산업진흥원 ) |
