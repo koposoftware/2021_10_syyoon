@@ -32,7 +32,7 @@
 <br><br><br>
 
 ## 발표 ppt 
-   <img src="pptimg.JPG"/>[발표자료 다운로드 아직안올렸지룽...](/project.pptx)<br>
+   <img src="pptimg.JPG"/>[발표자료 다운로드](/윤소영-홈원하나 발표제안서.pdf)<br>
 
 <br><br><br>
 
