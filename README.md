@@ -44,7 +44,8 @@
 <br><br><br>
 
 # 5. 본인 소개
-
+| 항목 | 내용 | - |
+|:---:|:---:|:---|
 | **이름** |윤소영|![syyoon](imgs/syyoon.jpg)|
 | **연락처** | soyo1228@naver.com| [깃블로그](https://yoon-ddo.github.io/) |
 | **skill set** | | Frontend - HTML, CSS, Javascript |
