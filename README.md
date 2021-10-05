@@ -48,7 +48,9 @@
 |:---:|:---:|:---|
 | **이름** |윤소영|![syyoon](imgs/syyoon.jpg)|
 | **연락처** | soyo1228@naver.com| [깃블로그](https://yoon-ddo.github.io/) |
-| **skill set** | | Frontend - HTML, CSS, Javascript<br>Backend - Java, Spring, Oracle<br>Data Analysis - Python |
+| **skill set** | | Frontend - HTML, CSS, Javascript |
+| | | Data Analysis - Python |
+| | | Data Analysis - Python |
 | **자격증** | 2021.06 | 정보처리기사 ( 한국산업인력공단 ) |
 || 2020.06 | SQLD ( 한국데이터산업진흥원 ) |
 || 2020.07 | ADsP ( 한국데이터산업진흥원 ) |
