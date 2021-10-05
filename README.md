@@ -38,7 +38,7 @@
 
 ## 시연 동영상 
 
-   <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://youtu.be/Dnisi_sosFI" frameborder="0"></iframe>
+   <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/Dnisi_sosFI" frameborder="0"></iframe>
 
 <br><br><br>
 
