@@ -44,10 +44,11 @@
 <br><br><br>
 
 # 5. 본인 소개
-| 항목 | 내용 ||
-|-----|---------------------------|----|
+
+| 항목      | 내용                | 내용         |
+|----------|---------------------------|------------------------------------------|
 | **이름** |윤소영| ![syyoon](imgs/syyoon.jpg) |
-| **연락처** | soyo1228@naver.com| [깃블로그](https://yoon-ddo.github.io/) |
+| **연락처** | soyo1228@naver.com | [깃블로그](https://yoon-ddo.github.io/) |
 | **skill set** || Frontend - HTML, CSS, Javascript<br>Backend - Java, Python<br>DataBase - Oracle |
 | **자격증** | 2021.06 | 정보처리기사 ( 한국산업인력공단 ) |
 || 2020.06 | SQLD ( 한국데이터산업진흥원 ) |
