@@ -37,18 +37,19 @@
 <br><br><br>
 
 ## 시연 동영상 
-
-   <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://youtu.be/Dnisi_sosFI" frameborder="0"></iframe>
+   <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/embed/Dnisi_sosFI">
+   <img src="imgs/videoimg.JPG" style="width:800px;">
+   </a>
 
 <br><br><br>
 
 # 5. 본인 소개
 
-| **이름** |윤소영|![syyoon](imgs/syyoon.jpg)|
-| **연락처** | soyo1228@naver.com| [깃블로그](https://yoon-ddo.github.io/) |
-| **skill set** | | Frontend - HTML, CSS, Javascript |
-|| | Backend - Java, Spring, Oracle |
-|| | Data Analysis - Python |
+| 항목      | 내용                | 내용         |
+|----------|---------------------------|------------------------------------------|
+| **이름** |윤소영| ![syyoon](imgs/syyoon.jpg) |
+| **연락처** | soyo1228@naver.com | [깃블로그](https://yoon-ddo.github.io/) |
+| **skill set** || Frontend - HTML, CSS, Javascript<br>Backend - Java, Python<br>DataBase - Oracle |
 | **자격증** | 2021.06 | 정보처리기사 ( 한국산업인력공단 ) |
 || 2020.06 | SQLD ( 한국데이터산업진흥원 ) |
 || 2020.07 | ADsP ( 한국데이터산업진흥원 ) |
