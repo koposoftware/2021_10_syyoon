@@ -7,6 +7,38 @@ $(document).ready(function(){
 	$('#modalb').hide()
 	$('#modalb').trigger('click')
 	
+	
+	$('input:radio[name=chkLimit]').click(function(){
+		if($('input[name=chkLimit]:checked')){
+			$('input:text[name=homeprice]').attr('value', 10000)
+		}
+	
+		
+	})
+	
+	
+	$('#chkAll').click(function(){
+		if($('#chkAll').prop("checked")){
+			$('.chkEtc').prop("checked", true)
+		}else{
+			$('.chkEtc').prop("checked", false)
+		}
+	});
+	
+	
+	// 체크박스 하나 해제시 전체 체크 해제
+	$('.chkEtc').click(function(){
+		if($('.chkEtc:checked').length == 4){
+			$('#chkAll').prop('checked', true)
+		}else{
+			$('#chkAll').prop('checked', false)
+		}
+	});
+	
+	
+	
+	
+	
 	$('#searchlimit').click(function(){
 		
 		var homeYN = $('input[name=homeYN]:checked').val()

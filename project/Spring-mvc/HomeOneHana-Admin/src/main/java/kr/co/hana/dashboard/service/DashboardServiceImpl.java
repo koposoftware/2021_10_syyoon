@@ -85,7 +85,7 @@ public class DashboardServiceImpl implements DashboardService {
 	public UserCreditVO getUserCredit(String id) throws IOException, ParseException {
 		UserCreditVO result = new UserCreditVO();
 
-		StringBuilder urlBuilder = new StringBuilder("http://3.36.93.8:5000/credit_auth_info/"); /*URL*/
+		StringBuilder urlBuilder = new StringBuilder("http://13.124.74.239:5000/credit_auth_info/"); /*URL*/
         urlBuilder.append(URLEncoder.encode(id,"UTF-8") );
 		//StringBuilder urlBuilder = new StringBuilder();
 		if(urlBuilder.toString().equals("")) {

@@ -28,6 +28,8 @@ public class SearchServiceImpl implements SearchService{
 	@Autowired
 	private SearchDAO searchdao;
 	
+	
+	
 
 	/**
 	 * 검색한 주소에서 가까운 주택 찾기

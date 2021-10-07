@@ -70,7 +70,7 @@
                             	</select>
                             	
                             </div>
-                             <h1 id="LoanNameIn"></h1>
+                             <h1 id="LoanNameIn">-</h1>
                             <div style="margin-top:20px; margin-bottom:20px; padding:20px;">
                             	
                             	<div class="boxTempl">

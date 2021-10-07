@@ -12,8 +12,14 @@
 	</select>
 	
 	<select id="getHomelist" parameterType="brtcSignguVO" resultType="searchHomeVO">
-		select * 
+		select *
 		from homelist
+		where brtccode = #{brtccode} and signgucode = #{signgucode}
+	</select>
+	
+	<select id="getHomelist2" parameterType="brtcSignguVO" resultType="searchHomeVO">
+		select distinct rnadres  
+		from lhhome
 		where brtccode = #{brtccode} and signgucode = #{signgucode}
 	</select>
 	

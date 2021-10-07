@@ -31,7 +31,7 @@ import kr.co.hana.search.vo.SearchHomeVO;
 public class apiTest {
 	
 	
-	@Test
+	@Ignore
 	public void getNotice() throws IOException {
 		
 		List<ScheduleVO> resultList = new ArrayList<ScheduleVO>();
@@ -201,7 +201,6 @@ public class apiTest {
 	
 	
 	
-	@Ignore
 	@Test
 	public void gggg() throws IOException, ParserConfigurationException, SAXException, XPathExpressionException{
 		

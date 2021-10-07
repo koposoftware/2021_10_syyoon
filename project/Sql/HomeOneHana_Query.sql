@@ -43,7 +43,8 @@ ALTER TABLE FAVORITE
     VALUES('','',0,SEQ_FAVSEQ.nextval);
 delete from favorite where id='onehana' and hsmpsn=31125790;
 commit;
-select * from homelist;
+desc homelist;
+select * from homelist where brtccode=11 and signgucode=140;
 select f.id, f.hsmpsn, to_char(f.enrolldt,'YYYY-MM-DD') as enrolldt, h.rnadres, h.suplytynm, h.housetynm, h.insttnm
 from favorite f, homelist h
 where f.hsmpsn = h.hsmpsn and f.id='onehana';
@@ -526,3 +527,82 @@ where a.contractcode = c.contractcode and l.code = c.loancode
 select l.name as loanname, c.principal, l.finalrate, l.duedate
 		from loancontract c, hana_loan l
 		where c.loancode = l.code and c.contractcode = 39;
+        
+        
+        
+        
+SELECT * FROM LOANCONTRACT;
+SELECT * FROM LOANFILE;
+SELECT * FROM LOANRECORD;
+SELECT * FROM HANA_LOAN;
+
+-- 파일 업로드시 대출 로그저장 프로시저
+CREATE OR REPLACE PROCEDURE LOANCONTRACT_LOG(
+    V_USERID            IN VARCHAR2, -- 유저아이디
+    V_MANAGER_ID        IN VARCHAR2, -- 담당자아이디
+    V_LOANNAME          IN VARCHAR2 -- 대출상품명
+) IS
+    CONTRACT_SEQ        LOANCONTRACT.CONTRACTCODE%TYPE      := seq_loancontract.nextval;   
+BEGIN
+
+    dbms_output.put_line(contract_seq);
+
+    -- 계약시작
+    INSERT INTO LOANCONTRACT(USERID,CONTRACTCODE,MANAGERID,LOANCODE)
+        VALUES(V_USERID, CONTRACT_SEQ,V_MANAGER_ID,(select code from hana_loan where name=V_LOANNAME));
+    -- 심사중으로 상태 추가
+    INSERT INTO LOANRECORD(LOANSEQ,STATUS,CONTRACTCODE)
+        VALUES(loanseq.nextval,'심사중',CONTRACT_SEQ);
+    COMMIT;
+    
+    EXCEPTION
+        WHEN OTHERS THEN
+        rollback;  
+ END;
+/
+exec LOANCONTRACT_LOG('1817729777','admin2','하나 전세금안심대출');
+
+select * from metahomedetail;
+
+desc homedetail;
+
+
+
+
+CREATE TABLE HOMELIST
+(
+    INSTTNM    VARCHAR2(100) NOT NULL,
+    COMPETDE    VARCHAR2(50) NOT NULL,
+    HOUSETYNM    VARCHAR2(50) NOT NULL,
+    SUPLYTYNM    VARCHAR2(50) NOT NULL,
+    BULDSTLENM    VARCHAR2(50) DEFAULT '0' NOT NULL,
+    ELVTRINSTLATNM    VARCHAR2(50) DEFAULT '0' NOT NULL,
+    BRTCCODE    NUMBER(5) NOT NULL,
+    SIGNGUCODE    NUMBER(5) NOT NULL,
+    PARKNGCO    NUMBER(10) DEFAULT 0 NOT NULL,
+    HSMPSN    NUMBER(13) NOT NULL,
+    HSMPNM    VARCHAR2(100) NOT NULL,
+    HSHLDCO    NUMBER(5) NOT NULL,
+    HEATMTHDDETAILNM    VARCHAR2(50) NOT NULL,
+    RNADRES    VARCHAR2(500) NOT NULL,
+    LATI    VARCHAR2(40) NOT NULL,
+    LONGS    VARCHAR2(40) NOT NULL
+);
+
+select * from metahomelist;
+DESC METAHOME;
+
+CREATE TABLE HOMEDETAIL
+(
+    STYLENM    VARCHAR2(50) NOT NULL,
+    SUPLYPRVUSEAR    VARCHAR2(50) NOT NULL,
+    SUPLYCMNUSEAR    VARCHAR2(50) NOT NULL,
+    BASSRENTGTN    NUMBER(20) NOT NULL,
+    BASSMTRNTCHRG    NUMBER(20) NOT NULL,
+    BASSCNVRSGTNLMT    NUMBER(20) NOT NULL,
+    HSMPSN    NUMBER(13) NOT NULL
+);
+
+
+
+

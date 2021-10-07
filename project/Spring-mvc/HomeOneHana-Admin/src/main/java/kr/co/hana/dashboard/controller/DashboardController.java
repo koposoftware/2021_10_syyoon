@@ -68,10 +68,29 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/main")
-	public String dashMain(Model model) {
+	public String dashMain(HttpSession session, Model model) {
 		System.out.println("대쉬보드메인");
-		
-		return "dashboard/main";
+		LoginVO loginVO = (LoginVO) session.getAttribute("loginVO");
+		String msg = "";
+		if(loginVO ==null) {
+			//로그인실패시 화면
+			msg = "세션이 만료되었습니다. 다시 로그인하세요.";
+			model.addAttribute("msg",msg);
+			return "index";
+			
+		}else {
+			
+			model.addAttribute("loginVO", loginVO);
+			//System.out.println("세션등록완료 : "+lg.toString());
+			
+			List<UserDashBoardVO> userlst = dashboardservice.getUsers(loginVO.getId());
+			model.addAttribute("userList",userlst);
+			
+			Map<String,Integer> userCnt = dashboardservice.getUserCnt(loginVO.getId());
+			model.addAttribute("userCnt", userCnt);
+			
+			return "dashboard/main";
+		}
 	}
 	
 	@GetMapping("/main/review")

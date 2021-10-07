@@ -8,10 +8,16 @@ function newMessage() {
 		return false;
 	}
 	
-	if(message =='/hello'){
-		message = myUserName+'고객님 환영합니다.'
-	}else if( message == '/homeyn'){
+	if(message =='안녕하세요'){
+		message = myUserName+'고객님 환영합니다. 행복을 드리는 상담사 김미영입니다.<br>무엇을 도와드릴까요?'
+	}else if( message == '무주택여부'){
 		message = myUserName+'고객님 현재 무주택자이신가요?'
+	}else if( message =='대출한도'){
+		message = myUserName+'고객님 현재 필요하신 대출금 금액이 얼마인가요?'
+	}else if(message == '주택지역'){
+		message = myUserName+'고객님 현재 계약 예정인 주택의 지역은 어디인가요?'
+	}else if(message == '안녕히가세요'){
+		message = '네 지금까지 고객님의 상담사 김미영이었습니다!<br>행복한 하루되세요 고객님~'
 	}
 	
 	/*if -> 나일때 왼쪽에 뜨게
@@ -96,6 +102,7 @@ sock.onmessage = function(e) {
 				, data:{loanname:loanNm}
 				, success:function(data){
 					console.log(data)
+					$('#LoanNameIn').empty()
 					$('#condition').empty()
 					$('#loan-changedt').empty()
 					$('#loan-baserate').empty()
@@ -103,7 +110,7 @@ sock.onmessage = function(e) {
 					$('#loan-finalrate').empty()
 					
 					
-					
+					$('#LoanNameIn').append(data.name)
 					$('#loan-changedt').append(data.changedt)
 					$('#loan-baserate').append(data.baserate)
 					$('#loan-addrate').append(data.addrate)
@@ -196,6 +203,7 @@ $(document).ready(function(){
 				, data:{loanname:searchLoan}
 				, success:function(data){
 					console.log(data)
+					$('#LoanNameIn').empty()
 					$('#condition').empty()
 					$('#loan-changedt').empty()
 					$('#loan-baserate').empty()
@@ -203,7 +211,7 @@ $(document).ready(function(){
 					$('#loan-finalrate').empty()
 					
 					
-					
+					$('#LoanNameIn').append(data.name)
 					$('#loan-changedt').append(data.changedt)
 					$('#loan-baserate').append(data.baserate)
 					$('#loan-addrate').append(data.addrate)

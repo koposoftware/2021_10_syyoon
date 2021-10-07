@@ -88,7 +88,7 @@ public class SearchController {
 		List<ScheduleVO> notice = scheduleservice.getNoticeList("41", date.get(0), date.get(1));
 		Map<String, ScheduleVO> result = new HashMap<String, ScheduleVO>();
 		
-		for(int i = 0; i<7; i++) {
+		for(int i = 0; i<3; i++) {
 			List<String> ndetail = scheduleservice.getNoticeAddrs(notice.get(i));
 			if(ndetail !=null) {
 				for(int h = 0; h<ndetail.size(); h++) {

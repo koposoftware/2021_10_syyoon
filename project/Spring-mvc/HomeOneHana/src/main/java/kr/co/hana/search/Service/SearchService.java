@@ -16,6 +16,7 @@ public interface SearchService {
 
 	List<SearchHomeVO> getHomeDetail(SearchHomeVO searchInfo);
 	List<SearchHomeVO> getNearHomeAll(SearchHomeVO searchInfo, List<BrtcSignguVO> list);
+
 	
 	List<BrtcSignguVO> getCodeList(String rnadres);
 	

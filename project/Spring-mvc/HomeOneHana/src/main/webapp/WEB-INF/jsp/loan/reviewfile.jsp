@@ -70,7 +70,7 @@
 								</tr>
 								<tr>
 									<th>지역</th>
-									<td><select id="selectlocation" name="laction" >
+									<td><select id="selectlocation" class="selections" name="laction" >
 											<option value="11">서울특별시</option>
 											<option value="41">경기도</option>
 											<option value="28">인천광역시</option>
@@ -88,19 +88,23 @@
 											<option value="47">경상북도</option>
 											<option value="48">경상남도</option>
 											<option value="50">제주특별자치도</option>
-									</select></td>
+									</select>
+							
+									</td>
 								</tr>
 								<tr>
-									<th>주택금액</th>
-									<td><input type="text" class="inputinfotext"
+									<th height="60px">주택금액</th>
+									<td height="60px"><input name="chkLimit" style="margin-top:10px;" id="chkLimit" type="radio"> <label for="chkLimit">대출최대한도</label>
+									<input style="height:40%;" type="text" class="inputinfotext"
 										name="homeprice" >만원</td>
 								</tr>
+								<%-- 
 								<tr>
 									<th>소득</th>
 									<td><input type="text" class="inputinfotext"
 										name="income" >만원</td>
 								</tr>
-
+								--%>
 							</table>
 
 							<div class="boxTempl"

@@ -13,6 +13,7 @@ public interface SearchDAO {
 	BrtcSignguVO getBrtcSigCode(BrtcSignguVO brtcsig);
 	List<String> getBrtcList();
 	List<SearchHomeVO> getHomeList(BrtcSignguVO brtcsig);
+	List<SearchHomeVO> getHomeList2(BrtcSignguVO brtcsig);
 	List<SearchHomeVO> getHomeDetail(String rnadres);
 	List<SearchHomeVO> checkHomeInfo(String rnadres);
 	int addFavoriteHome(FavoriteVO favorite);

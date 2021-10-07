@@ -84,6 +84,11 @@ public class SearchDAOImpl implements SearchDAO{
 		List<FavoriteVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getFavorites",id);
 		return result;
 	}
+
+	public List<SearchHomeVO> getHomeList2(BrtcSignguVO brtcsig) {
+		List<SearchHomeVO> result = sqlSessionTemplate.selectList("search.dao.SearchDAO.getHomelist2", brtcsig);
+		return result;
+	}
 	
 	
 	

@@ -13,6 +13,7 @@
 		    where c.contractcode = r.contractcode and c.loancode = h.code and u.id = c.userid and c.managerid = #{managerid}
 		) a
 		where rowidx=1
+		order by contractcode desc
 	</select>
 	
 	<select id="getFiles" parameterType="Integer" resultType="downloadFileVO">
